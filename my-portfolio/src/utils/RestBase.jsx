@@ -1,0 +1,1 @@
+export const RestBase = 'https://angusmacminn.com/portfolio-backend/wp-json/wp/v2/';
