@@ -2,9 +2,12 @@ import { useState, useEffect } from 'react';
 import { RestBase } from '../utils/RestBase';
 import Works from '../components/Works';
 import HeroContent from '../components/Hero';
+import Contact from '../components/Contact';
+import About from '../components/About';
+
 
 function HomePage() {
-    const restPath = RestBase + 'pages/5';
+    const restPath = RestBase + 'pages/5?_nocache=1';
     const [restData, setData] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
 
@@ -27,8 +30,15 @@ function HomePage() {
             <p>Loading...</p>
           ) : (
             <>
-              <HeroContent />
+              <HeroContent pageData={restData} />
+              {restData.acf && <h2>{restData.acf.work_title}</h2>}
               <Works />
+              {restData?.acf && (<About pageData={restData} />)}
+              {restData?.acf && (<Contact pageData={restData} />)}
+
+              
+
+              
             </>
 
           )}

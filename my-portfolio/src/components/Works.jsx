@@ -34,9 +34,7 @@ function Works() {
     
     return (
       <div className="works">
-      {!isLoaded ? (
-        <p>Loading works...</p>
-      ) : (
+      {!isLoaded ? (<p>Loading works...</p>) : (
         <div className="works-grid">
           {works.length === 0 ? (
             <p>No works found</p>
