@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { RestBase } from '../utils/RestBase';
 import Works from '../components/Works';
+import HeroContent from '../components/Hero';
 
 function HomePage() {
     const restPath = RestBase + 'pages/5';
@@ -26,8 +27,7 @@ function HomePage() {
             <p>Loading...</p>
           ) : (
             <>
-              <h1>{restData.title.rendered}</h1>
-              <div dangerouslySetInnerHTML={{ __html: restData.content.rendered }} />
+              <HeroContent />
               <Works />
             </>
 
