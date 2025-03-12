@@ -54,12 +54,3 @@
     padding-bottom: 0.25rem;
     transition: all 0.3s ease;
 }
-
-.hamburger-menu a:hover::after {
-    width: 100%;
-}
-
-/* Active link styling */
-.hamburger-menu a.active::after {
-    width: 100%;
-}

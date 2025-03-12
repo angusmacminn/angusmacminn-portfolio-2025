@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { RestBase } from '../utils/RestBase';
+import { Link } from 'react-router-dom';
 
 function Works() {
     const restPath = RestBase + 'work';
@@ -16,7 +17,7 @@ function Works() {
             const response = await fetch(`${restPath}?timestamp=${new Date().getTime()}`);
             if (response.ok) {
               const data = await response.json();
-              console.log('Fetched works:', data); // Debug log
+              // console.log('Fetched works:', data); // Debug log
               setWorks(data);
               setLoadStatus(true);
             } else {
@@ -35,26 +36,28 @@ function Works() {
     return (
       <div className="works">
       {!isLoaded ? (<p>Loading works...</p>) : (
-        <div className="works-grid">
+        <div className="works-cards">
           {works.length === 0 ? (
             <p>No works found</p>
           ) : (
             works.map(work => (
-              <div key={work.id} className="work-item">
-                <h2>{work.title.rendered}</h2>
-                {work.content.rendered && (
-                  <div dangerouslySetInnerHTML={{ __html: work.content.rendered }} />
-                )}
-                {/* Display skills if needed */}
-                <div className="skills">
-                  {work.class_list
-                    .filter(className => className.startsWith('skills-'))
-                    .map(skill => (
-                      <span key={skill} className="skill-tag">
-                        {skill.replace('skills-', '').replace('-', ' ')}
-                      </span>
-                    ))}
-                </div>
+              <div key={work.id} className="work-card">
+                 <Link to={`/work/${work.slug}`} className="work-link">
+                    <h2>{work.title.rendered}</h2>
+                    {work.content.rendered && (
+                      <div dangerouslySetInnerHTML={{ __html: work.content.rendered }} />
+                    )}
+                
+                    <div className="skills">
+                      {work.class_list
+                        .filter(className => className.startsWith('skills-'))
+                        .map(skill => (
+                          <span key={skill} className="skill-tag">
+                            {skill.replace('skills-', '').replace('-', ' ')}
+                          </span>
+                        ))}
+                    </div>
+                  </Link>
               </div>
             ))
           )}
