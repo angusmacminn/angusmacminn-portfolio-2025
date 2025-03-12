@@ -4,7 +4,7 @@ import Works from '../components/Works';
 import HeroContent from '../components/Hero';
 import Contact from '../components/Contact';
 import About from '../components/About';
-
+import Header from '../components/Header';
 
 function HomePage() {
     const restPath = RestBase + 'pages/5?_nocache=1';
@@ -24,21 +24,23 @@ function HomePage() {
     }
     fetchData()
 }, [restPath])
+
     return (
         <>
           {!isLoaded ? (
             <p>Loading...</p>
           ) : (
             <>
+              <Header />
               <HeroContent pageData={restData} />
-              {restData.acf && <h2>{restData.acf.work_title}</h2>}
-              <Works />
+              <section className="work-section" id="work">
+                {restData.acf && <h2>{restData.acf.work_title}</h2>}
+                <Works />
+              </section>
               {restData?.acf && (<About pageData={restData} />)}
               {restData?.acf && (<Contact pageData={restData} />)}
 
-              
-
-              
+            
             </>
 
           )}

@@ -11,16 +11,17 @@ function HeroContent({ pageData }) {
     return <div>Hero content not available</div>;
   }
   
+  // Destructure - Extract the acf object from the pageData object
   const { acf } = pageData;
   
   return (
-    <div className="hero-section">
+    <section className="hero-section">
       <div className="hero-content">
         <h1>{acf.name}</h1>
         <h2>{acf.position_title}</h2>
         
       </div>
-    </div>
+    </section>
   );
 }
 
