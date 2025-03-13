@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { RestBase } from '../utils/RestBase';
 import { formatSkillName } from '../utils/skillMap';
 import MediaGallery from './MediaGallery';
+import HighlightsAccordion from './HighlightsAccordion';
 
 function SingleWork() {
     const { slug } = useParams();
@@ -102,14 +103,12 @@ function SingleWork() {
                         </div>
                     )}
 
-                    {workData.acf.highlights_title && (
-                        <h2>{workData.acf.highlights_title}</h2>
-                    )}
-                    {workData.acf.overview_description && (
-                        <div className="work-overview-description">
-                            {workData.acf.overview_description}
-                        </div>
-                    )}
+                    {/* Highlights Accordion */}
+                    <HighlightsAccordion
+                        highlights={workData.acf}
+                        title={workData.acf.highlights_title}
+                        restBase={RestBase}
+                    />
                 </section>
 
                 

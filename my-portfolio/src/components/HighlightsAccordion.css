@@ -1,0 +1,26 @@
+.highlights-section {
+    margin: 2rem 0;
+  }
+  
+  .highlights-section h2 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .highlight-item {
+    margin-bottom: 2rem;
+  }
+  
+  .highlight-text {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+  
+  .highlight-media {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Make the media gallery in highlights a bit smaller */
+  .highlight-media .media-gallery {
+    max-width: 800px;
+  }
