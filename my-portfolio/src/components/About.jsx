@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 function About({ pageData }) {
   // Safety check for pageData
   if (!pageData) {
