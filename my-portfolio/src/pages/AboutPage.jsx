@@ -8,6 +8,7 @@ function AboutPage() {
     const restPath = RestBase + 'pages/9?_nocache=1';
     const [restData, setData] = useState(null);
     const [skills, setSkills] = useState([]);
+    const [profileImage, setProfileImage] = useState(null);
     const [isLoaded, setLoadStatus] = useState(false);
     const [skillsLoaded, setSkillsLoaded] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
