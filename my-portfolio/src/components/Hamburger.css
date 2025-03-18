@@ -1,37 +1,87 @@
 .hamburger-container {
     position: fixed;
     top: 1rem;
-    left: 1rem;
+    right: 1rem;
     z-index: 1001; /* Higher than the menu */
-    background: none;
     border: none;
     padding: 0;
     margin: 0;
     cursor: pointer;
-    outline: none;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     box-shadow: none;
+    background-color: #bdbdbd;
+    border-radius: 30rem;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
 }
 
-.hamburger-container button {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.hamburger-menu {
-    position: fixed;
+.hamburger-container::after {
+    content: '';
+    position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #631E30;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(to bottom right, #222222, #867b7b);
+    border-radius: 30rem;
+    z-index: -10;
+
+}
+
+.hamburger-container div[style*="position: absolute"] {
+    border-radius: 10rem;  /* round the edges */
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.hamburger-menu {
+    position: fixed;
+    top: 5rem;
+    left: 0;
+    right: 0;
+    background-image: linear-gradient(to bottom right, #2222223d, #867b7b3a);
     z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 1rem;
+    margin: 0 1rem;
+    animation: fadeIn 0.3s ease-in-out;
+    /* Add these for smoother appearance/disappearance */
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.hamburger-menu::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #41414176;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 1rem;
+    margin: 0.15rem;
+    animation: fadeIn 0.3s ease-in-out;
+    /* Add these for smoother appearance/disappearance */
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+    z-index: -10000;
+    
+}
+
+.hamburger-menu.closing {
+    opacity: 0;
 }
 
 .hamburger-menu ul {

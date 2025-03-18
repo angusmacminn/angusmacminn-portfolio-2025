@@ -8,7 +8,7 @@ function Header() {
             <nav className="header-nav">
                 <div className="nav-content">
                     <div className="logo">
-                            <img src="/path-to-your-logo.png" alt="Angus MacMinn logo" />
+                            
                     </div>
                     <div className="desktop-nav">
                         <ul>

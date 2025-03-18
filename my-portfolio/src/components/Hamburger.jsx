@@ -5,9 +5,20 @@ import './Hamburger.css';
 
 function HamburgerMenu() {
     const [isOpen, setIsOpen] = useState(false);
-    
+    const [isClosing, setIsClosing] = useState(false);
+
+
+    const handleClose = () => {
+        setIsClosing(true);
+        setTimeout(() => {
+            setIsOpen(false);
+            setIsClosing(false);
+        }, 300); // This should match your animation duration
+    };
+
     const handleLinkClick = () => {
         setIsOpen(false);
+        handleClose();
     };
 
     return (
@@ -22,11 +33,11 @@ function HamburgerMenu() {
                 <Hamburger 
                     toggled={isOpen} 
                     toggle={setIsOpen} 
-                    color="#631E30"
+                    color="var(--white)"
                 />
                         </button>
             
-            {isOpen && 
+                {(isOpen || isClosing) &&  
                 <nav 
                     id="mobile-navigation" 
                     className="hamburger-menu"
