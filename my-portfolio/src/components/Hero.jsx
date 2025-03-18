@@ -1,4 +1,5 @@
 import React from 'react';
+import "./Hero.css";
 
 function HeroContent({ pageData }) {
   // Check if pageData exists before trying to access its properties
@@ -19,7 +20,6 @@ function HeroContent({ pageData }) {
       <div className="hero-content">
         <h1>{acf.name}</h1>
         <h2>{acf.position_title}</h2>
-        
       </div>
     </section>
   );

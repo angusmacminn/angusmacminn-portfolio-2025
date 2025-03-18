@@ -3,8 +3,9 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     z-index: -1;
     pointer-events: auto; /* Enable interaction with the canvas */
     touch-action: none; /* Prevent default touch behaviors */
+    background-color: var(--black);
 }

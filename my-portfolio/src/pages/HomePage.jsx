@@ -29,7 +29,9 @@ function HomePage() {
 
     return (
         <>
-        <DotDisplace />
+        <div className='canvas-wrapper'>
+          <DotDisplace />
+        </div>
           {!isLoaded ? (
             <p>Loading...</p>
           ) : (
