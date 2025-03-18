@@ -1,0 +1,22 @@
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+    pointer-events: none; /* Let events pass through to canvas */
+}
+
+/* Allow pointer events on interactive elements */
+.content-wrapper a,
+.content-wrapper button,
+.content-wrapper input,
+.content-wrapper textarea,
+.content-wrapper select,
+.content-wrapper [role="button"],
+.content-wrapper [tabindex="0"] {
+    pointer-events: auto;
+}
+
+/* Add these classes to any other elements that need interaction */
+.clickable {
+    pointer-events: auto;
+}
+

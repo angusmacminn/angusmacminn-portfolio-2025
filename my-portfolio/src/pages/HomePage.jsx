@@ -5,6 +5,8 @@ import HeroContent from '../components/Hero';
 import Contact from '../components/Contact';
 import About from '../components/About';
 import Header from '../components/Header';
+import DotDisplace from '../scripts/DotDisplace';
+import './HomePage.css';
 
 function HomePage() {
     const restPath = RestBase + 'pages/5?_nocache=1';
@@ -27,18 +29,22 @@ function HomePage() {
 
     return (
         <>
+        <DotDisplace />
           {!isLoaded ? (
             <p>Loading...</p>
           ) : (
             <>
-              <Header />
-              <HeroContent pageData={restData} />
-              <section className="work-section" id="work">
-                {restData.acf && <h2>{restData.acf.work_title}</h2>}
-                <Works />
-              </section>
-              {restData?.acf && (<About pageData={restData} />)}
-              {restData?.acf && (<Contact pageData={restData} />)}
+            <div className="content-wrapper">
+              
+                <Header />
+                <HeroContent pageData={restData} />
+                <section className="work-section" id="work">
+                  {restData.acf && <h2>{restData.acf.work_title}</h2>}
+                  <Works />
+                </section>
+                {restData?.acf && (<About pageData={restData} />)}
+                {restData?.acf && (<Contact pageData={restData} />)}
+            </div>
 
             
             </>
