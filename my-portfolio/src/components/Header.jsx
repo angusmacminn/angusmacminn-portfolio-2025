@@ -16,6 +16,7 @@ function Header() {
                             <li><NavLink to="/work">Work</NavLink></li>
                             <li><NavLink to="/about">About</NavLink></li>
                             <li><NavLink to="/contact">Contact</NavLink></li>
+                            <li><NavLink to="/experiments">Experiments</NavLink></li>
                         </ul>
                     </div>
                     <div className="mobile-nav">
