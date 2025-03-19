@@ -6,6 +6,6 @@
     height: 100vh;
     z-index: -1;
     pointer-events: auto; /* Enable interaction with the canvas */
-    touch-action: none; /* Prevent default touch behaviors */
+    touch-action: pan-y; /* Allow vertical scrolling */
     background-color: var(--black);
 }

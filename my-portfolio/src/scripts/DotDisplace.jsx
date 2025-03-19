@@ -55,19 +55,33 @@ function DotDisplace() {
         particles = new THREE.Points(geometry, material);
         scene.add(particles);
 
+
+
         // Event handlers
         const handlePointerMove = (event) => {
-            const rect = canvas.getBoundingClientRect();
-            mouseRef.current.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-            mouseRef.current.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+            // Only handle mouse events on desktop
+            if (event.pointerType === 'mouse') {
+                const rect = canvas.getBoundingClientRect();
+                mouseRef.current.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+                mouseRef.current.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+            }
         };
 
         const handleTouchMove = (event) => {
-            event.preventDefault();
+            // Don't prevent default on mobile to allow scrolling
             const touch = event.touches[0];
             const rect = canvas.getBoundingClientRect();
-            mouseRef.current.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
-            mouseRef.current.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
+            
+            // Calculate touch position relative to canvas
+            const touchX = touch.clientX - rect.left;
+            const touchY = touch.clientY - rect.top;
+            
+            // Only update if touch is within canvas bounds
+            if (touchX >= 0 && touchX <= rect.width && 
+                touchY >= 0 && touchY <= rect.height) {
+                mouseRef.current.x = (touchX / rect.width) * 2 - 1;
+                mouseRef.current.y = -(touchY / rect.height) * 2 + 1;
+            }
         };
 
         const handleResize = () => {
@@ -83,7 +97,7 @@ function DotDisplace() {
 
         // Add event listeners
         canvas.addEventListener('pointermove', handlePointerMove);
-        canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+        canvas.addEventListener('touchmove', handleTouchMove, { passive: true });
         window.addEventListener('resize', handleResize);
 
         // Animation
@@ -138,7 +152,7 @@ function DotDisplace() {
                 width: '100%',
                 height: '100%',
                 pointerEvents: 'auto',
-                touchAction: 'none'
+                touchAction: 'pan-y'
             }}
         />
     );
