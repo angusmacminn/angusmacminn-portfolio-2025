@@ -1,6 +1,7 @@
 import React from 'react';
 import "./About.css";
 import { Link } from 'react-router-dom';
+import PixelPush from '../scripts/PixelPush';
 
 
 function About({ pageData }) {
@@ -26,6 +27,7 @@ function About({ pageData }) {
       {/* Only render if intro_paragraph exists */}
       {acf.intro_paragraph && (
         <div className="about-content">
+          <PixelPush />
           <p>{acf.intro_paragraph}</p>
           <Link to="/about" className="about-button">
             More about Angus
