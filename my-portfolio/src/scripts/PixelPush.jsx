@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import vertexShader from './pixelPushVertex.glsl';
 import fragmentShader from './pixelPushFragment.glsl';
+import './PixelPush.css';
 
 
 function PixelPush() {
@@ -123,6 +124,7 @@ useEffect(() => {
 return (
     <canvas 
         ref={canvasRef}
+        className="background-canvas"
         style={{
             position: 'absolute',
             top: 0,
@@ -130,7 +132,7 @@ return (
             width: '100%',
             height: '100%',
             pointerEvents: 'auto',
-            touchAction: 'none',
+            touchAction: 'pan-y',
             zIndex: 0
             }}
         />

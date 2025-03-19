@@ -1,0 +1,4 @@
+.background-canvas {
+    pointer-events: auto; /* Enable interaction with the canvas */
+    touch-action: pan-y; /* Allow vertical scrolling */
+}
