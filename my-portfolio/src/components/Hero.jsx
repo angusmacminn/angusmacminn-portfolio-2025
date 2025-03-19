@@ -1,5 +1,6 @@
 import React from 'react';
 import "./Hero.css";
+import arrowdown from "../assets/icons/arrowdown.svg";
 
 function HeroContent({ pageData }) {
   // Check if pageData exists before trying to access its properties
@@ -20,6 +21,9 @@ function HeroContent({ pageData }) {
       <div className="hero-content">
         <h1>{acf.name}</h1>
         <h2>{acf.position_title}</h2>
+      </div>
+      <div className="hero-arrowdown">
+        <img src={arrowdown} alt="arrowdown" />
       </div>
     </section>
   );
