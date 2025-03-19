@@ -42,21 +42,18 @@ function Works() {
             <p>No works found</p>
           ) : (
             works.map(work => (
-              <div key={work.id} className="work-card">
-                 <Link to={`/work/${work.slug}`} className="work-link">
-                    <h3>{work.title.rendered}</h3>
-                    </Link>   
-                
-                    <div className="skills">
-                      {work.class_list
-                        .filter(className => className.startsWith('skills-'))
-                        .map(skill => (
-                          <span key={skill} className="skill-tag">
-                            {skill.replace('skills-', '').replace('-', ' ')}
-                          </span>
-                        ))}
-                    </div>
-              </div>
+              <Link to={`/work/${work.slug}`} className="work-card" key={work.id}>
+                <h3>{work.title.rendered}</h3>
+                <div className="skills">
+                  {work.class_list
+                    .filter(className => className.startsWith('skills-'))
+                    .map(skill => (
+                      <span key={skill} className="skill-tag">
+                        {skill.replace('skills-', '').replace('-', ' ')}
+                      </span>
+                    ))}
+                </div>
+              </Link>
             ))
           )}
         </div>

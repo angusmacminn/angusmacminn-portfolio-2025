@@ -13,7 +13,7 @@
 .work-card {
     background-color: var(--white);
     border-radius: 1rem;
-    padding: 0 0.5rem;
+    padding: 0.75rem 1rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -23,19 +23,20 @@
 
 .work-card h3 {
     color: var(--black);
+    margin: 0;
+    flex-shrink: 0;
 }
-
-
 
 .skills {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     gap: 0.5rem;
     color: var(--black);
-    
+    flex: 1;
+    min-width: 0;
 }
 
 .skill-tag {
@@ -43,5 +44,18 @@
     border-radius: 0.5rem;
     padding: 0.25rem 0.5rem;
     font-size: 0.875rem;
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+    .work-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .skills {
+        justify-content: flex-start;
+        width: 100%;
+    }
 }
 
