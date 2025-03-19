@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { RestBase } from '../utils/RestBase';
 import Works from '../components/Works';
 import HeroContent from '../components/Hero';
@@ -43,6 +44,11 @@ function HomePage() {
                 <section className="work-section" id="work">
                   {restData.acf && <h2>{restData.acf.work_title}</h2>}
                   <Works />
+                  <div className="experiments-button-container">
+                    <Link to="/experiments" className="experiments-button">
+                      Experiments
+                    </Link>
+                  </div>
                 </section>
                 {restData?.acf && (<About pageData={restData} />)}
                 {restData?.acf && (<Contact pageData={restData} />)}
