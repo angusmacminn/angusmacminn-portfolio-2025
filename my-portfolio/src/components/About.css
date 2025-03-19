@@ -24,7 +24,15 @@
     position: relative; /* Make sure this is present */
     overflow: hidden;  /* Make sure this is present */
     min-height: 300px; /* Add a minimum height if needed */
-    transform: invert(1);
+}
+
+/* Update the text styles to create inversion effect */
+.about-content p,
+.about-content .about-button {
+    position: relative;
+    z-index: 1;
+    mix-blend-mode: difference; /* This will invert the text color */
+    color: white; /* Set to white so it inverts properly */
 }
 
 /* Ensure content stays above the shader */
