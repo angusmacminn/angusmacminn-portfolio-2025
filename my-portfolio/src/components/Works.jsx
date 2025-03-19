@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { RestBase } from '../utils/RestBase';
 import { Link } from 'react-router-dom';
 import "./Works.css";
+import arrow from "../assets/icons/project-arrow.svg"
 
 function Works() {
     const restPath = RestBase + 'work';
@@ -43,7 +44,10 @@ function Works() {
           ) : (
             works.map(work => (
               <Link to={`/work/${work.slug}`} className="work-card" key={work.id}>
-                <h3>{work.title.rendered}</h3>
+                <div className="title-container">
+                  <h3>{work.title.rendered}</h3>
+                  <img src={arrow} alt="arrow" />
+                </div>
                 <div className="skills">
                   {work.class_list
                     .filter(className => className.startsWith('skills-'))
