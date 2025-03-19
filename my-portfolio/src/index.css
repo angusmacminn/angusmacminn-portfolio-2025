@@ -62,6 +62,20 @@
   font-display: swap;
 }
 
+@media (prefers-color-scheme: light) {
+  :root {
+    /* Remove or override these to maintain dark theme */
+    color: var(--white);
+    background-color: var(--black);
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: var(--light-black);
+  }
+}
+
 :root {
   
   line-height: 1.5;
