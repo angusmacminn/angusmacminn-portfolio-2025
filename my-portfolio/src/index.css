@@ -96,7 +96,17 @@
   --font-family: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
   font-family: var(--font-family);
   color: var(--white);
+  
+
 }
+
+p {
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.05em;
+}
+
 h1 {
   font-size: 4em;
 } 
