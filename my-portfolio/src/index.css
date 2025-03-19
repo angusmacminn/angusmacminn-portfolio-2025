@@ -107,7 +107,7 @@ h2 {
 
 a {
   font-weight: 500;
-  
+  color: var(--white);
   text-decoration: inherit;
 }
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { RestBase } from '../utils/RestBase';
 import { Link } from 'react-router-dom';
+import "./Works.css";
 
 function Works() {
     const restPath = RestBase + 'work';
@@ -43,10 +44,8 @@ function Works() {
             works.map(work => (
               <div key={work.id} className="work-card">
                  <Link to={`/work/${work.slug}`} className="work-link">
-                    <h2>{work.title.rendered}</h2>
-                    {work.content.rendered && (
-                      <div dangerouslySetInnerHTML={{ __html: work.content.rendered }} />
-                    )}
+                    <h3>{work.title.rendered}</h3>
+                    </Link>   
                 
                     <div className="skills">
                       {work.class_list
@@ -57,7 +56,6 @@ function Works() {
                           </span>
                         ))}
                     </div>
-                  </Link>
               </div>
             ))
           )}
