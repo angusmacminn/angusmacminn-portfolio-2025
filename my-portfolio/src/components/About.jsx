@@ -1,4 +1,6 @@
 import React from 'react';
+import "./About.css";
+import { Link } from 'react-router-dom';
 
 
 function About({ pageData }) {
@@ -17,12 +19,17 @@ function About({ pageData }) {
   return (
     <section className="about-section" id="about">
       {/* Only render if about_title exists */}
-      {acf.about_title && <h2>{acf.about_title}</h2>}
+      {<div className="about-title">
+        {acf.about_title && <h2>{acf.about_title}</h2>}
+      </div>}
       
       {/* Only render if intro_paragraph exists */}
       {acf.intro_paragraph && (
         <div className="about-content">
           <p>{acf.intro_paragraph}</p>
+          <Link to="/about" className="about-button">
+            More about Angus
+          </Link>
         </div>
       )}
       
