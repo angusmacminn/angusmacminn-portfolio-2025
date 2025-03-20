@@ -1,4 +1,8 @@
 import React from 'react';
+import "./Contact.css";
+import linkedinIcon from '../assets/icons/iconmonstr-linkedin-3.svg';
+import githubIcon from '../assets/icons/iconmonstr-github-1.svg';
+import instagramIcon from '../assets/icons/iconmonstr-instagram-11.svg';
 
 function Contact({ pageData }) {
   // Check if contactData exists
@@ -9,18 +13,18 @@ function Contact({ pageData }) {
   return (
     <section className="contact-section" id="contact">
       <h2>{pageData.acf.contact_title}</h2>
-      <p className="contact-tagline">{pageData.acf.contact_tagline}</p>
-      
-      <div className="contact-info">
-        {pageData.acf.my_email && (
-          <div className="contact-item">
-            <h3>Email</h3>
-            <a href={`mailto:${pageData.acf.my_email}`}>{pageData.acf.my_email}</a>
-          </div>
-        )}
-      </div>
-      
-      <div className="social-links">
+      <div className="contact-content">
+        <p className="contact-tagline">{pageData.acf.contact_tagline}</p>
+        
+        <div className="contact-info">
+          {pageData.acf.my_email && (
+            <div className="contact-item">
+              <a href={`mailto:${pageData.acf.my_email}`}>{pageData.acf.my_email}</a>
+            </div>
+          )}
+        </div>
+
+        <div className="social-links">
         {pageData.acf.linkedin_url && (
           <a 
             href={pageData.acf.linkedin_url} 
@@ -28,7 +32,7 @@ function Contact({ pageData }) {
             rel="noopener noreferrer"
             className="social-link linkedin"
           >
-            LinkedIn
+            <img src={linkedinIcon} alt="LinkedIn" />
           </a>
         )}
         
@@ -39,7 +43,7 @@ function Contact({ pageData }) {
             rel="noopener noreferrer"
             className="social-link github"
           >
-            GitHub
+            <img src={githubIcon} alt="GitHub" />
           </a>
         )}
         
@@ -50,10 +54,15 @@ function Contact({ pageData }) {
             rel="noopener noreferrer"
             className="social-link instagram"
           >
-            Instagram
+            <img src={instagramIcon} alt="Instagram" />
           </a>
         )}
       </div>
+
+
+      </div>
+      
+      
     </section>
   );
 }
