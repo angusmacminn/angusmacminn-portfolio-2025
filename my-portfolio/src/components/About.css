@@ -27,7 +27,7 @@
 }
 
 /* Update the text styles to create inversion effect */
-.about-content p,
+.about-content h2,
 .about-content .about-button {
     position: relative;
     z-index: 1;
@@ -36,7 +36,7 @@
 }
 
 /* Ensure content stays above the shader */
-.about-content p,
+.about-content h2,
 .about-content .about-button {
     position: relative;
     z-index: 1;

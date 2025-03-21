@@ -28,7 +28,7 @@ function About({ pageData }) {
       {acf.intro_paragraph && (
         <div className="about-content">
           <PixelPush />
-          <p>{acf.intro_paragraph}</p>
+          <h2>{acf.intro_paragraph}</h2>
           <Link to="/about" className="about-button">
             More about Angus
           </Link>
