@@ -5,10 +5,14 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 function DotDisplace() {
     const canvasRef = useRef(null);
     const mouseRef = useRef(new THREE.Vector2(-10, -10));
-    const timeRef = useRef(0);
     const sceneRef = useRef(null);
     const requestRef = useRef(null);
-    const [isVisible, setIsVisible] = useState(true); // Default to true for initial render
+    const [isVisible, setIsVisible] = useState(true);
+    
+    // Define gridWidth and gridHeight at component level
+    const gridWidth = 50;
+    const gridHeight = 50;
+    const spacing = 1.0;
     
     // Setup Intersection Observer
     useEffect(() => {
@@ -67,7 +71,6 @@ function DotDisplace() {
 
         // Particles setup
         let particles, particlePositions = [], originalPositions = [];
-        const gridWidth = 50, gridHeight = 50, spacing = 1.0;
 
         const geometry = new THREE.BufferGeometry();
         const positions = [];
@@ -94,7 +97,10 @@ function DotDisplace() {
             particlePositions,
             originalPositions,
             geometry,
-            material
+            material,
+            sizes,
+            gridWidth,  // Include gridWidth in the ref
+            gridHeight  // Include gridHeight in the ref
         };
 
         // Event handlers
@@ -105,7 +111,7 @@ function DotDisplace() {
         };
 
         const handleTouchMove = (event) => {
-            event.preventDefault();
+            // Don't prevent default to allow scrolling
             const touch = event.touches[0];
             const rect = canvas.getBoundingClientRect();
             mouseRef.current.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
@@ -113,19 +119,21 @@ function DotDisplace() {
         };
 
         const handleResize = () => {
-            sizes.width = window.innerWidth;
-            sizes.height = window.innerHeight;
+            if (!sceneRef.current) return;
+            
+            sceneRef.current.sizes.width = window.innerWidth;
+            sceneRef.current.sizes.height = window.innerHeight;
 
-            camera.aspect = sizes.width / sizes.height;
+            camera.aspect = sceneRef.current.sizes.width / sceneRef.current.sizes.height;
             camera.updateProjectionMatrix();
 
-            renderer.setSize(sizes.width, sizes.height);
+            renderer.setSize(sceneRef.current.sizes.width, sceneRef.current.sizes.height);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         };
 
         // Add event listeners
         canvas.addEventListener('pointermove', handlePointerMove);
-        canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+        canvas.addEventListener('touchmove', handleTouchMove, { passive: true }); // Changed to passive: true
         window.addEventListener('resize', handleResize);
 
         // Initial render
@@ -133,15 +141,16 @@ function DotDisplace() {
 
         // Cleanup
         return () => {
+            cancelAnimationFrame(requestRef.current);
             canvas.removeEventListener('pointermove', handlePointerMove);
             canvas.removeEventListener('touchmove', handleTouchMove);
             window.removeEventListener('resize', handleResize);
-            cancelAnimationFrame(requestRef.current);
             
-            // Dispose resources
-            geometry.dispose();
-            material.dispose();
-            renderer.dispose();
+            if (sceneRef.current) {
+                sceneRef.current.geometry.dispose();
+                sceneRef.current.material.dispose();
+                sceneRef.current.renderer.dispose();
+            }
         };
     }, []);
 
@@ -161,7 +170,9 @@ function DotDisplace() {
                     renderer, 
                     particles, 
                     particlePositions, 
-                    originalPositions 
+                    originalPositions,
+                    gridWidth, 
+                    gridHeight
                 } = sceneRef.current;
                 
                 const positions = particles.geometry.attributes.position.array;
@@ -214,7 +225,7 @@ function DotDisplace() {
                 width: '100%',
                 height: '100%',
                 pointerEvents: 'auto',
-                touchAction: 'none'
+                touchAction: 'pan-y' // Changed to pan-y to allow vertical scrolling
             }}
         />
     );
