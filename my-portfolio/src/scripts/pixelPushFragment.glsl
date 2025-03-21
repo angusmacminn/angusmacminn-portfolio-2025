@@ -12,7 +12,7 @@ struct Trail {
     float size;
 };
 
-#define MAX_TRAIL 20
+#define MAX_TRAIL 50
 Trail trails[MAX_TRAIL];
 
 float random(vec2 st) {
