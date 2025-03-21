@@ -15,7 +15,7 @@
     justify-content: center;
     background-color: var(--black);
     border-radius: 2.5rem 2.5rem 0rem 0rem;
-    padding-top: 2rem;
+    padding: 2rem 0;
 }
 
 .social-links {

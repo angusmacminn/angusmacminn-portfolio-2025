@@ -39,7 +39,13 @@ useEffect(() => {
         alpha: true
     });
     renderer.setSize(sizes.width, sizes.height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Simplify your shader for mobile:
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    // Lower resolution on mobile
+    const pixelRatio = isMobile ? Math.min(1.0, window.devicePixelRatio) : Math.min(window.devicePixelRatio, 2);
+    renderer.setPixelRatio(pixelRatio);
 
     // create a plane
     const geometry = new THREE.PlaneGeometry(2, 2);
