@@ -28,5 +28,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 3rem;
+    margin-top: 4rem;
+    
 }
+
+.hero-arrowdown img {
+    width: 3rem;
+    height: 3rem;
+}
+
