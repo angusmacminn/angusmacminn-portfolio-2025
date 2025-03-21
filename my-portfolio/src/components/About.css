@@ -32,7 +32,7 @@
     position: relative;
     z-index: 1;
     mix-blend-mode: difference; /* This will invert the text color */
-    color: white; /* Set to white so it inverts properly */
+    color: var(--white); /* Set to white so it inverts properly */
 }
 
 /* Ensure content stays above the shader */

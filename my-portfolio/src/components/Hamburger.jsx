@@ -28,33 +28,34 @@ function HamburgerMenu() {
                 aria-expanded={isOpen}
                 aria-controls="mobile-navigation"
                 aria-label="Menu"
-                
-                >
+            >
                 <Hamburger 
                     toggled={isOpen} 
-                    toggle={setIsOpen} 
-                    color="var(--white)"
+                    toggle={setIsOpen}
+                    color="white"
+                    distance="4"
+                    duration={0.3}
                 />
-                        </button>
+            </button>
             
-                {(isOpen || isClosing) &&  
-                <nav 
-                    id="mobile-navigation" 
-                    className="hamburger-menu"
-                    aria-label="Mobile Navigation"
-                >
-                    <ul>
-                        <li><NavLink onClick={handleLinkClick} to="/">Home</NavLink></li>
-                        <li><NavLink onClick={handleLinkClick} to="/work">Work</NavLink></li>
-                        <li><NavLink onClick={handleLinkClick} to="/about">About</NavLink></li>
-                        <li><NavLink onClick={handleLinkClick} to="/contact">Contact</NavLink></li>
-                        <li><NavLink onClick={handleLinkClick} to="/experiments">Experiments</NavLink></li>
-                        
-                    </ul>
-                </nav>
-            }
-        </div>
-    )
+            {(isOpen || isClosing) &&  
+            <nav 
+                id="mobile-navigation" 
+                className="hamburger-menu"
+                aria-label="Mobile Navigation"
+            >
+                <ul>
+                    <li><NavLink onClick={handleLinkClick} to="/">Home</NavLink></li>
+                    <li><NavLink onClick={handleLinkClick} to="/work">Work</NavLink></li>
+                    <li><NavLink onClick={handleLinkClick} to="/about">About</NavLink></li>
+                    <li><NavLink onClick={handleLinkClick} to="/contact">Contact</NavLink></li>
+                    <li><NavLink onClick={handleLinkClick} to="/experiments">Experiments</NavLink></li>
+                    
+                </ul>
+            </nav>
+        }
+    </div>
+)
 }
 
 export default HamburgerMenu;
