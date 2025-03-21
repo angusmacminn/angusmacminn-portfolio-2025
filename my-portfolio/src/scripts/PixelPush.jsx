@@ -1,150 +1,198 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import vertexShader from './pixelPushVertex.glsl';
 import fragmentShader from './pixelPushFragment.glsl';
 import './PixelPush.css';
 
-
 function PixelPush() {
     const canvasRef = useRef(null);
-    const mouseRef = useRef(new THREE.Vector2(-10, -10));
-    const timeRef = useRef(0);
+    const containerRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(false);
+    const sceneRef = useRef(null);
+    const requestRef = useRef(null);
 
-useEffect(() => {
-    if (!canvasRef.current) return;
+    // Setup Intersection Observer
+    useEffect(() => {
+        const options = {
+            root: null, // use viewport as root
+            rootMargin: '0px',
+            threshold: 0.1 // trigger when at least 10% is visible
+        };
 
-    // Get the about-content div dimensions
-    const container = document.querySelector('.about-content');
-    if (!container) return;
-    const bounds = container.getBoundingClientRect();
-    // Scene setup
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0D0D0D);
-    // Canvas
-    const canvas = canvasRef.current;
-    // Sizes
-    const sizes = {
-        width: bounds.width,  // Use container width
-        height: bounds.height // Use container height
-    };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                setIsVisible(entry.isIntersecting);
+            });
+        }, options);
 
-    // Camera
-    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
-    camera.position.z = 1;
-
-    // Renderer
-    const renderer = new THREE.WebGLRenderer({
-        canvas: canvas,
-        antialias: true,
-        alpha: true
-    });
-    renderer.setSize(sizes.width, sizes.height);
-
-    // Simplify your shader for mobile:
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-    // Lower resolution on mobile
-    const pixelRatio = isMobile ? Math.min(1.0, window.devicePixelRatio) : Math.min(window.devicePixelRatio, 2);
-    renderer.setPixelRatio(pixelRatio);
-
-    // create a plane
-    const geometry = new THREE.PlaneGeometry(2, 2);
-    const material = new THREE.ShaderMaterial({
-        vertexShader: vertexShader,
-        fragmentShader: fragmentShader,
-        uniforms: {
-            u_time: { value: 0 },
-            u_mouse: { value: new THREE.Vector2(0.5, 0.5) },
-            u_resolution: { value: new THREE.Vector2(sizes.width, sizes.height) }
+        const container = document.querySelector('.about-content');
+        if (container) {
+            containerRef.current = container;
+            observer.observe(container);
         }
-    });
 
-    const mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
+        return () => {
+            if (containerRef.current) {
+                observer.unobserve(containerRef.current);
+            }
+        };
+    }, []);
 
-    
+    // Setup and handle Three.js scene
+    useEffect(() => {
+        if (!canvasRef.current || !containerRef.current) return;
 
-    // Event handlers
-    const handlePointerMove = (event) => {
-        const rect = canvas.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
+        // Only initialize the scene without starting animation
+        const bounds = containerRef.current.getBoundingClientRect();
         
-        // Only update if within bounds
-        if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-            mouseRef.current.x = (x / rect.width);
-            mouseRef.current.y = 1.0 - (y / rect.height);
-        }
-    };
-    const handleTouchMove = (event) => {
-        const touch = event.touches[0];
-        const rect = canvas.getBoundingClientRect();
-        const x = touch.clientX - rect.left;
-        const y = touch.clientY - rect.top;
+        // Setup renderer
+        const canvas = canvasRef.current;
+        const renderer = new THREE.WebGLRenderer({
+            canvas,
+            antialias: true,
+            alpha: true
+        });
+        renderer.setSize(bounds.width, bounds.height);
         
-        if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-            mouseRef.current.x = (x / rect.width);
-            mouseRef.current.y = 1.0 - (y / rect.height);
-        }
-    };
+        // Setup scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
+        camera.position.z = 1;
 
-    const handleResize = () => {
-        sizes.width = window.innerWidth;
-        sizes.height = window.innerHeight;
+        // Create objects
+        const geometry = new THREE.PlaneGeometry(2, 2);
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                u_backgroundColor: { value: new THREE.Vector3(0.95, 0.95, 0.95) },
+                u_mouse: { value: new THREE.Vector2(0.5, 0.5) },
+                u_resolution: { value: new THREE.Vector2(bounds.width, bounds.height) },
+                u_time: { value: 0.0 }
+            },
+            vertexShader,
+            fragmentShader,
+            transparent: true
+        });
 
-        camera.aspect = sizes.width / sizes.height;
-        camera.updateProjectionMatrix();
+        const mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
 
-        renderer.setSize(sizes.width, sizes.height);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    };
+        // Store references for animation
+        sceneRef.current = {
+            scene,
+            camera,
+            renderer,
+            material,
+            geometry,
+            time: 0,
+            mousePos: new THREE.Vector2(0.5, 0.5)
+        };
 
-    // Add event listeners
-    canvas.addEventListener('pointermove', handlePointerMove);
-    canvas.addEventListener('touchmove', handleTouchMove, { passive: true });
-    window.addEventListener('resize', handleResize);
+        // Handle mouse movement
+        const handlePointerMove = (event) => {
+            if (!sceneRef.current) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            
+            if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+                sceneRef.current.mousePos.x = x / rect.width;
+                sceneRef.current.mousePos.y = 1.0 - (y / rect.height);
+            }
+        };
 
-    // Animation
-    const animate = () => {
-        timeRef.current += 0.01;
-        material.uniforms.u_time.value = timeRef.current;
-        material.uniforms.u_mouse.value.copy(mouseRef.current);
+        canvas.addEventListener('pointermove', handlePointerMove);
 
+        // Handle resize
+        const handleResize = () => {
+            if (!sceneRef.current || !containerRef.current) return;
+            
+            const newBounds = containerRef.current.getBoundingClientRect();
+            sceneRef.current.renderer.setSize(newBounds.width, newBounds.height);
+            
+            if (sceneRef.current.material.uniforms.u_resolution) {
+                sceneRef.current.material.uniforms.u_resolution.value.set(
+                    newBounds.width, 
+                    newBounds.height
+                );
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        // Render once initially
         renderer.render(scene, camera);
-        requestAnimationFrame(animate);
-    };
 
-    animate();
+        return () => {
+            // Cleanup
+            cancelAnimationFrame(requestRef.current);
+            canvas.removeEventListener('pointermove', handlePointerMove);
+            window.removeEventListener('resize', handleResize);
+            
+            if (sceneRef.current) {
+                sceneRef.current.geometry.dispose();
+                sceneRef.current.material.dispose();
+                sceneRef.current.renderer.dispose();
+            }
+        };
+    }, []);
 
-    // Cleanup
-    return () => {
-        canvas.removeEventListener('pointermove', handlePointerMove);
-        canvas.removeEventListener('touchmove', handleTouchMove);
-        window.removeEventListener('resize', handleResize);
-        renderer.dispose();
-        geometry.dispose();
-        material.dispose();
-    };
-}, []);
+    // Handle animation based on visibility
+    useEffect(() => {
+        if (!sceneRef.current) return;
 
-return (
-    <canvas 
-        ref={canvasRef}
-        className="background-canvas"
-        style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            pointerEvents: 'auto',
-            touchAction: 'pan-y',
-            zIndex: 0
+        // Start or stop animation based on visibility
+        if (isVisible) {
+            console.log('Component is visible, starting animation');
+            
+            const animate = () => {
+                if (!sceneRef.current) return;
+                
+                const { scene, camera, renderer, material, mousePos } = sceneRef.current;
+                
+                // Update time
+                sceneRef.current.time += 0.01;
+                
+                // Update uniforms
+                if (material.uniforms.u_time) {
+                    material.uniforms.u_time.value = sceneRef.current.time;
+                }
+                if (material.uniforms.u_mouse) {
+                    material.uniforms.u_mouse.value = mousePos;
+                }
+                
+                // Render
+                renderer.render(scene, camera);
+                requestRef.current = requestAnimationFrame(animate);
+            };
+            
+            requestRef.current = requestAnimationFrame(animate);
+        } else {
+            console.log('Component is not visible, stopping animation');
+            cancelAnimationFrame(requestRef.current);
+        }
+
+        return () => {
+            cancelAnimationFrame(requestRef.current);
+        };
+    }, [isVisible]);
+
+    return (
+        <canvas 
+            ref={canvasRef}
+            className="background-canvas"
+            style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                pointerEvents: 'auto',
+                touchAction: 'pan-y',
+                zIndex: 0
             }}
         />
     );
 }
-
-
 
 export default PixelPush;
