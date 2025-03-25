@@ -63,7 +63,7 @@
     }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1000px) {
     .hero-section {
         padding-top: 10rem;
     }
