@@ -9,11 +9,21 @@ function DotDisplace() {
     const requestRef = useRef(null);
     const [isVisible, setIsVisible] = useState(true);
     
-    // Define gridWidth and gridHeight at component level
-    const gridWidth = 50;
-    const gridHeight = 50;
-    const spacing = 1.0;
-    
+    // Calculate grid dimensions based on screen size
+    const calculateGridDimensions = () => {
+        const baseSpacing = 1.5;
+        const aspectRatio = window.innerWidth / window.innerHeight;
+        
+        // Increase base size and add padding
+        const baseSize = Math.max(60, Math.floor(window.innerWidth / 15));
+        
+        return {
+            gridWidth: Math.ceil(baseSize * aspectRatio) + 10, // Add padding
+            gridHeight: baseSize + 10, // Add padding
+            spacing: baseSpacing
+        };
+    };
+
     // Setup Intersection Observer
     useEffect(() => {
         if (!canvasRef.current) return;
@@ -47,21 +57,19 @@ function DotDisplace() {
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(0x0D0D0D);
 
-        // Canvas
         const canvas = canvasRef.current;
-
-        // Sizes
         const sizes = {
             width: window.innerWidth,
             height: window.innerHeight
         };
 
-        // Camera
-        const camera = new THREE.PerspectiveCamera(25, sizes.width / sizes.height, 0.1, 100);
-        camera.position.set(0, 0, 100);
+        // Adjust camera FOV and position
+        const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 100);
+        // Move camera back to show more of the scene
+        camera.position.set(0, 0, 80);
         scene.add(camera);
 
-        // Renderer
+        // Renderer setup
         const renderer = new THREE.WebGLRenderer({
             canvas: canvas,
             antialias: true
@@ -69,12 +77,15 @@ function DotDisplace() {
         renderer.setSize(sizes.width, sizes.height);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
+        // Get initial grid dimensions
+        const { gridWidth, gridHeight, spacing } = calculateGridDimensions();
+        
         // Particles setup
         let particles, particlePositions = [], originalPositions = [];
-
         const geometry = new THREE.BufferGeometry();
         const positions = [];
         
+        // Create grid with calculated dimensions
         for(let x = -gridWidth / 2; x < gridWidth / 2; x += spacing) {
             for(let y = -gridHeight / 2; y < gridHeight / 2; y += spacing) {
                 positions.push(x, y, 0);
@@ -84,11 +95,14 @@ function DotDisplace() {
         }
         
         geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-        const material = new THREE.PointsMaterial({color: 0xffffff, size: 0.5});
+        const material = new THREE.PointsMaterial({
+            color: 0xffffff,
+            size: 0.6 // Increased from 0.5
+        });
         particles = new THREE.Points(geometry, material);
         scene.add(particles);
 
-        // Store references for animation
+        // Store references
         sceneRef.current = {
             scene,
             camera,
@@ -99,35 +113,90 @@ function DotDisplace() {
             geometry,
             material,
             sizes,
-            gridWidth,  // Include gridWidth in the ref
-            gridHeight  // Include gridHeight in the ref
+            gridWidth,
+            gridHeight
         };
 
         // Event handlers
         const handlePointerMove = (event) => {
             const rect = canvas.getBoundingClientRect();
-            mouseRef.current.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-            mouseRef.current.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+            
+            // Convert mouse position to normalized device coordinates (-1 to +1)
+            const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+            
+            // Convert to world coordinates
+            const vector = new THREE.Vector3(x, y, 0);
+            vector.unproject(camera);
+            vector.sub(camera.position).normalize();
+            const distance = -camera.position.z / vector.z;
+            const worldPos = camera.position.clone().add(vector.multiplyScalar(distance));
+            
+            mouseRef.current.x = worldPos.x;
+            mouseRef.current.y = worldPos.y;
         };
 
         const handleTouchMove = (event) => {
-            // Don't prevent default to allow scrolling
             const touch = event.touches[0];
             const rect = canvas.getBoundingClientRect();
-            mouseRef.current.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
-            mouseRef.current.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
+            
+            // Convert touch position to normalized device coordinates (-1 to +1)
+            const x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
+            const y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
+            
+            // Convert to world coordinates
+            const vector = new THREE.Vector3(x, y, 0);
+            vector.unproject(camera);
+            vector.sub(camera.position).normalize();
+            const distance = -camera.position.z / vector.z;
+            const worldPos = camera.position.clone().add(vector.multiplyScalar(distance));
+            
+            mouseRef.current.x = worldPos.x;
+            mouseRef.current.y = worldPos.y;
         };
 
+        // Enhanced resize handler
         const handleResize = () => {
             if (!sceneRef.current) return;
             
-            sceneRef.current.sizes.width = window.innerWidth;
-            sceneRef.current.sizes.height = window.innerHeight;
-
-            camera.aspect = sceneRef.current.sizes.width / sceneRef.current.sizes.height;
+            // Update sizes
+            const newSizes = {
+                width: window.innerWidth,
+                height: window.innerHeight
+            };
+            
+            // Update camera
+            camera.aspect = newSizes.width / newSizes.height;
             camera.updateProjectionMatrix();
-
-            renderer.setSize(sceneRef.current.sizes.width, sceneRef.current.sizes.height);
+            
+            // Recalculate grid dimensions
+            const { gridWidth, gridHeight, spacing } = calculateGridDimensions();
+            
+            // Update particles
+            const newPositions = [];
+            const newParticlePositions = [];
+            const newOriginalPositions = [];
+            
+            for(let x = -gridWidth / 2; x < gridWidth / 2; x += spacing) {
+                for(let y = -gridHeight / 2; y < gridHeight / 2; y += spacing) {
+                    newPositions.push(x, y, 0);
+                    newParticlePositions.push(new THREE.Vector3(x, y, 0));
+                    newOriginalPositions.push(new THREE.Vector3(x, y, 0));
+                }
+            }
+            
+            // Update geometry
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(newPositions, 3));
+            
+            // Update references
+            sceneRef.current.particlePositions = newParticlePositions;
+            sceneRef.current.originalPositions = newOriginalPositions;
+            sceneRef.current.gridWidth = gridWidth;
+            sceneRef.current.gridHeight = gridHeight;
+            sceneRef.current.sizes = newSizes;
+            
+            // Update renderer
+            renderer.setSize(newSizes.width, newSizes.height);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         };
 
@@ -170,9 +239,7 @@ function DotDisplace() {
                     renderer, 
                     particles, 
                     particlePositions, 
-                    originalPositions,
-                    gridWidth, 
-                    gridHeight
+                    originalPositions
                 } = sceneRef.current;
                 
                 const positions = particles.geometry.attributes.position.array;
@@ -181,17 +248,20 @@ function DotDisplace() {
                     let particle = particlePositions[i];
                     let original = originalPositions[i];
 
-                    let dx = (mouseRef.current.x * gridWidth / 2) - particle.x;
-                    let dy = (mouseRef.current.y * gridHeight / 2) - particle.y;
+                    // Direct distance calculation without scaling
+                    let dx = mouseRef.current.x - particle.x;
+                    let dy = mouseRef.current.y - particle.y;
                     let distance = Math.sqrt(dx * dx + dy * dy);
 
-                    let force = Math.max(0, 5 - distance) * 0.01;
+                    // Adjust force and radius of influence
+                    let radius = 8;
+                    let force = Math.max(0, radius - distance) * 0.015;
                     let angle = Math.atan2(dy, dx);
                     
                     particle.x -= Math.cos(angle) * force;
                     particle.y -= Math.sin(angle) * force;
 
-                    if (distance > 5) {
+                    if (distance > radius) {
                         let restorationSpeed = 0.04;
                         particle.x += (original.x - particle.x) * restorationSpeed;
                         particle.y += (original.y - particle.y) * restorationSpeed;
