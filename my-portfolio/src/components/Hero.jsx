@@ -12,6 +12,16 @@ function HeroContent({ pageData }) {
   if (!pageData.acf) {
     return <div>Hero content not available</div>;
   }
+
+  const scrollToWork = () => {
+    const workSection = document.getElementById('work');
+    if (workSection) {
+      workSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
   
   // Destructure - Extract the acf object from the pageData object
   const { acf } = pageData;
@@ -22,8 +32,8 @@ function HeroContent({ pageData }) {
         <h1>{acf.name}</h1>
         <h2>{acf.position_title}</h2>
       </div>
-      <div className="hero-arrowdown">
-        <img src={arrowdown} alt="arrowdown" />
+      <div className="hero-arrowdown" onClick={scrollToWork}>
+        <img src={arrowdown} alt="arrowdown" className="bounce-animation"/>
       </div>
     </section>
   );
