@@ -1,4 +1,3 @@
-
 .about-title {
     display: flex;
     justify-content: center;
@@ -17,13 +16,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem 2rem;
+    padding: 2rem;
     background-color: var(--white);
     color: var(--black);
     border-radius: 2.5rem 2.5rem 0rem 0rem;
-    position: relative; /* Make sure this is present */
-    overflow: hidden;  /* Make sure this is present */
-    min-height: 300px; /* Add a minimum height if needed */
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Update the text styles to create inversion effect */
@@ -50,5 +51,34 @@
     text-decoration: underline;
     align-self: flex-start;
     padding:0;
+}
+
+.about-section {
+    width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+    .about-section {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .about-text h2 {
+        font-weight: 400;
+    }
+}
+
+/* Add a specific rule for 1000px+ viewports */
+@media (min-width: 1000px) {
+    .about-section {
+        padding: 0;
+    }
+    
+    .about-content {
+        width: 100%;
+        max-width: 100%;
+    }
 }
 

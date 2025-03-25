@@ -28,10 +28,12 @@ function About({ pageData }) {
       {acf.intro_paragraph && (
         <div className="about-content">
           <PixelPush />
-          <h2>{acf.intro_paragraph}</h2>
-          <Link to="/about" className="about-button">
-            More about Angus
-          </Link>
+          <div className="about-text">
+            <h2>{acf.intro_paragraph}</h2>
+            <Link to="/about" className="about-button">
+              More about Angus
+            </Link>
+          </div>
         </div>
       )}
       

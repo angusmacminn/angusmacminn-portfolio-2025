@@ -41,7 +41,7 @@ function PixelPush() {
     useEffect(() => {
         if (!canvasRef.current || !containerRef.current) return;
 
-        // Only initialize the scene without starting animation
+        // Get initial bounds from container
         const bounds = containerRef.current.getBoundingClientRect();
         
         // Setup renderer
@@ -55,11 +55,20 @@ function PixelPush() {
         
         // Setup scene
         const scene = new THREE.Scene();
-        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
+        
+        // Update camera to use container dimensions
+        const camera = new THREE.OrthographicCamera(
+            bounds.width / -2,
+            bounds.width / 2,
+            bounds.height / 2,
+            bounds.height / -2,
+            0.1,
+            10
+        );
         camera.position.z = 1;
 
         // Create objects
-        const geometry = new THREE.PlaneGeometry(2, 2);
+        const geometry = new THREE.PlaneGeometry(bounds.width, bounds.height);
         const material = new THREE.ShaderMaterial({
             uniforms: {
                 u_backgroundColor: { value: new THREE.Vector3(0.95, 0.95, 0.95) },
@@ -82,11 +91,45 @@ function PixelPush() {
             renderer,
             material,
             geometry,
+            mesh,
             time: 0,
-            mousePos: new THREE.Vector2(0.5, 0.5)
+            mousePos: new THREE.Vector2(0.5, 0.5),
+            bounds: bounds
         };
 
-        // Handle mouse movement
+        // Enhanced resize handler
+        const handleResize = () => {
+            if (!sceneRef.current || !containerRef.current) return;
+            
+            const newBounds = containerRef.current.getBoundingClientRect();
+            
+            // Update renderer size
+            renderer.setSize(newBounds.width, newBounds.height);
+            
+            // Update camera frustum
+            camera.left = newBounds.width / -2;
+            camera.right = newBounds.width / 2;
+            camera.top = newBounds.height / 2;
+            camera.bottom = newBounds.height / -2;
+            camera.updateProjectionMatrix();
+            
+            // Update mesh geometry
+            mesh.geometry.dispose();
+            mesh.geometry = new THREE.PlaneGeometry(newBounds.width, newBounds.height);
+            
+            // Update uniforms
+            if (material.uniforms.u_resolution) {
+                material.uniforms.u_resolution.value.set(
+                    newBounds.width, 
+                    newBounds.height
+                );
+            }
+            
+            // Store new bounds
+            sceneRef.current.bounds = newBounds;
+        };
+
+        // Handle mouse movement with proper scaling
         const handlePointerMove = (event) => {
             if (!sceneRef.current) return;
             
@@ -100,26 +143,11 @@ function PixelPush() {
             }
         };
 
+        // Add event listeners
         canvas.addEventListener('pointermove', handlePointerMove);
-
-        // Handle resize
-        const handleResize = () => {
-            if (!sceneRef.current || !containerRef.current) return;
-            
-            const newBounds = containerRef.current.getBoundingClientRect();
-            sceneRef.current.renderer.setSize(newBounds.width, newBounds.height);
-            
-            if (sceneRef.current.material.uniforms.u_resolution) {
-                sceneRef.current.material.uniforms.u_resolution.value.set(
-                    newBounds.width, 
-                    newBounds.height
-                );
-            }
-        };
-
         window.addEventListener('resize', handleResize);
 
-        // Render once initially
+        // Initial render
         renderer.render(scene, camera);
 
         return () => {
@@ -187,7 +215,9 @@ function PixelPush() {
                 height: '100%',
                 pointerEvents: 'auto',
                 touchAction: 'pan-y',
-                zIndex: 0
+                zIndex: 0,
+                boxSizing: 'border-box',
+                overflow: 'hidden'
             }}
         />
     );

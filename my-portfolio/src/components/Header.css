@@ -5,6 +5,9 @@
     left: 0;
     width: 100%;
     z-index: 1000;
+    box-sizing: border-box; /* Add this */
+    display: flex;          /* Add this */
+    justify-content: center;
 }
 
 .nav-content {
@@ -14,8 +17,17 @@
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
+    
 }
 
+@media (min-width: 1000px) {
+    .nav-content {
+    background-color: var(--light-black);
+    border-radius: 1rem;
+    border: 1px solid var(--dark-gray);
+    box-shadow: 2px 4px 4px 0px rgba(123, 123, 123, 0.127) inset;
+    }
+}
 .logo {
     height: 2.5rem;
     display: flex;
