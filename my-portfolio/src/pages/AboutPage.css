@@ -31,6 +31,46 @@
     border: 1px solid var(--dark-gray);
 }
 
+.skills-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--light-black);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 5px 4px 17.6px 1px rgba(231, 231, 231, 0.06) inset;
+    border: 1px solid var(--dark-gray);
+}
+
+.hierarchical-skills {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+}
+
+.category-skills {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.skills-container h3 {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--light-gray);
+}
+
+.skill-tag--about {
+    font-size: var(--font-size-small);
+    font-weight: 300;
+    border: none;
+    color: var(--white);
+}
+
+
 
 
 .profile-image {

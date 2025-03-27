@@ -1,7 +1,7 @@
 import React from 'react';
 import { formatSkillName } from '../utils/skillMap';
 
-function ProfileSkills({ skillsData }) {
+function ProfileSkills({ skillsData, className }) {
   // Check if we have valid data
   if (!skillsData || !Array.isArray(skillsData) || skillsData.length === 0) {
     return <div className="skills-empty">No skills to display</div>;
@@ -20,7 +20,7 @@ function ProfileSkills({ skillsData }) {
   });
 
   return (
-    <div className="hierarchical-skills">
+    <div className={`hierarchical-skills ${className}`}>
     {parentCategories.map(category => (
       <div key={category.id} className="skill-category">
         <h3 className="category-title">{category.name}</h3>
@@ -28,7 +28,7 @@ function ProfileSkills({ skillsData }) {
         {childSkillByParent[category.id] && childSkillByParent[category.id].length > 0 ? (
           <div className="category-skills">
             {childSkillByParent[category.id].map(skill => (
-              <div key={skill.id} className="skill-tag">
+              <div key={skill.id} className={`skill-tag ${className ? 'skill-tag--about' : ''}`}>
                 {skill.name}
               </div>
             ))}

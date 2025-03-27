@@ -112,13 +112,13 @@ function AboutPage() {
                             <p>{restData.acf.profile_bio_1}</p>
                         </div>
                         
-                        <div className="about-content">
+                        <div className="about-page-content">
                             <div className="skills-container">
                                 {!skillsLoaded ? (
                                     <p className="loading">Loading skills... <span className="loading-dots"></span></p>
                                 ) : skills.length > 0 ? (
                                     <>
-                                        <ProfileSkills skillsData={skills} />
+                                        <ProfileSkills skillsData={skills} className="skill-tag--about" />
                                     </>
                                 ) : (
                                     <p className="no-skills">No skills found. Please check your API endpoint.</p>
