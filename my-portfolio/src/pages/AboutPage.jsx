@@ -131,17 +131,17 @@ function AboutPage() {
                         </div>
 
                         <div className='about-content-2'>
-                        <div className='profile-image'>
-                                {!imageLoaded ? (
-                                    <p className="loading">Loading image...</p>
-                                ) : profileImage ? (
-                                    <img 
-                                        src={profileImage.source_url} 
-                                        alt={profileImage.alt_text || 'Profile image'} 
-                                    />
-                                ) : (
-                                    <p>No profile image available</p>
-                                )}
+                            <div className='profile-image'>
+                                    {!imageLoaded ? (
+                                        <p className="loading">Loading image...</p>
+                                    ) : profileImage ? (
+                                        <img 
+                                            src={profileImage.source_url} 
+                                            alt={profileImage.alt_text || 'Profile image'} 
+                                        />
+                                    ) : (
+                                        <p>No profile image available</p>
+                                    )}
                             </div>
                         </div>
                     </section>

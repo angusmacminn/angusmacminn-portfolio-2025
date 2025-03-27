@@ -31,16 +31,18 @@
     }
     
     .logo {
+        display: flex;
+        height: 1.8rem;
+        align-items: center;
+        margin: 0;
+        padding: 0.2rem 0;
         margin-right: 1rem;
     }
 }
 
+/* Hide logo by default (mobile) */
 .logo {
-    height: 1.8rem;
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0.2rem 0;
+    display: none; /* Hide by default */
 }
 
 .logo img {

@@ -16,10 +16,28 @@
 }
 
 .about-intro h1 {
-    font-size: 2em;
+    /* font-size: 2em; */
     font-weight: 600;
     color: var(--white);
-    text-align: center;
+}
+
+.about-intro p {
+    font-size: var(--font-size-small);
+    font-weight: 300;
+    background-color: var(--light-black);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 5px 4px 17.6px 1px rgba(231, 231, 231, 0.06) inset;
+    border: 1px solid var(--dark-gray);
+}
+
+
+
+.profile-image {
+    width: 10rem;
+    height: 10rem;
+    overflow: hidden;
+    margin-bottom: 2rem;
 }
 
 

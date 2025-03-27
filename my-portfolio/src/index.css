@@ -97,6 +97,7 @@
   font-family: var(--font-family);
   color: var(--white);
   
+  --font-size-small: 0.9em;
 
 }
 
