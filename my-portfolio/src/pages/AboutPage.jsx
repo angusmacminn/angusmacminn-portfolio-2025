@@ -2,6 +2,7 @@ import Header from '../components/Header';
 import { useState, useEffect } from 'react';
 import { RestBase } from '../utils/RestBase';
 import ProfileSkills from '../components/ProfileSkills';
+import "./AboutPage.css";
 
 
 function AboutPage() {
@@ -105,7 +106,7 @@ function AboutPage() {
                 {!isLoaded ? (
                     <p className="loading">Loading page content...</p> 
                 ) : (
-                    <section className="about">
+                    <section className="about-page-section">
                         <div className="about-intro">
                             <h1>{restData.acf.tagline}</h1>
                             <p>{restData.acf.profile_bio_1}</p>
@@ -143,9 +144,6 @@ function AboutPage() {
                                 )}
                             </div>
                         </div>
-                        
-
-
                     </section>
                 )}
             </main>
