@@ -4,6 +4,8 @@ import { RestBase } from '../utils/RestBase';
 import { formatSkillName } from '../utils/skillMap';
 import MediaGallery from './MediaGallery';
 import HighlightsAccordion from './HighlightsAccordion';
+import './SingleWork.css';
+import Header from '../components/Header';
 
 function SingleWork() {
     const { slug } = useParams();
@@ -65,55 +67,62 @@ function SingleWork() {
 
     return (
         <main>
+            <Header />
             <section className="single-work">
-                <Link to="/" className="back-link">← Back to all works</Link>
-                <div className="work-title-year">
-                    <h1>{workData.title.rendered}</h1>
-                    <p>{workData.acf.year}</p>
-                </div>
+                <div className="single-work-container">
+                    <Link to="/" className="back-link">← Back to all works</Link>
+                    <div className="work-title-year">
+                        <h1>{workData.title.rendered}</h1>
+                        <p>{workData.acf.year}</p>
+                    </div>
 
-                <div className="work-skills">
-                {workData.class_list
-                                .filter(className => className.startsWith('skills-'))
-                                .map(skill => {
-                                  // Remove the 'skills-' prefix
-                                  const skillSlug = skill.replace('skills-', '');
-                                  
-                                  return (
+                    <div className="work-skills">
+                        {workData.class_list
+                            .filter(className => className.startsWith('skills-'))
+                            .map(skill => {
+                                // Remove the 'skills-' prefix
+                                const skillSlug = skill.replace('skills-', '');
+                                
+                                return (
                                     <span key={skill} className="skill-tag">
-                                      {formatSkillName(skillSlug)}
+                                        {formatSkillName(skillSlug)}
                                     </span>
-                                  );
-                                })}
+                                );
+                            })}
+                    </div>
+
+                    <section className="work-overview">
+                        {/* Media Gallery */}
+                        {workData.acf?.media_gallery && workData.acf.media_gallery.length > 0 && (
+                            <div className="work-media">
+                                <MediaGallery mediaItems={workData.acf.media_gallery} restBase={RestBase} />
+                            </div>
+                        )}
+                        
+                        {workData.acf?.media_gallery && workData.acf.media_gallery.length > 0 && (
+                            <div className="development-message">
+                                this game is currently under development<br />
+                                for mobile devices.
+                            </div>
+                        )}
+                        
+                        {workData.acf.overview_title && (
+                            <h2>{workData.acf.overview_title}</h2>
+                        )}
+                        {workData.acf.overview_description && (
+                            <div className="work-overview-description">
+                                {workData.acf.overview_description}
+                            </div>
+                        )}
+
+                        {/* Highlights Accordion */}
+                        <HighlightsAccordion
+                            highlights={workData.acf}
+                            title={workData.acf.highlights_title}
+                            restBase={RestBase}
+                        />
+                    </section>
                 </div>
-
-                <section className="work-overview">
-                    {/* Media Gallery */}
-                    {workData.acf?.media_gallery && workData.acf.media_gallery.length > 0 && (
-                        <div className="work-media">
-                        <MediaGallery mediaItems={workData.acf.media_gallery} restBase={RestBase} />
-                        </div>
-                    )}
-                    {workData.acf.overview_title && (
-                        <h2>{workData.acf.overview_title}</h2>
-                    )}
-                    {workData.acf.overview_description && (
-                        <div className="work-overview-description">
-                            {workData.acf.overview_description}
-                        </div>
-                    )}
-
-                    {/* Highlights Accordion */}
-                    <HighlightsAccordion
-                        highlights={workData.acf}
-                        title={workData.acf.highlights_title}
-                        restBase={RestBase}
-                    />
-                </section>
-
-                
-                
-                
             </section>
         </main>
     );

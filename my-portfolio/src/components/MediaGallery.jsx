@@ -121,7 +121,7 @@ function MediaGallery({ mediaItems, restBase }) {
         navigation
         pagination={{ clickable: true }}
         autoplay={{ 
-          delay: 5000,
+          delay: 10000,
           disableOnInteraction: false,
           pauseOnMouseEnter: true
         }}
@@ -133,7 +133,7 @@ function MediaGallery({ mediaItems, restBase }) {
               {media.type === 'video' && (
                 <video 
                   controls
-                  autoPlay={false}
+                  autoPlay={true}
                   muted
                   playsInline
                   className="media-video"
@@ -164,7 +164,7 @@ function MediaGallery({ mediaItems, restBase }) {
                 />
               )}
               
-              {media.title && <div className="media-caption">{media.title}</div>}
+              
             </div>
           </SwiperSlide>
         ))}

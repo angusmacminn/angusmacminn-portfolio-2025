@@ -1,0 +1,201 @@
+.single-work {
+    padding: 0.75rem;
+    margin: 0 auto;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.single-work-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+.back-link {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.work-title-year {
+    text-align: center;
+    margin-bottom: 1rem;
+    word-wrap: break-word; /* Ensure long titles wrap */
+}
+
+.work-title-year h1 {
+    font-size: 1.75rem; /* Slightly smaller for tiny screens */
+    font-weight: 400;
+    margin: 0;
+    margin-bottom: 0.25rem;
+}
+
+.work-title-year p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.work-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.skill-tag {
+    background-color: #fff;
+    color: #000;
+    padding: 0.2rem 0.5rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+}
+
+.work-overview {
+    margin-top: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.work-media {
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.work-overview h2 {
+    font-size: 1.2rem; /* Smaller for tiny screens */
+    font-weight: 400;
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.work-overview-description {
+    font-size: 0.85rem; /* Smaller for tiny screens */
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+    word-wrap: break-word;
+    width: 100%;
+}
+
+/* Message below gallery */
+.development-message {
+    text-align: center;
+    font-size: 0.8rem; /* Smaller for tiny screens */
+    margin: 0.8rem 0 1.5rem;
+    opacity: 0.8;
+}
+
+/* Fix for highlights accordion container */
+.highlights-accordion {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+/* Fix for accordion items */
+.accordion-item {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.accordion-content {
+    width: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
+/* Small phones (320px) - specific fixes */
+@media (max-width: 374px) {
+    .single-work {
+        padding: 0.5rem;
+    }
+    
+    .work-title-year h1 {
+        font-size: 1.5rem;
+    }
+    
+    .work-overview h2 {
+        font-size: 1.1rem;
+    }
+    
+    .work-overview-description {
+        font-size: 0.8rem;
+    }
+}
+
+/* Small tablets (portrait) */
+@media (min-width: 500px) {
+    .single-work {
+        padding: 1.5rem;
+    }
+    
+    .single-work-container {
+        max-width: 500px;
+    }
+    
+    .work-title-year h1 {
+        font-size: 2.5rem;
+    }
+    
+    .work-overview h2 {
+        font-size: 1.5rem;
+    }
+    
+    .development-message {
+        margin: 1rem 0 2rem;
+    }
+}
+
+/* Tablets and smaller desktops */
+@media (min-width: 768px) {
+    .single-work {
+        padding: 2rem;
+    }
+    
+    .single-work-container {
+        max-width: 650px;
+    }
+    
+    .back-link {
+        margin-bottom: 2rem;
+        font-size: 1rem;
+    }
+    
+    .work-skills {
+        margin-bottom: 2rem;
+    }
+    
+    .work-media {
+        margin-bottom: 2rem;
+    }
+}
+
+/* Larger desktops */
+@media (min-width: 1200px) {
+    .single-work-container {
+        max-width: 800px;
+    }
+    
+    .work-title-year h1 {
+        font-size: 3rem;
+    }
+    
+    .work-overview-description {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    .work-overview {
+        margin-top: 2rem;
+    }
+}
+
