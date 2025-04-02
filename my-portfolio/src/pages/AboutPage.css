@@ -1,5 +1,3 @@
-
-
 .about-page-section {
     display: flex;
     flex-direction: column;
@@ -21,7 +19,7 @@
     color: var(--white);
 }
 
-.about-intro p {
+.about-page-content p {
     font-size: var(--font-size-small);
     font-weight: 300;
     background-color: var(--light-black);
@@ -81,11 +79,165 @@
     border: 1px solid var(--dark-gray);
 }
 
+.right-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
 
 .profile-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border: 1px solid var(--dark-gray);
+    border-radius: 1rem;
+    max-width: 260px;
 }
 
+
+.education-section,
+.about-contact-section {
+    background-color: var(--light-black);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 5px 4px 17.6px 1px rgba(231, 231, 231, 0.06) inset;
+    border: 1px solid var(--dark-gray);
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 260px;
+}
+
+.education-section h3,
+.about-contact-section h3 {
+    font-size: var(--font-size-small);
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+
+.education-item {
+    margin-bottom: 1.5rem;
+}
+
+.education-item:last-child {
+    margin-bottom: 0;
+}
+
+.education-title {
+    font-size: var(--font-size-small);
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+}
+
+.education-school {
+    font-size: var(--font-size-small);
+    font-weight: 300;
+    color: var(--light-gray);
+}
+
+.contact-info {
+    font-size: var(--font-size-small);
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-links img {
+    width: 24px;
+    height: 24px;
+    filter: invert(1);
+    transition: opacity 0.2s ease;
+}
+
+.social-links a:hover img {
+    opacity: 0.7;
+}
+
+@media (min-width: 500px) {
+    .about-page-content {
+       max-width: 500px;
+       align-items: left;
+    }
+
+    .skills-container {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .profile-bio-2 {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 1000px) {
+
+    .about-page-section {
+        flex-direction: row;
+    }
+
+    .left-column {
+        align-items: left;
+    }
+
+    .about-intro h1 {
+        text-align: left;
+    }
+
+    .profile-bio-2 {
+        margin: 0;
+    }
+
+    .right-column {
+        align-self: flex-start;
+        margin-top: 24rem;
+    }
+
+    /* .profile-image {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+    }
+    
+    .profile-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: 1px solid var(--dark-gray);
+        border-radius: 1rem;
+        max-width: 260px;
+        transition: all 0.4s ease;
+        filter: contrast(100%) brightness(100%);
+    }
+
+    /* Pixelation hover effect */
+    /* .profile-image:hover img {
+        filter: contrast(150%) brightness(90%) url('#pixel-pattern');
+        transform: scale(1.02);
+    }
+
+    .profile-image img:hover {
+        animation: pixelate 0.4s ease-in-out forwards;
+    }
+    
+    @keyframes pixelate {
+        0% {
+            filter: contrast(100%) brightness(100%);
+        }
+        50% {
+            filter: contrast(150%) brightness(90%) url('#pixel-pattern') blur(1px);
+        }
+        100% {
+            filter: contrast(200%) brightness(85%) url('#pixel-pattern') blur(0.5px);
+        }
+    } */ 
+   
+}

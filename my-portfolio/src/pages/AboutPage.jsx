@@ -2,6 +2,9 @@ import Header from '../components/Header';
 import { useState, useEffect } from 'react';
 import { RestBase } from '../utils/RestBase';
 import ProfileSkills from '../components/ProfileSkills';
+import linkedinIcon from '../assets/icons/iconmonstr-linkedin-3.svg';
+import githubIcon from '../assets/icons/iconmonstr-github-1.svg';
+import instagramIcon from '../assets/icons/iconmonstr-instagram-11.svg';
 import "./AboutPage.css";
 
 
@@ -25,11 +28,6 @@ function AboutPage() {
                     setData(data);
                     setLoadStatus(true);
 
-                    if (data.acf && data.acf.profile_image) {
-                        fetchProfileImage(data.acf.profile_image);
-                    } else {
-                        setImageLoaded(true);
-                    }
  
 
                 } else {
@@ -107,43 +105,83 @@ function AboutPage() {
                     <p className="loading">Loading page content...</p> 
                 ) : (
                     <section className="about-page-section">
-                        <div className="about-intro">
-                            <h1>{restData.acf.tagline}</h1>
-                            <p>{restData.acf.profile_bio_1}</p>
+                        <div className="left-column">
+                            <div className="about-intro">
+                                <h1>{restData.acf.tagline}</h1>
+                                
+                            </div>
+                            
+                            <div className="about-page-content">
+                                <p>{restData.acf.profile_bio_1}</p>
+                                    <div className="skills-container">
+                                        {!skillsLoaded ? (
+                                            <p className="loading">Loading skills... <span className="loading-dots"></span></p>
+                                        ) : skills.length > 0 ? (
+                                            <>
+                                                <ProfileSkills skillsData={skills} className="skill-tag--about" />
+                                            </>
+                                        ) : (
+                                            <p className="no-skills">No skills found. Please check your API endpoint.</p>
+                                        )}
+                                    </div>
+                            </div>
+    
+                            <div className='about-content-2'>
+                                <div className='profile-bio-2'>
+                                    <p>{restData.acf.profile_bio_2}</p>
+                                </div>
+                            </div>
                         </div>
-                        
-                        <div className="about-page-content">
-                            <div className="skills-container">
-                                {!skillsLoaded ? (
-                                    <p className="loading">Loading skills... <span className="loading-dots"></span></p>
-                                ) : skills.length > 0 ? (
-                                    <>
-                                        <ProfileSkills skillsData={skills} className="skill-tag--about" />
-                                    </>
+                        <div className='right-column'>
+                            <div className='profile-image'>
+                                {!imageLoaded ? (
+                                    <p className="loading">Loading image...</p>
+                                ) : profileImage ? (
+                                    <img 
+                                        src={profileImage.source_url} 
+                                        alt={profileImage.alt_text || 'Profile image'} 
+                                    />
                                 ) : (
-                                    <p className="no-skills">No skills found. Please check your API endpoint.</p>
+                                    <p>No profile image available</p>
                                 )}
                             </div>
-
-                            <div className='profile-bio-2'>
-                                <p>{restData.acf.profile_bio_2}</p>
+                            
+                            <div className="education-section">
+                                <h3>Education</h3>
+                                <div className="education-item">
+                                    <p>Bachelors of Digital Communications</p>
+                                    <p className="education-school">Humber College - 2021</p>
+                                </div>
+                                <div className="education-item">
+                                    <p>Certificate in Front-End Web Development</p>
+                                    <p className="education-school">British Columbia Institute of Technology - 2025</p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div className='about-content-2'>
-                            <div className='profile-image'>
-                                    {!imageLoaded ? (
-                                        <p className="loading">Loading image...</p>
-                                    ) : profileImage ? (
-                                        <img 
-                                            src={profileImage.source_url} 
-                                            alt={profileImage.alt_text || 'Profile image'} 
-                                        />
-                                    ) : (
-                                        <p>No profile image available</p>
+                            <div className="about-contact-section">
+                                <div className="contact-info">Vancouver, BC</div>
+                                <div className="contact-info">4:35 PST</div>
+                                <div className="contact-info">angusmacminn@outlook.com</div>
+                                <div className="social-links">
+                                    {restData.acf.instagram_url && (
+                                        <a href={restData.acf.instagram_url} target="_blank" rel="noopener noreferrer">
+                                            <img src={instagramIcon} alt="Instagram" />
+                                        </a>
                                     )}
+                                    {restData.acf.github_url && (
+                                        <a href={restData.acf.github_url} target="_blank" rel="noopener noreferrer">
+                                            <img src={githubIcon} alt="GitHub" />
+                                        </a>
+                                    )}
+                                    {restData.acf.linkedin_url && (
+                                        <a href={restData.acf.linkedin_url} target="_blank" rel="noopener noreferrer">
+                                            <img src={linkedinIcon} alt="LinkedIn" />
+                                        </a>
+                                    )}
+                                </div>
                             </div>
                         </div>
+                        
                     </section>
                 )}
             </main>
