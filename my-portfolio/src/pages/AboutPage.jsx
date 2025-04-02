@@ -28,7 +28,15 @@ function AboutPage() {
                     setData(data);
                     setLoadStatus(true);
 
- 
+                    // Fetch profile image
+                    if (data.acf && data.acf.profile_image) {
+                        // If there's an image ID, fetch the image details
+                        fetchProfileImage(data.acf.profile_image);
+                    } else {
+                        // If no image ID, consider the image "loaded" (as there's nothing to load)
+                        console.log("No profile image ID found in ACF data.");
+                        setImageLoaded(true);
+                    }
 
                 } else {
                     console.error("Failed to fetch page data:", pageResponse.status);
