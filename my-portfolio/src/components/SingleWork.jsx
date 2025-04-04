@@ -94,7 +94,7 @@ function SingleWork() {
             <Header />
             <section className="single-work">
                 <div className="single-work-container">
-                    <Link to="/" className="back-link">← Back to all works</Link>
+                    <Link to="/#work" className="back-link">← Back to all works</Link>
                     <div className="work-title-year">
                         <h1>{workData.title.rendered}</h1>
                         <p>{workData.acf.year}</p>

@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css'; // Default theme
 
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import './MediaGallery.css';
 
 function MediaGallery({ mediaItems, restBase }) {
@@ -15,79 +11,32 @@ function MediaGallery({ mediaItems, restBase }) {
 
   useEffect(() => {
     const fetchMediaContent = async () => {
-      // Add defensive checks
       if (!mediaItems || !Array.isArray(mediaItems) || mediaItems.length === 0) {
-        console.log("No valid media items provided:", mediaItems);
         setLoading(false);
         return;
       }
-
       try {
-        console.log("Processing media items:", mediaItems);
-        
-        // Create an array to store all media content
         const mediaContentArray = [];
-        
-        // Process each media item
         for (const item of mediaItems) {
-          console.log("Processing item:", item);
-          
-          try {
-            // Handle different media types
-            if (item.type === 'video') {
-              if (item.video_file) {
-                // Fetch video file data
-                const videoResponse = await fetch(`${restBase}media/${item.video_file}`);
-                if (videoResponse.ok) {
-                  const videoData = await videoResponse.json();
-                  mediaContentArray.push({
-                    id: videoData.id,
-                    type: 'video',
-                    url: videoData.source_url,
-                    title: videoData.title?.rendered || '',
-                    mime_type: videoData.mime_type || 'video/mp4'
-                  });
-                } else {
-                  console.error(`Failed to fetch video with ID ${item.video_file}: ${videoResponse.status}`);
-                }
-              } else if (item.video_url) {
-                // Handle external video URL (YouTube, Vimeo, etc.)
-                mediaContentArray.push({
-                  id: `video-url-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-                  type: 'embed',
-                  url: item.video_url,
-                  title: ''
-                });
+          if (item.type === 'video') {
+            if (item.video_file) {
+              const videoResponse = await fetch(`${restBase}media/${item.video_file}`);
+              if (videoResponse.ok) {
+                const videoData = await videoResponse.json();
+                mediaContentArray.push({ id: videoData.id, type: 'video', url: videoData.source_url, title: videoData.title?.rendered || '', mime_type: videoData.mime_type || 'video/mp4' });
               }
-            } else if (item.type === 'image' && item.image) {
-              // Fetch image data
-              const imageResponse = await fetch(`${restBase}media/${item.image}`);
-              if (imageResponse.ok) {
-                const imageData = await imageResponse.json();
-                mediaContentArray.push({
-                  id: imageData.id,
-                  type: 'image',
-                  url: imageData.source_url,
-                  alt: imageData.alt_text || 'Project image',
-                  title: imageData.title?.rendered || ''
-                });
-              } else {
-                console.error(`Failed to fetch image with ID ${item.image}: ${imageResponse.status}`);
-              }
+            } else if (item.video_url) {
+              mediaContentArray.push({ id: `video-url-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`, type: 'embed', url: item.video_url, title: '' });
             }
-          } catch (itemError) {
-            console.error("Error processing media item:", itemError);
-            // Continue with next item instead of failing the whole gallery
+          } else if (item.type === 'image' && item.image) {
+            const imageResponse = await fetch(`${restBase}media/${item.image}`);
+            if (imageResponse.ok) {
+              const imageData = await imageResponse.json();
+              mediaContentArray.push({ id: imageData.id, type: 'image', url: imageData.source_url, alt: imageData.alt_text || 'Project image', title: imageData.title?.rendered || '' });
+            }
           }
         }
-        
-        // Sort the array to put videos first
-        const sortedMedia = [
-          ...mediaContentArray.filter(item => item.type === 'video' || item.type === 'embed'),
-          ...mediaContentArray.filter(item => item.type === 'image')
-        ];
-        
-        console.log("Processed media content:", sortedMedia);
+        const sortedMedia = [ ...mediaContentArray.filter(item => item.type === 'video' || item.type === 'embed'), ...mediaContentArray.filter(item => item.type === 'image') ];
         setMediaContent(sortedMedia);
       } catch (error) {
         console.error('Error fetching media content:', error);
@@ -96,7 +45,6 @@ function MediaGallery({ mediaItems, restBase }) {
         setLoading(false);
       }
     };
-
     fetchMediaContent();
   }, [mediaItems, restBase]);
 
@@ -109,33 +57,44 @@ function MediaGallery({ mediaItems, restBase }) {
   }
 
   if (mediaContent.length === 0) {
-    return null; // Don't render anything if no media
+    return null; 
   }
+
+  // Splide options object - dynamically set arrows/pagination/autoplay
+  const isSingleItem = mediaContent.length <= 1;
+  const splideOptions = {
+    type       : isSingleItem ? 'slide' : 'loop', // Use 'slide' for single item, 'loop' otherwise
+    perPage    : 1,      
+    perMove    : 1,      
+    gap        : '1rem', 
+    arrows     : !isSingleItem,   // Hide arrows if single item
+    pagination : !isSingleItem,   // Hide pagination if single item
+    autoplay   : !isSingleItem,   // Disable autoplay if single item
+    interval   : 10000,  
+    pauseOnHover: true,  
+    resetProgress: false, 
+    lazyLoad   : 'nearby', 
+    // Make sure video pauses when slide changes
+    video: {
+        autoplay: false, // Let the video tag handle autoplay if needed
+        pauseOnEnd: true,
+        mute: true, // Required for most browser autoplay
+    },
+  };
 
   return (
     <div className="media-gallery">
-      <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={30}
-        slidesPerView={1}
-        navigation
-        pagination={{ clickable: true }}
-        autoplay={{ 
-          delay: 10000,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true
-        }}
-        className="mySwiper"
-      >
+      <Splide options={splideOptions} aria-label="Project Media Gallery">
         {mediaContent.map((media) => (
-          <SwiperSlide key={media.id}>
-            <div className="swiper-media-container">
+          <SplideSlide key={media.id}>
+            <div className="splide-media-container">
               {media.type === 'video' && (
                 <video 
                   controls
-                  autoPlay={true}
-                  muted
+                  autoPlay={true} // Add autoPlay prop
+                  muted       // Keep muted for autoplay compatibility
                   playsInline
+                  loop        // Optional: loop the video itself
                   className="media-video"
                 >
                   <source src={media.url} type={media.mime_type} />
@@ -157,18 +116,16 @@ function MediaGallery({ mediaItems, restBase }) {
               
               {media.type === 'image' && (
                 <img 
-                  src={media.url} 
+                  data-splide-lazy={media.url} 
+                  src={media.url}
                   alt={media.alt} 
-                  loading="lazy"
                   className="media-image"
                 />
               )}
-              
-              
             </div>
-          </SwiperSlide>
+          </SplideSlide>
         ))}
-      </Swiper>
+      </Splide>
     </div>
   );
 }
