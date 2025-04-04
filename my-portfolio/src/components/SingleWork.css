@@ -1,9 +1,9 @@
 .single-work {
-    padding: 1rem;
+    padding-top: 6rem;
     margin: 0 auto;
-    /* overflow-x: hidden; 
-    width: 100%;
-    box-sizing: border-box; */
+    padding-left: 1rem;  /* Keep side padding */
+    padding-right: 1rem; /* Keep side padding */
+    padding-bottom: 1rem; /* Keep bottom padding */
 }
 
 .single-work-container {
@@ -18,6 +18,7 @@
     display: block;
     margin-bottom: 1rem;
     font-size: 0.9rem;
+    padding-left: 1rem;
 }
 
 .work-title-year {
@@ -53,6 +54,20 @@
     border-radius: 0.5rem;
     font-size: 0.8rem;
 }
+
+.work-media {
+    max-width: 30rem;
+    margin: 0 auto;
+}
+
+/* Message below gallery */
+.development-message {
+    text-align: center;
+    font-size: 0.8rem; 
+    margin: 0.8rem 0 1.5rem;
+    opacity: 0.8;
+}
+
 
 .project-link-container {
     text-align: center;
@@ -108,12 +123,11 @@
     margin-top: 1rem;
     width: 100%;
     box-sizing: border-box;
+    max-width: 35rem;
+    margin: 0 auto;
 }
 
-.work-media {
-    margin-bottom: 1rem;
-    width: 100%;
-}
+
 
 .work-overview h2 {
     font-size: 1.2rem; 
@@ -128,118 +142,4 @@
     margin-bottom: 1.5rem;
     width: 100%;
 }
-
-/* Message below gallery */
-.development-message {
-    text-align: center;
-    font-size: 0.8rem; 
-    margin: 0.8rem 0 1.5rem;
-    opacity: 0.8;
-}
-
-/* Fix for highlights accordion container */
-/* .highlights-accordion {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    overflow-x: hidden;
-} */
-
-/* Fix for accordion items */
-/* .accordion-item {
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.accordion-content {
-    width: 100%;
-    box-sizing: border-box;
-    word-wrap: break-word;
-} */
-
-/* Small phones (320px) - specific fixes
-@media (max-width: 374px) {
-    .single-work {
-        padding: 0.5rem;
-    }
-    
-    .work-title-year h1 {
-        font-size: 1.5rem;
-    }
-    
-    .work-overview h2 {
-        font-size: 1.1rem;
-    }
-    
-    .work-overview-description {
-        font-size: 0.8rem;
-    }
-}
-
-/* Small tablets (portrait) */
-/* @media (min-width: 500px) {
-    .single-work {
-        padding: 1.5rem;
-    }
-    
-    .single-work-container {
-        max-width: 500px;
-    }
-    
-    .work-title-year h1 {
-        font-size: 2.5rem;
-    }
-    
-    .work-overview h2 {
-        font-size: 1.5rem;
-    }
-    
-    .development-message {
-        margin: 1rem 0 2rem;
-    }
-} */
-
-/* Tablets and smaller desktops */
-/* @media (min-width: 768px) {
-    .single-work {
-        padding: 2rem;
-    }
-    
-    .single-work-container {
-        max-width: 650px;
-    }
-    
-    .back-link {
-        margin-bottom: 2rem;
-        font-size: 1rem;
-    }
-    
-    .work-skills {
-        margin-bottom: 2rem;
-    }
-    
-    .work-media {
-        margin-bottom: 2rem;
-    }
-} */
-
-/* Larger desktops */
- /* @media (min-width: 1200px) {
-    .single-work-container {
-        max-width: 800px;
-    }
-    
-    .work-title-year h1 {
-        font-size: 3rem;
-    }
-    
-    .work-overview-description {
-        font-size: 1rem;
-        line-height: 1.6;
-    }
-    
-    .work-overview {
-        margin-top: 2rem;
-    }
-} */
 

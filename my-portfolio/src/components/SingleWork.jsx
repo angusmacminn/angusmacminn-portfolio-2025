@@ -115,7 +115,7 @@ function SingleWork() {
                             })}
                     </div>
 
-                    <section className="work-overview">
+                    
                         {/* Media Gallery */}
                         {workData.acf?.media_gallery && workData.acf.media_gallery.length > 0 && (
                             <div className="work-media">
@@ -148,7 +148,7 @@ function SingleWork() {
                             )
                         )}
                         {/* === End Conditional === */}
-                        
+                    <div className="work-overview">
                         {workData.acf.overview_title && (
                             <h2>{workData.acf.overview_title}</h2>
                         )}
@@ -164,7 +164,7 @@ function SingleWork() {
                             title={workData.acf.highlights_title}
                             restBase={RestBase}
                         />
-                    </section>
+                    </div>
                 </div>
             </section>
         </main>
