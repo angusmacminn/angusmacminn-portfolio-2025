@@ -19,6 +19,17 @@
     align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
+     /* Define transitions on the base state */
+     transition: background-color 0.5s ease, border-color 0.5s ease;
+     border: 1px solid transparent; /* Add transparent border initially to transition border */
+}
+
+/* Add a selector for the image within the work-card */
+.work-card img {
+    filter: invert(0); /* Initial state */
+    rotate: 0deg;      /* Initial state */
+    /* Define image transitions on the base img state */
+    transition: filter 0.5s ease, rotate 0.5s ease;
 }
 
 .title-container {
@@ -45,6 +56,8 @@
     color: var(--black);
     flex: 1;
     min-width: 0;
+    /* Define color transition on the base skills container state */
+    transition: color 0.5s ease;
 }
 
 .skill-tag {
@@ -67,3 +80,23 @@
     }
 }
 
+.work-card:hover {
+    background-color: var(--black);
+    color: var(--white);
+    border: 1px solid var(--white);
+
+}
+
+.work-card:hover h3 {
+    color: var(--white);
+}
+
+.work-card:hover .skills {
+    color: var(--white);
+}
+
+.work-card:hover img {
+    filter: invert(1);
+    rotate: 50deg;
+    transition: all 0.5s ease;
+}
