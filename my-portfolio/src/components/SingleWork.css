@@ -57,6 +57,56 @@
     font-size: 0.8rem;
 }
 
+.project-link-container {
+    text-align: center;
+    margin: 1rem 0 2rem; /* Same margin as development message */
+}
+
+.project-link-button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--light-black); /* Or your primary button color */
+    color: var(--white); /* Text color */
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 0.8rem;
+    border: 1px solid var(--white);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+
+.project-link-button:hover {
+    background-color: var(--white); /* Darker background on hover */
+    color: var(--black); /* Lighter text on hover */
+    border-color: var(--black);
+}
+
+.project-link-button img {
+    width: 0.75rem;
+    height: 0.75rem;
+    margin-left: 0.7rem;
+    
+    filter: invert(1); /* Initial state */
+    rotate: 50deg;      /* Initial state */
+    /* Define image transitions on the base img state */
+    transition: filter 0.5s ease, rotate 0.5s ease;
+}
+
+.project-link-button:hover img {
+    margin-bottom: 0.25rem;
+    filter: invert(0); /* Initial state */
+    rotate: 0deg;      /* Initial state */
+    /* Define image transitions on the base img state */
+    transition: filter 0.5s ease, rotate 0.5s ease;
+}
+
+
 .work-overview {
     margin-top: 1rem;
     width: 100%;

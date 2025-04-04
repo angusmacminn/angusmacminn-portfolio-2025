@@ -6,12 +6,36 @@ import MediaGallery from './MediaGallery';
 import HighlightsAccordion from './HighlightsAccordion';
 import './SingleWork.css';
 import Header from '../components/Header';
+import arrow from "../assets/icons/project-arrow.svg"
+ 
+
+// Simple hook to check for mobile screen size
+const useIsMobile = (breakpoint = 768) => {
+    const [isMobile, setIsMobile] = useState(window.innerWidth < breakpoint);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < breakpoint);
+        };
+
+        window.addEventListener('resize', handleResize);
+        
+        // Initial check in case the component mounts after initial load
+        handleResize(); 
+
+        // Cleanup listener on unmount
+        return () => window.removeEventListener('resize', handleResize);
+    }, [breakpoint]); // Re-run effect if breakpoint changes
+
+    return isMobile;
+};
 
 function SingleWork() {
     const { slug } = useParams();
     const [workData, setWorkData] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [error, setError] = useState(null);
+    const isMobile = useIsMobile(); // Use the hook
 
     useEffect(() => {
         const fetchWorkItem = async () => {
@@ -99,12 +123,31 @@ function SingleWork() {
                             </div>
                         )}
                         
+                        {/* === Conditional Message/Button === */}
                         {workData.acf?.media_gallery && workData.acf.media_gallery.length > 0 && (
-                            <div className="development-message">
-                                this game is currently under development<br />
-                                for mobile devices.
-                            </div>
+                             isMobile ? (
+                                <div className="development-message">
+                                    This game is currently under development<br />
+                                    for mobile devices.
+                                </div>
+                            ) : (
+                                workData.acf.link_to_project && (
+                                    <div className="project-link-container">
+                                        <a 
+                                            href={workData.acf.link_to_project} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer" 
+                                            className="project-link-button"
+                                        >
+                                            Play Game
+                                            <img src={arrow} alt="arrow" />
+
+                                        </a>
+                                    </div>
+                                )
+                            )
                         )}
+                        {/* === End Conditional === */}
                         
                         {workData.acf.overview_title && (
                             <h2>{workData.acf.overview_title}</h2>
