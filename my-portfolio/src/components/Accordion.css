@@ -42,7 +42,7 @@
   }
   
   .accordion-button.active {
-    background-color: var(--light-black);
+    background-color: var(--black);
   }
   
   .accordion-icon {

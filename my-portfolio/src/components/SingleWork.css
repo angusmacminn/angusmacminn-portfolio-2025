@@ -1,16 +1,15 @@
 .single-work {
-    padding: 0.75rem;
+    padding: 1rem;
     margin: 0 auto;
-    overflow-x: hidden; 
+    /* overflow-x: hidden; 
     width: 100%;
-    box-sizing: border-box;
+    box-sizing: border-box; */
 }
 
 .single-work-container {
     width: 100%;
     margin: 0 auto;
-    overflow-x: hidden;
-    box-sizing: border-box;
+
 }
 
 .back-link {
@@ -24,7 +23,6 @@
 .work-title-year {
     text-align: center;
     margin-bottom: 1rem;
-    word-wrap: break-word; 
 }
 
 .work-title-year h1 {
@@ -48,11 +46,11 @@
     margin-bottom: 1.5rem;
 }
 
-.skill-tag {
+.skill-tag-single {
     background-color: #fff;
     color: #000;
     padding: 0.2rem 0.5rem;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     font-size: 0.8rem;
 }
 
@@ -126,12 +124,9 @@
 }
 
 .work-overview-description {
-    font-size: 0.85rem; 
     line-height: 1.4;
     margin-bottom: 1.5rem;
-    word-wrap: break-word;
     width: 100%;
-    overflow-wrap: break-word;
 }
 
 /* Message below gallery */

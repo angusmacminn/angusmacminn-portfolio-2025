@@ -108,7 +108,7 @@ function SingleWork() {
                                 const skillSlug = skill.replace('skills-', '');
                                 
                                 return (
-                                    <span key={skill} className="skill-tag">
+                                    <span key={skill} className="skill-tag-single">
                                         {formatSkillName(skillSlug)}
                                     </span>
                                 );
