@@ -125,6 +125,11 @@
     box-sizing: border-box;
     max-width: 35rem;
     margin: 0 auto;
+    
+}
+
+.work-overview p {
+    font-size: var(--font-size-small);
 }
 
 
@@ -143,3 +148,96 @@
     width: 100%;
 }
 
+
+@media (min-width: 1000px) {
+
+    .work-title-year h1 {
+        font-size: 4em;
+    }
+
+    .work-overview h2 {
+        font-size: 2em;
+    }
+
+    .top-half {
+        
+        display: grid; /* Use Grid layout */
+        grid-template-columns: 1fr 1fr; /* Create two equal columns */
+        grid-template-rows: auto auto; /* Define rows implicitly or explicitly */
+        gap: 2rem 4rem; /* Adjust row and column gap (row-gap column-gap) */
+        align-items: start; /* Align items to the start of their grid area */
+        max-width: 90rem;
+        margin: 0 auto;
+        padding: 3rem;
+    }
+
+    .top-half-left {
+        /* Place in the first column, first row */
+        grid-column: 1 / 2; 
+        grid-row: 1 / 2;
+        /* Ensure it takes necessary vertical space */
+        align-self: start;
+    }
+
+    
+    
+    .media-container {
+        /* Place in the second column, span both rows to align next to both left items */
+        grid-column: 2 / 3;
+        grid-row: 1 / 3; 
+        /* Center content within the media container */
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Vertically center */
+        align-items: center; /* Horizontally center */
+        align-self: start; /* Align container itself */
+        /* Ensure it doesn't shrink */
+        width: 100%; 
+    }
+
+    .work-overview {
+        /* Place in the first column, second row */
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+        /* Reset margins applied for mobile */
+        margin: 0; 
+        max-width: 100%; /* Allow it to fill the grid column */
+        /* Ensure it takes necessary vertical space */
+        align-self: start;
+    }
+
+    /* Optional: Adjust spacing if needed */
+    .work-overview h2 {
+        margin-top: 1rem; /* Add some space above the overview title */
+        text-align: left; /* Align text left in the column */
+    }
+    
+     .work-overview-description {
+         margin-bottom: 0; /* Remove bottom margin if not needed */
+     }
+
+    .bottom-half {
+        /* Ensure bottom half clears the grid layout */
+        margin-top: 2rem; /* Add space below the grid */
+        padding: 3rem;
+    }
+
+    /* Adjust other elements as needed for desktop layout */
+    .back-link {
+        padding-left: 0; /* Remove mobile padding */
+    }
+    
+    .work-title-year, .work-skills {
+        text-align: left;
+        justify-content: flex-start;
+    }
+
+    .work-overview {
+        max-width: 20rem;
+    }
+
+    .bottom-half {
+        max-width: 90rem;
+        margin: 0 auto;
+    }
+}

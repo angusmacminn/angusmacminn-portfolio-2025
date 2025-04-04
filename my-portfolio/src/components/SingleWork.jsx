@@ -90,84 +90,91 @@ function SingleWork() {
     }
 
     return (
-        <main>
+        <>
             <Header />
             <section className="single-work">
                 <div className="single-work-container">
-                    <Link to="/#work" className="back-link">← Back to all works</Link>
-                    <div className="work-title-year">
-                        <h1>{workData.title.rendered}</h1>
-                        <p>{workData.acf.year}</p>
-                    </div>
-
-                    <div className="work-skills">
-                        {workData.class_list
-                            .filter(className => className.startsWith('skills-'))
-                            .map(skill => {
-                                // Remove the 'skills-' prefix
-                                const skillSlug = skill.replace('skills-', '');
-                                
-                                return (
-                                    <span key={skill} className="skill-tag-single">
-                                        {formatSkillName(skillSlug)}
-                                    </span>
-                                );
-                            })}
-                    </div>
-
-                    
-                        {/* Media Gallery */}
-                        {workData.acf?.media_gallery && workData.acf.media_gallery.length > 0 && (
-                            <div className="work-media">
-                                    <MediaGallery mediaItems={workData.acf.media_gallery} restBase={RestBase} />
+                    <div className='top-half'>
+                        <div className='top-half-left'>
+                            <Link to="/#work" className="back-link">← Back to all works</Link>
+                            <div className="work-title-year">
+                                <h1>{workData.title.rendered}</h1>
+                                <p>{workData.acf.year}</p>
                             </div>
-                        )}
+        
+                            <div className="work-skills">
+                                {workData.class_list
+                                    .filter(className => className.startsWith('skills-'))
+                                    .map(skill => {
+                                        // Remove the 'skills-' prefix
+                                        const skillSlug = skill.replace('skills-', '');
+                                        
+                                        return (
+                                            <span key={skill} className="skill-tag-single">
+                                                {formatSkillName(skillSlug)}
+                                            </span>
+                                        );
+                                    })}
+                            </div>
+                        </div>
+    
                         
-                        {/* === Conditional Message/Button === */}
-                        {workData.acf?.media_gallery && workData.acf.media_gallery.length > 0 && (
-                             isMobile ? (
-                                <div className="development-message">
-                                    This game is currently under development<br />
-                                    for mobile devices.
-                                </div>
-                            ) : (
-                                workData.acf.link_to_project && (
-                                    <div className="project-link-container">
-                                        <a 
-                                            href={workData.acf.link_to_project} 
-                                            target="_blank" 
-                                            rel="noopener noreferrer" 
-                                            className="project-link-button"
-                                        >
-                                            Play Game
-                                            <img src={arrow} alt="arrow" />
-
-                                        </a>
+                            <div className='media-container'>
+                                {/* Media Gallery */}
+                                {workData.acf?.media_gallery && workData.acf.media_gallery.length > 0 && (
+                                    <div className="work-media">
+                                            <MediaGallery mediaItems={workData.acf.media_gallery} restBase={RestBase} />
                                     </div>
-                                )
-                            )
-                        )}
-                        {/* === End Conditional === */}
-                    <div className="work-overview">
-                        {workData.acf.overview_title && (
-                            <h2>{workData.acf.overview_title}</h2>
-                        )}
-                        {workData.acf.overview_description && (
-                            <div className="work-overview-description">
-                                {workData.acf.overview_description}
+                                )}
+                                
+                                {/* === Conditional Message/Button === */}
+                                {workData.acf?.media_gallery && workData.acf.media_gallery.length > 0 && (
+                                     isMobile ? (
+                                        <div className="development-message">
+                                            This game is currently under development<br />
+                                            for mobile devices.
+                                        </div>
+                                    ) : (
+                                        workData.acf.link_to_project && (
+                                            <div className="project-link-container">
+                                                <a 
+                                                    href={workData.acf.link_to_project} 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer" 
+                                                    className="project-link-button"
+                                                >
+                                                    Play Game
+                                                    <img src={arrow} alt="arrow" />
+        
+                                                </a>
+                                            </div>
+                                        )
+                                    )
+                                )}
                             </div>
-                        )}
-
-                        {/* Highlights Accordion */}
-                        <HighlightsAccordion
-                            highlights={workData.acf}
-                            title={workData.acf.highlights_title}
-                            restBase={RestBase}
-                        />
+                            
+                        <div className="work-overview">
+                            {workData.acf.overview_title && (
+                                <h2>{workData.acf.overview_title}</h2>
+                            )}
+                            {workData.acf.overview_description && (
+                                <div className="work-overview-description">
+                                    <p>{workData.acf.overview_description}</p>
+                                </div>
+                            )}
+                        </div>
                     </div>
+                        <div className='bottom-half'>
+                            {/* Highlights Accordion */}
+                            <HighlightsAccordion
+                                highlights={workData.acf}
+                                title={workData.acf.highlights_title}
+                                restBase={RestBase}
+                            />
+                        </div>
                 </div>
             </section>
-        </main>
+        </>
     );
 }
 
