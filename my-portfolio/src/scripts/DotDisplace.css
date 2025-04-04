@@ -8,4 +8,6 @@
     pointer-events: auto; /* Enable interaction with the canvas */
     touch-action: pan-y; /* Allow vertical scrolling */
     background-color: var(--black);
+    max-width: 90%;
+    max-height: 90%;
 }

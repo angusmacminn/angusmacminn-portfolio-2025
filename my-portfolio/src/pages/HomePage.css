@@ -29,19 +29,25 @@
     z-index: 1;
     pointer-events: auto;
     background-color: var(--black);
-    mask-image: linear-gradient(
-        to bottom,
-        black 0%,
-        black 80%,
-        transparent 100%
+    overflow: hidden; 
+
+    /* --- SINGLE RADIAL MASK --- */
+    mask-image: radial-gradient(
+        ellipse farthest-corner at center center, 
+        black 40%,   /* Opaque center area size */
+        transparent 80% /* Fade to transparent at the corners */
     );
-    -webkit-mask-image: linear-gradient(
-        to bottom,
-        black 0%,
-        black 80%,
-        transparent 100%
+    -webkit-mask-image: radial-gradient(
+        ellipse farthest-corner at center center, 
+        black 10%, 
+        transparent 90%
     );
+    
+    /* Remove composite properties */
+    mask-composite: initial; 
+    -webkit-mask-composite: initial; 
 }
+
 
 .hero-section {
     position: relative;
