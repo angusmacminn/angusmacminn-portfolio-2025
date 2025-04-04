@@ -1,4 +1,4 @@
-.highlights-section {
+/* .highlights-section {
   margin: 1.5rem 0;
   width: 100%;
   box-sizing: border-box;
@@ -10,26 +10,26 @@
   font-size: 1.2rem;
   text-align: center;
   word-wrap: break-word;
-}
+} */
 
 /* Accordion container */
-.accordion {
+/* .accordion {
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
-}
+} */
 
 /* Accordion items */
-.accordion-item {
+/* .accordion-item {
   width: 100%;
   box-sizing: border-box;
   margin-bottom: 0.75rem;
   border-radius: 4px;
   overflow: hidden;
-}
+} */
 
 /* Accordion button/header */
-.accordion-button {
+/* .accordion-button {
   width: 100%;
   box-sizing: border-box;
   padding: 0.75rem;
@@ -54,10 +54,10 @@
 .accordion-button.active:after {
   content: '−';
   transform: rotate(0deg);
-}
+} */
 
 /* Accordion panel/content */
-.accordion-panel {
+/* .accordion-panel {
   width: 100%;
   box-sizing: border-box;
   background-color: var(--light-black, rgba(30, 30, 30, 0.8));
@@ -71,14 +71,14 @@
 }
 
 .accordion-panel.active {
-  max-height: 2000px; /* Large enough to fit content */
+  max-height: 2000px; 
   padding: 0.75rem;
   overflow-x: hidden;
   overflow-y: auto;
-}
+} */
 
 /* Highlight items within accordion */
-.highlight-item {
+/* .highlight-item {
   margin-bottom: 1.5rem;
   width: 100%;
   box-sizing: border-box;
@@ -100,56 +100,12 @@
   margin-bottom: 0.75rem;
   width: 100%;
   box-sizing: border-box;
-}
+} */
 
 /* Make the media gallery in highlights fit the container */
-.highlight-media .media-gallery {
+/* .highlight-media .media-gallery {
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
-}
+} */
 
-/* Small tablets and up */
-@media (min-width: 500px) {
-  .highlights-section h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .accordion-button {
-    padding: 1rem;
-    font-size: 1rem;
-  }
-
-  .accordion-panel.active {
-    padding: 1rem;
-  }
-
-  .highlight-text {
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin-bottom: 1.25rem;
-  }
-
-  .highlight-media {
-    margin-top: 1rem;
-    margin-bottom: 1.25rem;
-  }
-}
-
-/* Tablets and up */
-@media (min-width: 768px) {
-  .highlights-section {
-    margin: 2rem 0;
-  }
-
-  .highlight-text {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-
-  .highlight-media {
-    margin-top: 1.25rem;
-    margin-bottom: 1.5rem;
-  }
-}

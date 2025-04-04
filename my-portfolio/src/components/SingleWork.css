@@ -1,14 +1,13 @@
 .single-work {
     padding: 0.75rem;
     margin: 0 auto;
-    overflow-x: hidden; /* Prevent horizontal overflow */
+    overflow-x: hidden; 
     width: 100%;
     box-sizing: border-box;
 }
 
 .single-work-container {
     width: 100%;
-    max-width: 100%;
     margin: 0 auto;
     overflow-x: hidden;
     box-sizing: border-box;
@@ -25,11 +24,11 @@
 .work-title-year {
     text-align: center;
     margin-bottom: 1rem;
-    word-wrap: break-word; /* Ensure long titles wrap */
+    word-wrap: break-word; 
 }
 
 .work-title-year h1 {
-    font-size: 1.75rem; /* Slightly smaller for tiny screens */
+    font-size: 1.75rem; 
     font-weight: 400;
     margin: 0;
     margin-bottom: 0.25rem;
@@ -119,40 +118,40 @@
 }
 
 .work-overview h2 {
-    font-size: 1.2rem; /* Smaller for tiny screens */
+    font-size: 1.2rem; 
     font-weight: 400;
     margin-top: 1.5rem;
     margin-bottom: 0.8rem;
     text-align: center;
-    word-wrap: break-word;
 }
 
 .work-overview-description {
-    font-size: 0.85rem; /* Smaller for tiny screens */
+    font-size: 0.85rem; 
     line-height: 1.4;
     margin-bottom: 1.5rem;
     word-wrap: break-word;
     width: 100%;
+    overflow-wrap: break-word;
 }
 
 /* Message below gallery */
 .development-message {
     text-align: center;
-    font-size: 0.8rem; /* Smaller for tiny screens */
+    font-size: 0.8rem; 
     margin: 0.8rem 0 1.5rem;
     opacity: 0.8;
 }
 
 /* Fix for highlights accordion container */
-.highlights-accordion {
+/* .highlights-accordion {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
     overflow-x: hidden;
-}
+} */
 
 /* Fix for accordion items */
-.accordion-item {
+/* .accordion-item {
     width: 100%;
     box-sizing: border-box;
 }
@@ -161,9 +160,9 @@
     width: 100%;
     box-sizing: border-box;
     word-wrap: break-word;
-}
+} */
 
-/* Small phones (320px) - specific fixes */
+/* Small phones (320px) - specific fixes
 @media (max-width: 374px) {
     .single-work {
         padding: 0.5rem;
@@ -183,7 +182,7 @@
 }
 
 /* Small tablets (portrait) */
-@media (min-width: 500px) {
+/* @media (min-width: 500px) {
     .single-work {
         padding: 1.5rem;
     }
@@ -203,10 +202,10 @@
     .development-message {
         margin: 1rem 0 2rem;
     }
-}
+} */
 
 /* Tablets and smaller desktops */
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
     .single-work {
         padding: 2rem;
     }
@@ -227,10 +226,10 @@
     .work-media {
         margin-bottom: 2rem;
     }
-}
+} */
 
 /* Larger desktops */
-@media (min-width: 1200px) {
+/* @media (min-width: 1200px) {
     .single-work-container {
         max-width: 800px;
     }

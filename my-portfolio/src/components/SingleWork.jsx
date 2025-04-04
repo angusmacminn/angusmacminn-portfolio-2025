@@ -119,7 +119,7 @@ function SingleWork() {
                         {/* Media Gallery */}
                         {workData.acf?.media_gallery && workData.acf.media_gallery.length > 0 && (
                             <div className="work-media">
-                                <MediaGallery mediaItems={workData.acf.media_gallery} restBase={RestBase} />
+                                    <MediaGallery mediaItems={workData.acf.media_gallery} restBase={RestBase} />
                             </div>
                         )}
                         
