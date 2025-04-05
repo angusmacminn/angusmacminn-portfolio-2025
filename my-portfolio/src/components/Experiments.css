@@ -1,0 +1,48 @@
+.experiments-container {
+    max-width: 800px; /* Adjust max-width as needed */
+    margin: 2rem auto; /* Center the container and add vertical margin */
+    padding: 0 1rem; /* Add horizontal padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally within the container */
+    gap: 3rem; /* Space between technology groups */
+}
+
+.technology-group {
+    width: 100%; /* Each group takes full width of the container */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content within the group */
+}
+
+.technology-title {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    color: var(--white); /* Assuming a dark background */
+    text-align: center;
+}
+
+.experiments-grid {
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Stack cards vertically */
+    align-items: center; /* Center cards horizontally */
+    gap: 1.5rem; /* Space between experiment cards */
+}
+
+.experiment-card {
+    background-color: var(--light-black); /* Example background */
+    border: 1px solid var(--dark-gray); /* Example border */
+    border-radius: 8px;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 600px; /* Max width for individual cards */
+    box-sizing: border-box;
+    text-align: center; /* Center text within the card */
+}
+
+.experiment-content video {
+    max-width: 400px;
+    border-radius: 8px;
+}

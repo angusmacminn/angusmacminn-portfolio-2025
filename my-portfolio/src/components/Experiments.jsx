@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-
+import './Experiments.css';
 
 function Experiments({ experiments, isLoaded, error }) {
     // Group experiments by technology

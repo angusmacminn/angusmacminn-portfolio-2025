@@ -41,10 +41,7 @@
     transition: transform 0.3s ease-in-out;
   }
   
-  .accordion-button:hover {
-    /* Optional hover effect on title/icon if needed */
-    /* .accordion-title { color: lightblue; } */
-  }
+
   
   /* .accordion-button.active .accordion-icon {
     transform: rotate(45deg);
