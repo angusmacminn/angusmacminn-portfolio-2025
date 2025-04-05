@@ -129,12 +129,7 @@ function SingleWork() {
                                 
                                 {/* === Conditional Message/Button === */}
                                 {workData.acf?.media_gallery && workData.acf.media_gallery.length > 0 && (
-                                     isMobile ? (
-                                        <div className="development-message">
-                                            This game is currently under development<br />
-                                            for mobile devices.
-                                        </div>
-                                    ) : (
+                                     (
                                         workData.acf.link_to_project && (
                                             <div className="project-link-container">
                                                 <a 
@@ -143,7 +138,7 @@ function SingleWork() {
                                                     rel="noopener noreferrer" 
                                                     className="project-link-button"
                                                 >
-                                                    Play Game
+                                                    Visit
                                                     <img src={arrow} alt="arrow" />
         
                                                 </a>

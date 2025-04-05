@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
+
+// Import Core Splide CSS first, then the theme
+import '@splidejs/react-splide/css/core'; 
 import '@splidejs/react-splide/css'; // Default theme
 
 import './MediaGallery.css';
@@ -73,7 +76,7 @@ function MediaGallery({ mediaItems, restBase }) {
     interval   : 10000,  
     pauseOnHover: true,  
     resetProgress: false, 
-    lazyLoad   : 'nearby', 
+    lazyLoad   : false, // Disable Splide's lazy load
     // Make sure video pauses when slide changes
     video: {
         autoplay: false, // Let the video tag handle autoplay if needed
@@ -116,8 +119,8 @@ function MediaGallery({ mediaItems, restBase }) {
               
               {media.type === 'image' && (
                 <img 
-                  data-splide-lazy={media.url} 
-                  src={media.url}
+                  src={media.url} 
+                  loading="lazy" 
                   alt={media.alt} 
                   className="media-image"
                 />

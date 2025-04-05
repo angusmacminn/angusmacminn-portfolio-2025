@@ -2,20 +2,22 @@
     width: 100%;
     margin: 1rem 0;
     border-radius: 8px;
-    overflow: hidden;
+    overflow: visible;
   }
   
   .accordion-item {
     margin-bottom: 1rem;
-    border: 1px solid #eee;
-    border-radius: 8px;
+    border: 1px solid var(--light-gray);
+    border-radius: 0.5rem;
     overflow: hidden;
+    box-shadow: 5px 4px 17.6px 1px rgba(231, 231, 231, 0.06) inset;
+    background-color: var(--light-black);
   }
   
   .accordion-button {
     width: 100%;
     padding: 1rem;
-    background-color: var(--light-black);
+    background-color: transparent;
     border: none;
     text-align: left;
     cursor: pointer;
@@ -24,7 +26,6 @@
     align-items: center;
     font-weight: 600;
     font-size: 1.1rem;
-    transition: background-color 0.3s ease;
   }
 
   .accordion-title {
@@ -35,31 +36,35 @@
   .accordion-icon {
     color: var(--white);
     font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: transform 0.3s ease-in-out;
   }
   
   .accordion-button:hover {
-    background-color: var(--black);
+    /* Optional hover effect on title/icon if needed */
+    /* .accordion-title { color: lightblue; } */
   }
   
-  .accordion-button.active {
-    background-color: var(--black);
-  }
-  
-  .accordion-icon {
-    font-size: 1.5rem;
-    line-height: 1;
-  }
+  /* .accordion-button.active .accordion-icon {
+    transform: rotate(45deg);
+  } */
   
   .accordion-panel {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.4s ease-in-out;
+    background-color: transparent;
+    border-top: 1px solid transparent;
   }
   
   .accordion-panel.active {
-    max-height: 2000px; /* Large enough to contain content */
+    max-height: 2000px;
+    border-top: 1px solid var(--light-gray);
   }
   
   .accordion-content {
-    padding: 1rem;
+    padding: 0 1rem 1rem 1rem;
+    margin: 0;
+    background-color: var(--black);
   }
