@@ -1,7 +1,5 @@
 .experiments-container {
-    max-width: 800px; /* Adjust max-width as needed */
-    margin: 2rem auto; /* Center the container and add vertical margin */
-    padding: 0 1rem; /* Add horizontal padding */
+
     display: flex;
     flex-direction: column;
     align-items: center; /* Center items horizontally within the container */
@@ -9,8 +7,7 @@
 }
 
 .technology-group {
-    width: 100%; /* Each group takes full width of the container */
-    display: flex;
+    
     flex-direction: column;
     align-items: center; /* Center content within the group */
 }
@@ -43,6 +40,6 @@
 }
 
 .experiment-content video {
-    max-width: 400px;
+    max-width: 300px;
     border-radius: 8px;
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { RestBase } from '../utils/RestBase';
 import Experiments from '../components/Experiments';
+import "./ExperimentsPage.css";
 
 function ExperimentsPage() {
     const [experiments, setExperiments] = useState([]);
@@ -33,8 +34,7 @@ function ExperimentsPage() {
     }, []);
 
     return (
-        <main>
-            <section>
+            <section className="experiments-section">
                 <div className="experiments-title">
                     <h1>Experiments</h1>
                 </div>
@@ -44,7 +44,6 @@ function ExperimentsPage() {
                     error={error}
                 />
             </section>
-        </main>
     );
 }
 
