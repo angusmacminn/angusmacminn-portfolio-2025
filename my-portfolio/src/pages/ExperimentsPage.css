@@ -5,6 +5,10 @@
     overflow-x: hidden;
 }
 
+.experiments-intro {
+    max-width: 720px;
+}
+
 .experiments-intro p {
     font-size: var(--font-size-small);
     font-weight: 300;
@@ -15,4 +19,12 @@
     font-size: 0.6rem;
 }
 
+
+@media (min-width: 768px) {
+    .experiments-intro {
+        max-width: 720px;
+        text-align: center;
+        margin: 0 auto;
+    }
+}
 

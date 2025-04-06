@@ -44,8 +44,14 @@
 .experiment-content video {
     max-width: 100%; /* Ensure video scales within the content area */
     border-radius: 8px;
-    margin: 0 auto;
-    display: block; /* Ensures margin: auto works for centering */
+    display: block; /* Ensure it takes up the full width and respects margins */
+    margin: 0; /* Reset vertical and horizontal margins */
+    padding: 0; /* Reset any potential padding */
+}
+
+.experiment-content figure {
+    margin: 0;
+    padding: 1rem;
 }
 
 .experiment-content {
@@ -63,3 +69,25 @@
     font-size: var(--font-size-small);
     font-weight: 300;
 }
+
+@media (min-width: 768px) {
+    .experiments-grid {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .experiments-grid {
+        max-width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        align-items: flex-start;
+        max-width: 1400px;
+    }
+
+    .experiment-card {
+        max-width: 720px;
+    }
+}
+
