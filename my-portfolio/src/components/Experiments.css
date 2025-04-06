@@ -7,9 +7,7 @@
     align-items: center;
 }
 
-.technology-group {
 
-}
 
 .technology-title {
     font-size: 1.8rem;
@@ -30,11 +28,17 @@
     background-color: var(--light-black); /* Example background */
     border: 1px solid var(--dark-gray); /* Example border */
     border-radius: 8px;
-    padding: 1rem;
     width: 100%; /* Change from fixed width to 100% */
     /* max-width: 600px; /* Optional: keep a max-width for larger screens if needed */
     box-sizing: border-box;
-    
+}
+
+.experiment-card h3{
+    padding: 0 1rem;
+}
+
+.experiment-description {
+    padding: 1rem;
 }
 
 .experiment-content video {
