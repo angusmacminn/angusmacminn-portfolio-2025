@@ -32,8 +32,15 @@ function Experiments({ experiments, isLoaded, error }) {
                         {techExperiments.map(experiment => (
                             <div key={experiment.id} className="experiment-card">
                                 <h3>{experiment.title.rendered}</h3>
-                                <p>{experiment.acf.experiment_description}</p>
-                                {experiment.acf.experiment_link && (
+                               
+                                
+                                
+                                <div 
+                                    className="experiment-content"
+                                    dangerouslySetInnerHTML={{ __html: experiment.content.rendered }}
+                                />
+                                 <p>{experiment.acf.experiment_description}</p>
+                                 {experiment.acf.experiment_link && (
                                     <a 
                                         href={experiment.acf.experiment_link} 
                                         target="_blank" 
@@ -42,11 +49,7 @@ function Experiments({ experiments, isLoaded, error }) {
                                         View Experiment
                                     </a>
                                 )}
-                                <div 
-                                    className="experiment-content"
-                                    dangerouslySetInnerHTML={{ __html: experiment.content.rendered }}
-                                />
-                                </div>
+                            </div>
                         ))}
                     </div>
                 </div>

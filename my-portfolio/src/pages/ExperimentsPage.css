@@ -1,11 +1,18 @@
 .experiments-section {
-    padding: 2rem;
-    
+    padding: 4rem 1rem;
+    box-sizing: border-box;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.experiments-intro p {
+    font-size: var(--font-size-small);
+    font-weight: 300;
 }
 
 .experiments-title {
     text-align: center;
-    
+    font-size: 0.6rem;
 }
 
 

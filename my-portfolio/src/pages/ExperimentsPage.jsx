@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { RestBase } from '../utils/RestBase';
+import Header from '../components/Header';
 import Experiments from '../components/Experiments';
 import "./ExperimentsPage.css";
 
@@ -34,9 +35,18 @@ function ExperimentsPage() {
     }, []);
 
     return (
+        <>
+            <Header />
             <section className="experiments-section">
                 <div className="experiments-title">
                     <h1>Experiments</h1>
+                </div>
+
+                <div className='experiments-intro'>
+                    <p>
+                        These are a collection of projects and experiments I've worked on.
+                        They vary in complexity and scope, but all are a reflection of my learning and growth as a creative developer and lover of making pixels move on screens.
+                    </p>
                 </div>
                 <Experiments 
                     experiments={experiments}
@@ -44,6 +54,7 @@ function ExperimentsPage() {
                     error={error}
                 />
             </section>
+        </>
     );
 }
 
