@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 .work-card {
@@ -20,7 +20,7 @@
     justify-content: space-between;
     gap: 0.75rem;
      /* Define transitions on the base state */
-     transition: background-color 0.5s ease, border-color 0.5s ease;
+     transition: background-color 0.5s ease, border-color 0.5s ease, translate 0.5s ease;
      border: 1px solid transparent; /* Add transparent border initially to transition border */
 }
 
@@ -87,9 +87,10 @@
 }
 
 .work-card:hover {
-    background-color: var(--black);
+    background-color: var(--light-black);
     color: var(--white);
     border: 1px solid var(--white);
+    translate: 3rem 0;
 
 }
 
