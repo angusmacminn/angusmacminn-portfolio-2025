@@ -77,6 +77,11 @@
 }
 
 @media (min-width: 1024px) {
+
+    .experiments-container {
+        gap: 4rem;
+    }
+
     .experiments-grid {
         max-width: 100%;
         display: grid;
@@ -84,6 +89,10 @@
         gap: 1.5rem;
         align-items: flex-start;
         max-width: 1400px;
+    }
+
+    .technology-title {
+        text-align: left;
     }
 
     .experiment-card {

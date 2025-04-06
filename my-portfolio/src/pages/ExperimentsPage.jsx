@@ -12,7 +12,7 @@ function ExperimentsPage() {
     useEffect(() => {
         const fetchExperiments = async () => {
             try {
-                const response = await fetch(`${RestBase}experiment?_embed`);
+                const response = await fetch(`${RestBase}experiment?_embed&per_page=100`);
                 console.log("Fetching all experiments from:", `${RestBase}experiment?_embed`);
                 
                 if (response.ok) {
