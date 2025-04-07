@@ -16,6 +16,7 @@ function AboutPage() {
     const [isLoaded, setLoadStatus] = useState(false);
     const [skillsLoaded, setSkillsLoaded] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
+    const [currentTimePST, setCurrentTimePST] = useState('');
 
     // Fetch page data first
     useEffect(() => {
@@ -105,6 +106,30 @@ function AboutPage() {
         }
     };
 
+    // Effect to update the time every second
+    useEffect(() => {
+        // Function to get and format the current time in PST/PDT
+        const updateTime = () => {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', {
+                timeZone: 'America/Los_Angeles', // Handles PST/PDT automatically
+                hour: 'numeric',
+                minute: '2-digit',
+                // timeZoneName: 'short' // Optional: adds PST/PDT abbreviation
+            });
+            setCurrentTimePST(timeString + " PST"); // Add PST manually if timeZoneName isn't used or desired
+        };
+
+        updateTime(); // Initial update immediately on mount
+
+        // Set up an interval to update the time every second
+        const intervalId = setInterval(updateTime, 1000);
+
+        // Cleanup function to clear the interval when the component unmounts
+        return () => clearInterval(intervalId);
+
+    }, []); // Empty dependency array ensures this effect runs only once on mount
+
     return (
         <>
             <Header/>
@@ -168,7 +193,10 @@ function AboutPage() {
 
                             <div className="about-contact-section">
                                 <div className="contact-info">Vancouver, BC</div>
-                                <div className="contact-info">4:35 PST</div>
+                                <div className="contact-item">
+                                    {/* <div className="contact-label">Local Time</div> */}
+                                    <div className="contact-info">{currentTimePST}</div>
+                                </div>
                                 <div className="contact-info">angusmacminn@outlook.com</div>
                                 <div className="social-links">
                                     {restData.acf.instagram_url && (

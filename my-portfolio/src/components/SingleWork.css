@@ -248,4 +248,14 @@
         max-width: 90rem;
         margin: 0 auto;
     }
+
+    .single-work-container {
+        margin-top: 4rem;
+        background-color: var(--light-black);
+        border-radius: 1rem;
+        border: 1px solid var(--light-gray);
+        padding: 2rem;
+    }
+
+    
 }

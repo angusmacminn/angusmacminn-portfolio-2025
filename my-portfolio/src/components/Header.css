@@ -24,7 +24,7 @@
 @media (min-width: 1000px) {
     .nav-content {
         background-color: var(--light-black);
-        border-radius: 1rem;
+        border-radius: 0.5rem;
         border: 1px solid var(--dark-gray);
         box-shadow: 2px 4px 4px 0px rgba(123, 123, 123, 0.127) inset;
         padding: 0.5rem 1.5rem;
@@ -41,9 +41,7 @@
 }
 
 /* Hide logo by default (mobile) */
-.logo {
-    /* display: none; Hide by default */
-}
+
 
 .logo img {
     height: 100%;

@@ -3,52 +3,93 @@
   width: 100%;
 }
 
-/* Swiper container */
-.swiper {
+/* Splide container */
+.splide {
   width: 100%;
-  height: auto;
+  height: auto; /* Let content determine height initially */
+  max-width: 100%; /* Prevent exceeding parent */
+  overflow: hidden; 
+  box-sizing: border-box;
+  min-width: 0;
   border-radius: 4px;
-  background: #000;
+  background: var(--light-black); /* Use theme color */
+  position: relative; /* Needed for absolute positioning of arrows/pagination */
+}
+
+/* Splide track and list */
+.splide__track,
+.splide__list {
+  width: 100%;
+  height: 100%; 
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 /* Individual slide */
-.swiper-slide {
-  height: 200px; 
+.splide__slide {
+  /* Removed fixed height */
+  /* height: 200px; */ 
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid red;
+  /* border: 1px solid red; /* Remove debug border */
+  width: 100%; 
+  max-width: 100vw; 
+  box-sizing: border-box;
+  flex-shrink: 0; 
+  overflow: hidden; 
+  /* Set a max-height for the slide itself */
+  max-height: 70vh; /* Limit slide height to 70% of viewport height */
+  min-height: 200px; /* Optional: Ensure a minimum height */
 }
 
 /* Media container within slide */
-/* .swiper-media-container {
+.splide-media-container {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-} */
-
-/* Image styling */
-.media-image {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  border-radius: 1rem;
+  position: relative; /* Keep for potential overlays */
+  box-sizing: border-box;
+  /* Ensure container respects slide max-height */
+  max-height: 100%; 
 }
 
-/* Video styling */
+/* --- Media Element Styling --- */
+
+.media-image,
+.media-video,
+.media-embed {
+  display: block; /* Ensure block behavior */
+  max-width: 100%; /* Fit width */
+  max-height: 100%; /* Fit height within slide's max-height */
+  width: auto;     /* Allow natural width up to max-width */
+  height: auto;    /* Allow natural height up to max-height */
+  object-fit: contain; /* Maintain aspect ratio within bounds */
+  box-sizing: border-box;
+  margin: auto; /* Center within flex container */
+}
+
+/* Specifically for video, enforce max-height more strictly if needed */
 .media-video {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  border-radius: 8px; /* Keep border-radius consistent */
+  /* max-height: 65vh; */ /* Optional: Slightly smaller max-height for video than slide */
+}
+
+/* Image specific styling */
+.media-image {
+  border-radius: 8px; /* Match video radius */
 }
 
 /* Embed styling */
 .media-embed {
   width: 100%;
-  height: 100%;
+  /* Aspect ratio for embeds if needed, e.g., 16/9 */
+  /* aspect-ratio: 16 / 9; */
+  /* Use height 100% if aspect-ratio isn't set */
+   height: 100%; 
+   max-height: 100%; /* Ensure it doesn't exceed container */
 }
 
 .media-embed iframe {
@@ -57,80 +98,64 @@
   border: none;
 }
 
+/* --- Splide UI Elements (Arrows/Pagination) --- */
 
-
-/* Navigation arrows */
-.swiper-button-next,
-.swiper-button-prev {
-  color: white;
-  background: rgba(0, 0, 0, 0.5);
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
+.splide__arrow {
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  width: 2.5em; /* Adjust size */
+  height: 2.5em; /* Adjust size */
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
 }
 
-.swiper-button-next:after,
-.swiper-button-prev:after {
-  font-size: 12px;
+.splide__arrow:hover {
+    opacity: 1;
+}
+
+.splide__arrow svg {
+  fill: white; /* Arrow color */
+  width: 1.2em; /* Icon size */
+  height: 1.2em; /* Icon size */
+}
+
+/* Position arrows */
+.splide__arrow--prev {
+  left: 0.5em;
+}
+
+.splide__arrow--next {
+  right: 0.5em;
 }
 
 /* Pagination bullets */
-.swiper-pagination-bullet {
-  width: 6px;
-  height: 6px;
-  background: white;
+.splide__pagination {
+    bottom: 0.5em; /* Position from bottom */
+}
+
+.splide__pagination__page {
+  background: white; /* Bullet color */
+  width: 8px;       /* Bullet size */
+  height: 8px;      /* Bullet size */
   opacity: 0.5;
+  margin: 0 4px;    /* Spacing between bullets */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
 }
 
-.swiper-pagination-bullet-active {
+.splide__pagination__page.is-active {
   opacity: 1;
-} 
+  transform: scale(1.2); /* Slightly larger active bullet */
+  background: var(--primary-color, white); /* Use primary color if defined */
+}
 
-/* Loading state */
-.gallery-loading {
+/* --- Loading/Error States --- */
+
+.gallery-loading,
+.gallery-error {
   text-align: center;
-  padding: 0.5rem;
-  font-size: 0.8rem;
-}
-
-/* Work gallery container */
-.work-gallery {
-  margin: 1rem 0;
-}
-
-/* Ensure the main swiper container doesn't cause overflow */
-.swiper {
-  width: 100%; /* Already likely set, but explicit */
-  max-width: 100%; /* Prevent exceeding parent */
-  overflow: hidden; /* Crucial: hide anything trying to peek out */
-  box-sizing: border-box;
-  /* Remove potential min-width Swiper might add */
-  min-width: 0; 
-}
-
-/* Ensure the wrapper holding the slides respects boundaries */
-.swiper-wrapper {
-  width: 100%; /* Should align with container */
-  max-width: 100%;
-  box-sizing: border-box;
-  /* Prevent flex properties from causing issues */
-  min-width: 0; 
-}
-
-/* Ensure individual slides don't force width */
-.swiper-slide {
-  width: 100%; /* Force slide width to match container */
-  max-width: 100vw; /* Absolute max based on viewport width */
-  box-sizing: border-box;
-  flex-shrink: 0; /* Prevent slide from shrinking in flex context (Swiper uses flex) */
-  /* Ensure content within slide is constrained if needed */
-   overflow: hidden; 
-}
-
-/* Ensure media elements within slides are constrained */
-.swiper-slide .media-image,
-.swiper-slide .media-video,
-.swiper-slide .media-embed {
-   max-width: 100%; /* Make sure media doesn't overflow slide */
-   box-sizing: border-box;
+  padding: 2rem;
+  font-size: 1rem;
+  color: var(--medium-gray);
 }

@@ -22,7 +22,7 @@
     padding-bottom: 6rem;
     background-color: var(--white);
     color: var(--black);
-    border-radius: 2.5rem 2.5rem 0rem 0rem;
+    border-radius: 0.5rem 0.5rem 0rem 0rem;
     position: relative;
     overflow: hidden;
     min-height: 300px;
