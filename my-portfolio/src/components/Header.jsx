@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { HashLink} from 'react-router-hash-link';
 import HamburgerMenu from './Hamburger';
 import angusLogo from '../assets/icons/angus-logo-1.svg'; // Update path if needed
 import "./Header.css";
@@ -15,7 +16,7 @@ function Header() {
                     </div>
                     <div className="desktop-nav">
                         <ul>
-                            <li><NavLink to="/work">Work</NavLink></li>
+                            <li><HashLink smooth to="/#work">Work</HashLink></li>
                             <li><NavLink to="/about">About</NavLink></li>
                             <li><NavLink to="/contact">Contact</NavLink></li>
                             <li><NavLink to="/experiments">Experiments</NavLink></li>

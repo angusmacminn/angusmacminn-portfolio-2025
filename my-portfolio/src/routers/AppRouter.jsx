@@ -3,10 +3,12 @@ import HomePage from '../pages/HomePage';
 import AboutPage from '../pages/AboutPage';
 import SingleWork from '../components/SingleWork';
 import ExperimentsPage from '../pages/ExperimentsPage';
+import ScrollToTop from '../utils/ScrollToTop';
 
 function AppRouter() {
     return (
         <BrowserRouter>
+            <ScrollToTop />
             <main>
                 <Routes>
                     <Route path="/" element={<HomePage />} />

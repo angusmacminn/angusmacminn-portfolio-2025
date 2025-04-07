@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { RestBase } from '../utils/RestBase';
 import { formatSkillName } from '../utils/skillMap';
+import { HashLink } from 'react-router-hash-link';
 import MediaGallery from './MediaGallery';
 import HighlightsAccordion from './HighlightsAccordion';
 import './SingleWork.css';
@@ -96,7 +97,7 @@ function SingleWork() {
                 <div className="single-work-container">
                     <div className='top-half'>
                         <div className='top-half-left'>
-                            <Link to="/#work" className="back-link">← Back to all works</Link>
+                            <HashLink smooth to="/#work" className="back-link">← Back to all works</HashLink>
                             <div className="work-title-year">
                                 <h1>{workData.title.rendered}</h1>
                                 <p>{workData.acf.year}</p>
