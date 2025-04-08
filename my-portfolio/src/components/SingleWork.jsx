@@ -34,37 +34,38 @@ const useIsMobile = (breakpoint = 768) => {
 function SingleWork() {
     const { slug } = useParams();
     const [workData, setWorkData] = useState(null);
+    const [relatedWorks, setRelatedWorks] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [error, setError] = useState(null);
-    const isMobile = useIsMobile(); // Use the hook
+    const isMobile = useIsMobile();
 
     useEffect(() => {
         const fetchWorkItem = async () => {
             try {
-                // Fetch all work items
                 const response = await fetch(`${RestBase}work?_embed`);
-                console.log("Fetching all works from:", `${RestBase}work?_embed`);
                 
                 if (response.ok) {
                     const allWorks = await response.json();
-                    console.log("All works:", allWorks);
                     
                     // Find the work with matching slug
                     const matchingWork = allWorks.find(work => work.slug === slug);
                     
                     if (matchingWork) {
-                        console.log("Found matching work:", matchingWork);
                         setWorkData(matchingWork);
+                        
+                        // Get other works (excluding current)
+                        const otherWorks = allWorks
+                            .filter(work => work.slug !== slug)
+                            .slice(0, 3); // Limit to 3 related works
+                        
+                        setRelatedWorks(otherWorks);
                     } else {
-                        console.error("No work found with slug:", slug);
                         setError('Work item not found');
                     }
                 } else {
-                    console.error("API error:", response.status);
                     setError(`Failed to load work items: ${response.status}`);
                 }
             } catch (err) {
-                console.error("Fetch error:", err);
                 setError(`Error: ${err.message}`);
             } finally {
                 setIsLoaded(true);
@@ -97,7 +98,7 @@ function SingleWork() {
                 <div className="single-work-container">
                     <div className='top-half'>
                         <div className='top-half-left'>
-                            <HashLink smooth to="/#work" className="back-link">← Back to all works</HashLink>
+                            <HashLink smooth to="/#work" className="back-link"><img src={arrow} alt="arrow" /> Back to all works</HashLink>
                             <div className="work-title-year">
                                 <h1>{workData.title.rendered}</h1>
                                 <p>{workData.acf.year}</p>
@@ -168,6 +169,28 @@ function SingleWork() {
                                 restBase={RestBase}
                             />
                         </div>
+                </div>
+                <div className="more-works-section">
+                    <h2>More Projects</h2>
+                    <div className="more-works-grid">
+                        {relatedWorks.map(work => (
+                            <Link to={`/work/${work.slug}`} key={work.id} className="related-work-card">
+                                {work._embedded?.['wp:featuredmedia']?.[0]?.source_url && (
+                                    <div className="related-work-image">
+                                        <img 
+                                            src={work._embedded['wp:featuredmedia'][0].source_url} 
+                                            alt={work.title.rendered}
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                )}
+                                <div className="related-work-info">
+                                    <h3>{work.title.rendered}</h3>
+                                    <p className="related-work-year">{work.acf.year}</p>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
                 </div>
             </section>
         </>
