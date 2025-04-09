@@ -52,6 +52,8 @@ function PixelPush() {
             alpha: true
         });
         renderer.setSize(bounds.width, bounds.height);
+        const pixelRatio = 0.5; // Lower value = better performance but less quality
+        renderer.setPixelRatio(pixelRatio);
         
         // Setup scene
         const scene = new THREE.Scene();
