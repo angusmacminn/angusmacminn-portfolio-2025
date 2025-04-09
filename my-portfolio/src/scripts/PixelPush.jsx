@@ -68,7 +68,7 @@ function PixelPush() {
         camera.position.z = 1;
 
         // Create objects
-        const geometry = new THREE.PlaneGeometry(bounds.width, bounds.height);
+        const geometry = new THREE.PlaneGeometry(bounds.width, bounds.height, 1, 1);
         const material = new THREE.ShaderMaterial({
             uniforms: {
                 u_backgroundColor: { value: new THREE.Vector3(0.95, 0.95, 0.95) },
@@ -115,7 +115,7 @@ function PixelPush() {
             
             // Update mesh geometry
             mesh.geometry.dispose();
-            mesh.geometry = new THREE.PlaneGeometry(newBounds.width, newBounds.height);
+            mesh.geometry = new THREE.PlaneGeometry(newBounds.width, newBounds.height, 1, 1);
             
             // Update uniforms
             if (material.uniforms.u_resolution) {
