@@ -166,21 +166,22 @@ function PixelPush() {
 
     // Handle animation based on visibility
     useEffect(() => {
-        if (!sceneRef.current) return;
-
-        // Start or stop animation based on visibility
-        if (isVisible) {
-            console.log('Component is visible, starting animation');
+        if (!isVisible || !sceneRef.current) return;
+        
+        let lastTime = 0;
+        const targetFPS = 30; // Lower = better performance
+        const interval = 1000 / targetFPS;
+        
+        const animate = (timestamp) => {
+            if (!sceneRef.current) return;
             
-            const animate = () => {
-                if (!sceneRef.current) return;
-                
+            const deltaTime = timestamp - lastTime;
+            
+            if (deltaTime >= interval) {
                 const { scene, camera, renderer, material, mousePos } = sceneRef.current;
                 
-                // Update time
                 sceneRef.current.time += 0.01;
                 
-                // Update uniforms
                 if (material.uniforms.u_time) {
                     material.uniforms.u_time.value = sceneRef.current.time;
                 }
@@ -188,17 +189,15 @@ function PixelPush() {
                     material.uniforms.u_mouse.value = mousePos;
                 }
                 
-                // Render
                 renderer.render(scene, camera);
-                requestRef.current = requestAnimationFrame(animate);
-            };
+                lastTime = timestamp;
+            }
             
             requestRef.current = requestAnimationFrame(animate);
-        } else {
-            console.log('Component is not visible, stopping animation');
-            cancelAnimationFrame(requestRef.current);
-        }
-
+        };
+        
+        requestRef.current = requestAnimationFrame(animate);
+        
         return () => {
             cancelAnimationFrame(requestRef.current);
         };
