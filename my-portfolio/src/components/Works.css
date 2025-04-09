@@ -1,6 +1,8 @@
 .works {
     width: 100%;
     padding: 0 1rem;
+    max-width: 62.5rem;
+    margin: 0 auto;
 }
 
 .works-cards {
@@ -23,6 +25,14 @@
      transition: background-color 0.5s ease, border-color 0.5s ease, translate 0.5s ease;
      border: 1px solid transparent; /* Add transparent border initially to transition border */
 }
+
+.work-card:hover {
+    background-color: var(--light-black);
+    color: var(--white);
+    border: 1px solid var(--white);
+    translate: 1rem 0;
+}
+
 
 /* Add a selector for the image within the work-card */
 .work-card img {
@@ -86,13 +96,6 @@
     }
 }
 
-.work-card:hover {
-    background-color: var(--light-black);
-    color: var(--white);
-    border: 1px solid var(--white);
-    translate: 3rem 0;
-
-}
 
 .work-card:hover h3 {
     color: var(--white);
@@ -106,4 +109,14 @@
     filter: invert(1);
     rotate: 50deg;
     transition: all 0.5s ease;
+}
+
+@media (min-width: 768px) {
+    .work-card:hover {
+        background-color: var(--light-black);
+        color: var(--white);
+        border: 1px solid var(--white);
+        translate: 3rem 0;
+    }
+        
 }

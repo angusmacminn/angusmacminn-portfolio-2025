@@ -31,7 +31,7 @@
 
   .highlight-item {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     align-items: flex-start;
     gap: 2rem;

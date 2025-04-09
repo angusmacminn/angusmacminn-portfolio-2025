@@ -12,7 +12,7 @@
   box-sizing: border-box;
   min-width: 0;
   border-radius: 4px;
-  background: var(--light-black); /* Use theme color */
+  background: var(--light-black); 
   position: relative; /* Needed for absolute positioning of arrows/pagination */
 }
 

@@ -1,6 +1,7 @@
 import Hamburger from 'hamburger-react';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import './Hamburger.css';
 
 function HamburgerMenu() {
@@ -46,9 +47,9 @@ function HamburgerMenu() {
             >
                 <ul>
                     <li><NavLink onClick={handleLinkClick} to="/">Home</NavLink></li>
-                    <li><NavLink onClick={handleLinkClick} to="/work">Work</NavLink></li>
+                    <li><HashLink onClick={handleLinkClick} smooth to="/#work">Work</HashLink></li>
                     <li><NavLink onClick={handleLinkClick} to="/about">About</NavLink></li>
-                    <li><NavLink onClick={handleLinkClick} to="/contact">Contact</NavLink></li>
+                    <li><HashLink onClick={handleLinkClick} smooth to="/#contact">Contact</HashLink></li>
                     <li><NavLink onClick={handleLinkClick} to="/experiments">Experiments</NavLink></li>
                     
                 </ul>

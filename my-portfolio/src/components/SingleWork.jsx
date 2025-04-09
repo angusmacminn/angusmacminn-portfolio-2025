@@ -8,7 +8,6 @@ import HighlightsAccordion from './HighlightsAccordion';
 import './SingleWork.css';
 import Header from '../components/Header';
 import arrow from "../assets/icons/project-arrow.svg"
- 
 
 // Simple hook to check for mobile screen size
 const useIsMobile = (breakpoint = 768) => {
@@ -96,80 +95,76 @@ function SingleWork() {
             <Header />
             <section className="single-work">
                 <div className="single-work-container">
-                    <div className='top-half'>
-                        <div className='top-half-left'>
-                            <HashLink smooth to="/#work" className="back-link"><img src={arrow} alt="arrow" /> Back to all works</HashLink>
-                            <div className="work-title-year">
-                                <h1>{workData.title.rendered}</h1>
-                                <p>{workData.acf.year}</p>
-                            </div>
-        
-                            <div className="work-skills">
-                                {workData.class_list
-                                    .filter(className => className.startsWith('skills-'))
-                                    .map(skill => {
-                                        // Remove the 'skills-' prefix
-                                        const skillSlug = skill.replace('skills-', '');
-                                        
-                                        return (
-                                            <span key={skill} className="skill-tag-single">
-                                                {formatSkillName(skillSlug)}
-                                            </span>
-                                        );
-                                    })}
-                            </div>
+                    <div className='top-half-left'>
+                        <HashLink smooth to="/#work" className="back-link"><img src={arrow} alt="arrow" /> Back to all works</HashLink>
+                        <div className="work-title-year">
+                            <h1>{workData.title.rendered}</h1>
+                            <p>{workData.acf.year}</p>
                         </div>
-    
-                        
-                            <div className='media-container'>
-                                {/* Media Gallery */}
-                                {workData.acf?.media_gallery && workData.acf.media_gallery.length > 0 && (
-                                    <div className="work-media">
-                                            <MediaGallery mediaItems={workData.acf.media_gallery} restBase={RestBase} />
-                                    </div>
-                                )}
-                                
-                                {/* === Conditional Message/Button === */}
-                                {workData.acf?.media_gallery && workData.acf.media_gallery.length > 0 && (
-                                     (
-                                        workData.acf.link_to_project && (
-                                            <div className="project-link-container">
-                                                <a 
-                                                    href={workData.acf.link_to_project} 
-                                                    target="_blank" 
-                                                    rel="noopener noreferrer" 
-                                                    className="project-link-button"
-                                                >
-                                                    Visit
-                                                    <img src={arrow} alt="arrow" />
-        
-                                                </a>
-                                            </div>
-                                        )
-                                    )
-                                )}
-                            </div>
-                            
-                        <div className="work-overview">
-                            {workData.acf.overview_title && (
-                                <h2>{workData.acf.overview_title}</h2>
-                            )}
-                            {workData.acf.overview_description && (
-                                <div className="work-overview-description">
-                                    <p>{workData.acf.overview_description}</p>
-                                </div>
-                            )}
+                        <div className="work-skills">
+                            {workData.class_list
+                                .filter(className => className.startsWith('skills-'))
+                                .map(skill => {
+                                    // Remove the 'skills-' prefix
+                                    const skillSlug = skill.replace('skills-', '');
+                                    
+                                    return (
+                                        <span key={skill} className="skill-tag-single">
+                                            {formatSkillName(skillSlug)}
+                                        </span>
+                                    );
+                                })}
                         </div>
                     </div>
-                        <div className='bottom-half'>
-                            {/* Highlights Accordion */}
-                            <HighlightsAccordion
-                                highlights={workData.acf}
-                                title={workData.acf.highlights_title}
-                                restBase={RestBase}
-                            />
-                        </div>
+
+                    <div className='media-container'>
+                        {/* Media Gallery */}
+                        {workData.acf?.media_gallery && workData.acf.media_gallery.length > 0 && (
+                            <div className="work-media">
+                                <MediaGallery mediaItems={workData.acf.media_gallery} restBase={RestBase} />
+                            </div>
+                        )}
+                        
+                        {/* === Conditional Message/Button === */}
+                        {workData.acf?.media_gallery && workData.acf.media_gallery.length > 0 && (
+                            workData.acf.link_to_project && (
+                                <div className="project-link-container">
+                                    <a 
+                                        href={workData.acf.link_to_project} 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        className="project-link-button"
+                                    >
+                                        Visit
+                                        <img src={arrow} alt="arrow" />
+                                    </a>
+                                </div>
+                            )
+                        )}
+                    </div>
+                            
+                    <div className="work-overview">
+                        {workData.acf.overview_title && (
+                            <h2>{workData.acf.overview_title}</h2>
+                        )}
+                        {workData.acf.overview_description && (
+                            <div className="work-overview-description">
+                                <p>{workData.acf.overview_description}</p>
+                            </div>
+                        )}
+                    </div>
+                
+                    <div className='highlights-container'>
+                        {/* Highlights Accordion */}
+                        <HighlightsAccordion
+                            highlights={workData.acf}
+                            title={workData.acf.highlights_title}
+                            restBase={RestBase}
+                        />
+                    </div>
                 </div>
+                
+                {/* More Works Section */}
                 <div className="more-works-section">
                     <h2>More Projects</h2>
                     <div className="more-works-grid">

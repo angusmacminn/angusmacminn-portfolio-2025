@@ -72,7 +72,6 @@
 
 .logo-white:hover {
     transform: scale(1.05);
-    filter: brightness(0) invert(0);
 }
 
 /* Add responsive adjustments if needed */
