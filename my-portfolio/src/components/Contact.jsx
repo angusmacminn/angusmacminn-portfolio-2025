@@ -11,7 +11,7 @@ function Contact({ pageData }) {
   }
 
   return (
-    <section className="contact-section" id="contact">
+    <footer className="contact-section" id="contact">
       <h2>{pageData.acf.contact_title}</h2>
       <div className="contact-content">
         <p className="contact-tagline">{pageData.acf.contact_tagline}</p>
@@ -59,11 +59,15 @@ function Contact({ pageData }) {
         )}
       </div>
 
+      <div className="copyright">
+          <p>&copy; {new Date().getFullYear()} Angus MacMinn. All rights reserved.</p>
+        </div>
+
 
       </div>
       
       
-    </section>
+      </footer>
   );
 }
 

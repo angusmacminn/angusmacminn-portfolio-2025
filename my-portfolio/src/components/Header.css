@@ -21,6 +21,17 @@
     box-sizing: border-box;
 }
 
+.logo-white {
+    max-width: 60px;
+    filter: brightness(0) invert(1); /* Makes it white by default */
+    mix-blend-mode: difference; /* This will make it automatically invert based on background */
+    transition: transform 0.3s ease; /* Keep transition for scale effect if needed */
+}
+
+.logo-white:active {
+    filter: brightness(0) invert(0); /* Change to black when tapped/active */
+}
+
 @media (min-width: 1000px) {
     .nav-content {
         background-color: var(--light-black);
@@ -48,6 +59,7 @@
     width: auto;
     object-fit: contain;
     max-height: 100%;
+    
 }
 
 /* Make the logo white and add additional size control */
@@ -87,68 +99,31 @@
     padding: 0;
 }
 
+.desktop-nav li {
+    /* Add initial states */
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    /* Add transition for all properties */
+    transition: background-color 0.2s ease, border 0.2s ease;
+}
+
 .desktop-nav a {
     text-decoration: none;
     color: var(--text-color);
     font-weight: 500;
     position: relative;
-    padding-bottom: 0.25rem;
-    transition: all 0.2s ease;
+    padding: 0.2rem 0.5rem;
+    display: block; /* Ensure the anchor fills the li */
 }
 
-.desktop-nav a:hover {
-    /* color: var(--accent-color); */
-    border-bottom: 2px solid var(--text-color);
+.desktop-nav li:hover {
+    background-color: var(--black);
+    border: 1px solid var(--white);
+    border-radius: 0.5rem;
 }
 
-/* Active link styling */
-.desktop-nav a.active {
-    position: relative;
-}
 
-.desktop-nav a.active::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--text-color);
-    transition: width 0.3s ease;
-}
-
-/* Remove outline on all focused nav links */
-.desktop-nav a:focus {
-    outline: none;
-}
-
-/* Keyboard focus style with multiple indicators */
-.desktop-nav a:focus-visible {
-    background-color: rgba(77, 144, 254, 0.1);
-    box-shadow: 0 0 0 2px #4d90fe;
-}
-
-/* You can add a subtle underline or other indicator */
-.desktop-nav a:focus-visible::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 100%;
-    height: 2px;
-    background-color: #4d90fe;
-}
-
-li .contact-CTA {
-    background-color: var(--burgundy);
-    color: var(--white);
-    padding: 0.5rem 1rem;
-    border-radius: 2rem;
-}
-
-li .contact-CTA:hover {
-    color: var(--yellow);
-}
 
 /* Responsive Styles */
 @media (min-width: 1000px) {

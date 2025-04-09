@@ -18,7 +18,7 @@ function Header() {
                         <ul>
                             <li><HashLink smooth to="/#work">Work</HashLink></li>
                             <li><NavLink to="/about">About</NavLink></li>
-                            <li><NavLink to="/contact">Contact</NavLink></li>
+                            <li><HashLink smooth to="/#contact">Contact</HashLink></li>
                             <li><NavLink to="/experiments">Experiments</NavLink></li>
                         </ul>
                     </div>
