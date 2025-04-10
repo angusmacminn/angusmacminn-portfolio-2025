@@ -99,6 +99,7 @@ function MediaGallery({ mediaItems, restBase }) {
                   playsInline
                   loop        // Optional: loop the video itself
                   className="media-video"
+                  aria-label={media.title || "Project video"}
                 >
                   <source src={media.url} type={media.mime_type} />
                   Your browser does not support the video tag.
@@ -113,6 +114,7 @@ function MediaGallery({ mediaItems, restBase }) {
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
+                    aria-label={media.title || "Embedded projectvideo"}
                   ></iframe>
                 </div>
               )}

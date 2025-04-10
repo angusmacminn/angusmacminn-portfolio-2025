@@ -7,7 +7,7 @@ import "./Header.css";
 function Header() {
     return (
         <header>
-            <nav className="header-nav">
+            <nav className="header-nav" aria-label="Main Navigation">
                 <div className="nav-content">
                     <div className="logo">
                         <NavLink to="/">

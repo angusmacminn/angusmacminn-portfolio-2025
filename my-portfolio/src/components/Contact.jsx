@@ -31,8 +31,9 @@ function Contact({ pageData }) {
             target="_blank" 
             rel="noopener noreferrer"
             className="social-link linkedin"
+            aria-label="LinkedIn"
           >
-            <img src={linkedinIcon} alt="LinkedIn" />
+            <img src={linkedinIcon} alt="" />
           </a>
         )}
         
@@ -42,8 +43,9 @@ function Contact({ pageData }) {
             target="_blank" 
             rel="noopener noreferrer"
             className="social-link github"
+            aria-label="GitHub"
           >
-            <img src={githubIcon} alt="GitHub" />
+            <img src={githubIcon} alt="" />
           </a>
         )}
         
@@ -53,8 +55,9 @@ function Contact({ pageData }) {
             target="_blank" 
             rel="noopener noreferrer"
             className="social-link instagram"
+            aria-label="Instagram"
           >
-            <img src={instagramIcon} alt="Instagram" />
+            <img src={instagramIcon} alt="" />
           </a>
         )}
       </div>

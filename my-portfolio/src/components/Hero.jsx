@@ -33,7 +33,11 @@ function HeroContent({ pageData }) {
         <h2>{acf.position_title}</h2>
       </div>
       <div className="hero-arrowdown" onClick={scrollToWork}>
-        <img src={arrowdown} alt="arrowdown" className="bounce-animation"/>
+        <img src={arrowdown} 
+             alt="arrowdown" 
+             className="bounce-animation"
+             aria-label="Scroll to work section"
+             />
       </div>
     </section>
   );
