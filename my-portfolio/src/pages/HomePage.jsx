@@ -30,34 +30,36 @@ function HomePage() {
 
     return (
         <>
-        <div className='canvas-wrapper'>
-          <DotDisplace />
-        </div>
-          {!isLoaded ? (
-            <p>Loading...</p>
-          ) : (
-            <>
-            <div className="content-wrapper">
-              
-                <Header />
-                <HeroContent pageData={restData} />
-                <section className="work-section" id="work">
-                  {restData.acf && <h2>{restData.acf.work_title}</h2>}
-                  <Works />
-                  <div className="experiments-button-container">
-                    <Link to="/experiments" className="experiments-button">
-                      Experiments
-                    </Link>
-                  </div>
-                </section>
-                {restData?.acf && (<About pageData={restData} />)}
-                {restData?.acf && (<Contact pageData={restData} />)}
-            </div>
-
+            <a href="#main-content" className="skip-to-content">Skip to content</a>
             
-            </>
-
-          )}
+            <div className='canvas-wrapper'>
+              <DotDisplace />
+            </div>
+            
+            {!isLoaded ? (
+                <p>Loading...</p>
+            ) : (
+                <>
+                <div className="content-wrapper">
+                    <Header />
+                    
+                    <main id="main-content">
+                        <HeroContent pageData={restData} />
+                        <section className="work-section" id="work">
+                            {restData.acf && <h2>{restData.acf.work_title}</h2>}
+                            <Works />
+                            <div className="experiments-button-container">
+                                <Link to="/experiments" className="experiments-button">
+                                    Experiments
+                                </Link>
+                            </div>
+                        </section>
+                        {restData?.acf && (<About pageData={restData} />)}
+                        {restData?.acf && (<Contact pageData={restData} />)}
+                    </main>
+                </div>
+                </>
+            )}
         </>
     )
 }
