@@ -119,7 +119,7 @@ function SingleWork() {
                                     );
                                 })}
                         </div>
-                        {(workData.acf.role || workData.acf.responsibilities) && (
+                        {(workData.acf.role || workData.acf.responsibilities_list) && (
                             <div className="work-role-section">
                                 {workData.acf.role && (
                                     <div className="work-role">
@@ -128,10 +128,14 @@ function SingleWork() {
                                     </div>
                                 )}
                                 
-                                {workData.acf.responsibilities && (
+                                {workData.acf.responsibilities_list && workData.acf.responsibilities_list.length > 0 && (
                                     <div className="work-responsibilities">
-                                        <p className='work-role-title'>Responsibilities</p>
-                                        <p>{workData.acf.responsibilities}</p>
+                                        <p className="work-role-title">Responsibilities</p>
+                                        <ul className="responsibilities-list">
+                                            {workData.acf.responsibilities_list.map((item, index) => (
+                                                <li key={index}>{item.responsibility_item}</li>
+                                            ))}
+                                        </ul>
                                     </div>
                                 )}
                             </div>
