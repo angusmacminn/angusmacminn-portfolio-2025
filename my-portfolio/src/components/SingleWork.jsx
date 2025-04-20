@@ -90,6 +90,10 @@ function SingleWork() {
         return <div className="not-found">Work item not found</div>;
     }
 
+    console.log("ACF Fields:", workData.acf);
+    console.log("Role:", workData.acf.role);
+    console.log("Responsibilities:", workData.acf.responsibilities);
+
     return (
         <>
             <Header />
@@ -115,6 +119,23 @@ function SingleWork() {
                                     );
                                 })}
                         </div>
+                        {(workData.acf.role || workData.acf.responsibilities) && (
+                            <div className="work-role-section">
+                                {workData.acf.role && (
+                                    <div className="work-role">
+                                        <p className='work-role-title'>Role</p>
+                                        <p>{workData.acf.role}</p>
+                                    </div>
+                                )}
+                                
+                                {workData.acf.responsibilities && (
+                                    <div className="work-responsibilities">
+                                        <p className='work-role-title'>Responsibilities</p>
+                                        <p>{workData.acf.responsibilities}</p>
+                                    </div>
+                                )}
+                            </div>
+                        )}
                     </div>
 
                     <div className='media-container'>

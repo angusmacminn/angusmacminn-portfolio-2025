@@ -205,6 +205,31 @@
 
 }
 
+.work-role-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 35rem;
+    margin: 0 auto;
+}
+
+.work-role-section p {
+    margin-top: 0.5rem;
+}
+
+.work-role-title {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    color: var(--light-gray);
+}
+
+
+
+
+
+
+
 
 @media (min-width: 1000px) {
 
@@ -228,6 +253,10 @@
 
     .work-overview h2 {
         font-size: 2em;
+    }
+    
+    .work-role-section {
+        margin: 0;
     }
 
     .top-half-left {
