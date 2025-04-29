@@ -1,13 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { RestBase } from '../utils/RestBase';
 import { Link } from 'react-router-dom';
 import "./Works.css";
 import arrow from "../assets/icons/project-arrow.svg"
+import gsap from 'gsap';
 
 function Works() {
     const restPath = RestBase + 'work';
     const [works, setWorks] = useState([]);
     const [isLoaded, setLoadStatus] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
+    const workSectionRef = useRef(null);
+
+
+    
 
     useEffect(() => {
         // Reset loading state when fetching
@@ -34,9 +40,56 @@ function Works() {
         
         fetchWorks();
     }, [restPath]);
+
+
+// gsap animation
+    useEffect(() => {
+      const section = workSectionRef.current;
+      if(!section) return;
+
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) {
+              setIsVisible(true);
+              observer.unobserve(section);
+            }
+          },
+          {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1,
+          }
+        );
+        observer.observe(section);
+
+        // cleanup funtion
+        return () => {
+          if(section) {
+            observer.unobserve(section);
+          }
+        }
+    }, []); // This effect runs once on mount to set up the observer
+
+    useEffect(() => {
+    // Only run animation if the section is visible and works data exists
+    if (isVisible && works && works.length > 0) {
+      gsap.fromTo('.work-card', {
+        opacity: 0,
+        y: 100,
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: 'power2.inOut',
+        stagger: 0.2,
+        clearProps: 'transform',
+        // Add a delay if needed, e.g., delay: 0.2
+      });
+    }
+  }, [isVisible, works]);
     
     return (
-      <div className="works">
+      <div ref={workSectionRef} className="works">
       {!isLoaded ? (<p>Loading works...</p>) : (
         <div className="works-cards">
           {works.length === 0 ? (
@@ -64,6 +117,8 @@ function Works() {
       )}
     </div>
   );
+
+
 }
 
 export default Works;
