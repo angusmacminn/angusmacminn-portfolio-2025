@@ -197,7 +197,9 @@ function AboutPage() {
                                     {/* <div className="contact-label">Local Time</div> */}
                                     <div className="contact-info">{currentTimePST}</div>
                                 </div>
-                                <div className="contact-info">angusmacminn@outlook.com</div>
+                                <div className="contact-info">
+                                    <a href="mailto:angusmacminn@outlook.com">angusmacminn@outlook.com</a>
+                                </div>
                                 <div className="social-links">
                                     {restData.acf.instagram_url && (
                                         <a href={restData.acf.instagram_url} target="_blank" rel="noopener noreferrer">

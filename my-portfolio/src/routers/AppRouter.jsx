@@ -11,20 +11,20 @@ import {AnimatePresence, motion} from 'framer-motion';
 const pageVariants = {
     initial: {
         opacity: 0,
-        x: "-100vw" // slide in from left
+        // x: "-100vw" // slide in from left
     },
     in: {
         opacity: 1,
-        x: 0 // arrive at center
+        // x: 0 // arrive at center
     },
     out: {
         opacity: 0,
-        x: "100vw" // slide out to right
+        // x: "100vw" // slide out to right
     }
 };
 
 const pageTransition = {
-    type: "tween",
+    type: "spring",
     ease: "anticipate",
     duration: 0.5
 };
@@ -33,8 +33,14 @@ const pageTransition = {
 function AnimatedRoutes() {
     const location = useLocation();
 
+    const handleScrollToTop = () => {
+        window.scrollTo(0, 0);
+    };
+
     return (
-        <AnimatePresence mode="wait"> {/* 'wait' ensures exit animation finishes before enter */}
+        <AnimatePresence mode="wait"
+            onExitComplete={handleScrollToTop}
+        > {/* 'wait' ensures exit animation finishes before enter */}
             <Routes location={location} key={location.pathname}> {/* Pass location and key */}
                     <Route path="/" element={
                         <motion.div
@@ -93,7 +99,7 @@ function AnimatedRoutes() {
 function AppRouter() {
     return (
         <BrowserRouter>
-            <ScrollToTop />
+            
             <main>
                 <AnimatedRoutes />
             </main>
