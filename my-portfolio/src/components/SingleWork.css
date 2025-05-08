@@ -9,7 +9,7 @@
 .single-work-container {
     width: 100%;
     margin: 0 auto;
-
+    will-change: transform, opacity;
 }
 
 .back-link {
@@ -36,6 +36,10 @@
 }
 .back-link:hover img {
     rotate: 280deg;
+}
+
+.top-half-left > * {
+    will-change: transform, opacity; /* Hint to the browser */
 }
 
 .work-title-year {

@@ -12,9 +12,6 @@ function Works() {
     const [isVisible, setIsVisible] = useState(false);
     const workSectionRef = useRef(null);
 
-
-    
-
     useEffect(() => {
         // Reset loading state when fetching
         setLoadStatus(false);
@@ -57,7 +54,7 @@ function Works() {
           {
             root: null,
             rootMargin: '0px',
-            threshold: 0.1,
+            threshold: 0.5,
           }
         );
         observer.observe(section);

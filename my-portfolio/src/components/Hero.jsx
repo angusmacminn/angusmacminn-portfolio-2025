@@ -1,6 +1,8 @@
-import React from 'react';
 import "./Hero.css";
 import arrowdown from "../assets/icons/arrowdown.svg";
+import { gsap } from 'gsap';
+import { useEffect } from "react";
+
 
 function HeroContent({ pageData }) {
   // Check if pageData exists before trying to access its properties
@@ -22,6 +24,35 @@ function HeroContent({ pageData }) {
       });
     }
   };
+
+  // GSAP animation - hero
+  useEffect(() => {
+    gsap.fromTo('.hero-content', {
+      opacity: 0,
+      y: 100,
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: 'power2.inOut',
+      clearProps: 'transform,opacity',
+      delay: 0.3,
+    });
+  }, []);
+
+  useEffect(() => {
+    gsap.fromTo('.hero-arrowdown', {
+      opacity: 0,
+      y: -100,
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: 'power2.inOut',
+      clearProps: 'transform,opacity',
+      delay: 0.4,
+    });
+  }, []);
   
   // Destructure - Extract the acf object from the pageData object
   const { acf } = pageData;

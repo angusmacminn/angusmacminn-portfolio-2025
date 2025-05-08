@@ -1,11 +1,13 @@
 import Header from '../components/Header';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { RestBase } from '../utils/RestBase';
 import ProfileSkills from '../components/ProfileSkills';
 import linkedinIcon from '../assets/icons/iconmonstr-linkedin-3.svg';
 import githubIcon from '../assets/icons/iconmonstr-github-1.svg';
 import instagramIcon from '../assets/icons/iconmonstr-instagram-11.svg';
 import "./AboutPage.css";
+
+import { gsap } from 'gsap';
 
 
 function AboutPage() {
@@ -25,7 +27,7 @@ function AboutPage() {
                 const pageResponse = await fetch(restPath);
                 if (pageResponse.ok) {
                     const data = await pageResponse.json();
-                    console.log("Page data loaded:", data);
+                    
                     setData(data);
                     setLoadStatus(true);
 
@@ -57,7 +59,7 @@ function AboutPage() {
     // Fetch profile image data
     const fetchProfileImage = async (imageId) => {
         try {
-            console.log("Fetching profile image with ID:", imageId);
+            
             const response = await fetch(`${RestBase}media/${imageId}`);
             
             if (response.ok) {
@@ -130,6 +132,84 @@ function AboutPage() {
 
     }, []); // Empty dependency array ensures this effect runs only once on mount
 
+
+    // GSAP animation - H1
+    useEffect(() => {
+        // Check if data AND the specific tagline field exist
+        if(restData?.acf?.tagline){
+            // Target the H1 directly
+            gsap.fromTo('.about-intro h1', // Use a CSS selector
+                {
+                    x: 100,
+                    opacity: 0,
+                },
+                {
+                    x: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: 'power2.inOut',
+                    delay: 0.3, // Slight delay after component likely renders
+                    // Optional: clearProps might not be strictly necessary if no other
+                    // styles conflict, but it's good practice
+                    clearProps: 'x,opacity' 
+                }
+            )
+        }
+        // Depend only on the specific data needed for the animation
+    }, [restData?.acf?.tagline]);
+
+    // GSAP animation - bio
+    useEffect(() => {
+        if(restData?.acf?.profile_bio_1){
+            gsap.fromTo('.about-page-content > *', {
+                opacity: 0,
+                x: -100,
+            }, {
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                ease: 'power2.inOut',
+                delay: 0.5,
+                clearProps: 'x,opacity',
+                stagger: 0.3,
+            })
+        }
+    }, [restData?.acf?.profile_bio_1]);
+
+    useEffect(() => {
+        if(restData?.acf?.profile_bio_2){
+            gsap.fromTo('.right-column > *', {
+                opacity: 0,
+                x: 100,
+            }, {
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                ease: 'power2.inOut',
+                delay: 0.5,
+                clearProps: 'x,opacity',
+                stagger: 0.3,
+            })
+        }
+    }, [restData?.acf?.profile_bio_2]);
+
+    useEffect(() => {
+        if(restData?.acf?.profile_bio_1){
+            gsap.fromTo('.about-content-2', {
+                opacity: 0,
+                x: -100,
+            }, {
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                ease: 'power2.inOut',
+                delay: 0.7,
+                clearProps: 'x,opacity',
+                stagger: 0.3,
+            })
+        }
+    }, [restData?.acf?.profile_bio_1]);
+
     return (
         <>
             <Header/>
@@ -140,8 +220,7 @@ function AboutPage() {
                     <section className="about-page-section">
                         <div className="left-column">
                             <div className="about-intro">
-                                <h1>{restData.acf.tagline}</h1>
-                                
+                                {restData.acf.tagline ? <h1>{restData.acf.tagline}</h1> : null}
                             </div>
                             
                             <div className="about-page-content">

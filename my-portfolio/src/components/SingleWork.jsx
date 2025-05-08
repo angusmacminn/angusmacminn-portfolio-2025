@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { RestBase } from '../utils/RestBase';
 import { formatSkillName } from '../utils/skillMap';
@@ -8,6 +8,8 @@ import HighlightsAccordion from './HighlightsAccordion';
 import './SingleWork.css';
 import Header from '../components/Header';
 import arrow from "../assets/icons/project-arrow.svg"
+
+import { gsap } from 'gsap';
 
 // Simple hook to check for mobile screen size
 const useIsMobile = (breakpoint = 768) => {
@@ -37,6 +39,51 @@ function SingleWork() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [error, setError] = useState(null);
     const isMobile = useIsMobile();
+    const containerRef = useRef(null);
+    const contentRef = useRef(null);
+
+    // GSAP animation - card
+    useEffect(() => {
+        if (workData && containerRef.current) {
+            gsap.fromTo(
+                containerRef.current,
+                {
+                    opacity: 0,
+                    scale: 0.9,
+                },
+                {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    clearProps: 'transform,opacity',
+                    delay: 0.2,
+                }
+            );
+        }
+    }, [workData]);
+
+    // GSAP animation - content
+    useEffect(() => {
+        if (workData && contentRef.current) {
+            gsap.fromTo(
+                contentRef.current,
+                {   
+                    opacity: 0,
+                    x: 100,
+                },
+                {
+                    opacity: 1,
+                    x: 0,   
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    clearProps: 'transform,opacity',
+                    delay: 0.2,
+                    stagger: 0.2,
+                }
+            );
+        }
+    }, [workData]);
 
     useEffect(() => {
         const fetchWorkItem = async () => {
@@ -90,16 +137,14 @@ function SingleWork() {
         return <div className="not-found">Work item not found</div>;
     }
 
-    console.log("ACF Fields:", workData.acf);
-    console.log("Role:", workData.acf.role);
-    console.log("Responsibilities:", workData.acf.responsibilities);
+
 
     return (
         <>
             <Header />
             <section className="single-work">
-                <div className="single-work-container">
-                    <div className='top-half-left'>
+                <div ref={containerRef} className="single-work-container">
+                    <div ref={contentRef} className='top-half-left'>
                         <HashLink smooth to="/#work" className="back-link"><img src={arrow} alt="arrow" /> Back to all works</HashLink>
                         <div className="work-title-year">
                             <h1>{workData.title.rendered}</h1>

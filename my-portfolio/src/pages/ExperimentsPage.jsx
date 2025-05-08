@@ -3,6 +3,7 @@ import { RestBase } from '../utils/RestBase';
 import Header from '../components/Header';
 import Experiments from '../components/Experiments';
 import "./ExperimentsPage.css";
+import { gsap } from 'gsap';
 
 function ExperimentsPage() {
     const [experiments, setExperiments] = useState([]);
@@ -34,6 +35,35 @@ function ExperimentsPage() {
         fetchExperiments();
     }, []);
 
+    useEffect(() => {
+        gsap.fromTo('.experiments-title, .experiments-intro', {
+            opacity: 0,
+            y: -100,
+        }, {
+            opacity: 1, 
+            y: 0,
+            duration: 1,
+            ease: 'power2.inOut',
+            clearProps: 'transform,opacity',
+            delay: 0.3,
+            stagger: 0.3,
+        });
+    }, []);
+
+    useEffect(() => {
+        gsap.fromTo('.experiments-container', {
+            opacity: 0,
+            x: 100,
+        }, {
+            opacity: 1, 
+            x: 0,
+            duration: 1,
+            ease: 'power2.inOut',
+            clearProps: 'transform,opacity',
+            delay: 0.3,
+            stagger: 0.3,
+        });
+    }, []);
     return (
         <>
             <Header />
@@ -48,11 +78,13 @@ function ExperimentsPage() {
                         They vary in complexity and scope, but all are a reflection of my learning and growth as a creative developer and lover of making pixels move on screens.
                     </p>
                 </div>
-                <Experiments 
-                    experiments={experiments}
-                    isLoaded={isLoaded}
-                    error={error}
-                />
+                <div className='experiments-container'>
+                    <Experiments 
+                        experiments={experiments}
+                        isLoaded={isLoaded}
+                        error={error}
+                    />
+                </div>
             </section>
         </>
     );

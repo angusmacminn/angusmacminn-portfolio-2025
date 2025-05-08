@@ -24,6 +24,8 @@
      /* Define transitions on the base state */
     transition: background-color 0.5s ease, border-color 0.5s ease, transform 0.5s ease;
     border: 1px solid transparent; /* Add transparent border initially to transition border */
+    opacity: 0;
+   
 }
 
 .work-card:hover {
