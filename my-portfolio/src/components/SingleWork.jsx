@@ -35,6 +35,7 @@ const useIsMobile = (breakpoint = 768) => {
 function SingleWork() {
     const { slug } = useParams();
     const [workData, setWorkData] = useState(null);
+    const [projectSkills, setProjectSkills] = useState([]);
     const [relatedWorks, setRelatedWorks] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [error, setError] = useState(null);
@@ -85,6 +86,7 @@ function SingleWork() {
         }
     }, [workData]);
 
+    // Fetch work item and its related works 
     useEffect(() => {
         const fetchWorkItem = async () => {
             try {
@@ -99,10 +101,27 @@ function SingleWork() {
                     if (matchingWork) {
                         setWorkData(matchingWork);
                         
+                       
+                        
                         // Get other works (excluding current)
                         const otherWorks = allWorks
                             .filter(work => work.slug !== slug)
                             .slice(0, 3); // Limit to 3 related works
+
+                        // Extract skills from the current work
+                        if (matchingWork.acf?.add_software_and_skills && matchingWork._embedded?.['acf:term']) {
+                            const termIds = matchingWork.acf.add_software_and_skills;
+                            const allAvailableTerms = matchingWork._embedded['acf:term']
+                                .flat()
+                                .filter(term => term && typeof term.id !== 'undefined' && typeof term.name !== 'undefined');
+
+                            const resolvedSkills = termIds.map(id => {
+                                const termObject = allAvailableTerms.find(term => term.id === id);
+                                return termObject ? termObject.name : null;
+                            }).filter(name => name !== null);
+
+                            setProjectSkills(resolvedSkills); 
+                        }
                         
                         setRelatedWorks(otherWorks);
                     } else {
@@ -151,18 +170,18 @@ function SingleWork() {
                             <p>{workData.acf.year}</p>
                         </div>
                         <div className="work-skills">
-                            {workData.class_list
-                                .filter(className => className.startsWith('skills-'))
-                                .map(skill => {
-                                    // Remove the 'skills-' prefix
-                                    const skillSlug = skill.replace('skills-', '');
-                                    
-                                    return (
-                                        <span key={skill} className="skill-tag-single">
-                                            {formatSkillName(skillSlug)}
-                                        </span>
-                                    );
-                                })}
+                            {/* Only display additional skills from ACF */}
+                            {projectSkills.length > 0 ? (
+                                projectSkills.map((skillName, index) => (
+                                    <span key={`${skillName}-${index}`} className="skill-tag-single">
+                                        {skillName}
+                                    </span>
+                                ))
+                            ) : (
+                                // Optional: message if no ACF skills are found, or leave empty
+                                // <p>No specific software/skills listed.</p> 
+                                null
+                            )}
                         </div>
                         {(workData.acf.role || workData.acf.responsibilities_list) && (
                             <div className="work-role-section">
