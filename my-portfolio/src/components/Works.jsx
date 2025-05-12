@@ -19,7 +19,7 @@ function Works() {
         const fetchWorks = async () => {
           try {
             // Add cache-busting parameter to prevent browser caching
-            const response = await fetch(`${restPath}?timestamp=${new Date().getTime()}`);
+            const response = await fetch(`${restPath}?_embed&timestamp=${new Date().getTime()}`);
             if (response.ok) {
               const data = await response.json();
               // console.log('Fetched works:', data); // Debug log
@@ -39,7 +39,7 @@ function Works() {
     }, [restPath]);
 
 
-// gsap animation
+    // gsap animation
     useEffect(() => {
       const section = workSectionRef.current;
       if(!section) return;
@@ -67,6 +67,7 @@ function Works() {
         }
     }, []); // This effect runs once on mount to set up the observer
 
+    // gsap animation
     useEffect(() => {
     // Only run animation if the section is visible and works data exists
     if (isVisible && works && works.length > 0) {
@@ -92,23 +93,42 @@ function Works() {
           {works.length === 0 ? (
             <p>No works found</p>
           ) : (
-            works.map(work => (
-              <Link to={`/work/${work.slug}`} className="work-card" key={work.id}>
-                <div className="title-container">
-                  <h3>{work.title.rendered}</h3>
-                  <img src={arrow} alt="arrow" />
-                </div>
-                <div className="skills">
-                  {work.class_list
-                    .filter(className => className.startsWith('skills-'))
-                    .map(skill => (
-                      <span key={skill} className="skill-tag">
-                        {skill.replace('skills-', '').replace('-', ' ')}
-                      </span>
-                    ))}
-                </div>
-              </Link>
-            ))
+            works.map(work => {
+              // Safely access the featured image URL
+              const imageUrl = work._embedded?.['wp:featuredmedia']?.[0]?.source_url;
+              // Or, for a specific size like 'medium' (if available):
+              // const thumbnailUrl = work._embedded?.['wp:featuredmedia']?.[0]?.media_details?.sizes?.medium?.source_url || imageUrl;
+
+              return (
+                <Link to={`/work/${work.slug}`} className="work-card" key={work.id}>
+                  {/* Add the image tag here */}
+                  
+                  <div className="title-container">
+                    <h3>{work.title.rendered}</h3>
+                    <div className="arrow-container"><img src={arrow} alt="arrow"/></div>
+                  </div>
+                  <div className="skills">
+                    {work.class_list
+                      .filter(className => className.startsWith('skills-'))
+                      .map(skill => (
+                        <span key={skill} className="skill-tag">
+                          {skill.replace('skills-', '').replace('-', ' ')}
+                        </span>
+                      ))}
+                  </div>
+                  {imageUrl && (
+                    <div className="work-card-thumbnail-container"> {/* Optional: for styling */}
+                      <img 
+                        src={imageUrl} // or thumbnailUrl
+                        alt={work.title.rendered || 'Project thumbnail'} 
+                        className="work-card-thumbnail" 
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                </Link>
+              );
+            })
           )}
         </div>
       )}
