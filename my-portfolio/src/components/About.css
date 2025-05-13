@@ -33,12 +33,13 @@
 .about-content .about-button {
     position: relative;
     z-index: 1;
+    visibility: hidden; /* Initially hide */
     mix-blend-mode: difference; /* This will invert the text color */
     color: var(--white); /* Set to white so it inverts properly */
     font-weight: 400;
 }
 
-/* Ensure content stays above the shader */
+/* Ensure content stays above the shader AND is initially hidden */
 .about-content h3,
 .about-content .about-button {
     position: relative;
@@ -47,12 +48,13 @@
 
 .about-button {
     /* background-color: var(--dark-gray); */
-    color: var(--black);
+    color: var(--white); /* Re-confirming this for mix-blend-mode: difference */
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     text-decoration: underline;
     align-self: flex-start;
     padding:0;
+    /* visibility: hidden; -- Already covered by the rule above */
 }
 
 .about-section {
@@ -86,5 +88,12 @@
         font-size: 1.5rem;
         font-weight: 500;
     }
+}
+
+/* If you are using specific classes from SplitText like .split-char,
+   and want to apply transforms, ensure they are display: inline-block. */
+.split-char, .split-word { /* General classes for SplitText if you use them */
+    display: inline-block;
+    /* opacity: 0; */ /* Initial opacity will be handled by GSAP's .from() */
 }
 

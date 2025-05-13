@@ -81,7 +81,7 @@ function Works() {
         y: 0,
         duration: 0.5,
         ease: 'power2.inOut',
-        stagger: 0.2,
+        stagger: 0.5,
         clearProps: 'transform',
         // Add a delay if needed, e.g., delay: 0.2
       });

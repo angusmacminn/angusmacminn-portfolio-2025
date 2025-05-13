@@ -6,55 +6,69 @@ import linkedinIcon from '../assets/icons/iconmonstr-linkedin-3.svg';
 import githubIcon from '../assets/icons/iconmonstr-github-1.svg';
 import instagramIcon from '../assets/icons/iconmonstr-instagram-11.svg';
 import "./AboutPage.css";
-
+import Contact from '../components/Contact';
 import { gsap } from 'gsap';
 
-
 function AboutPage() {
-    const restPath = RestBase + 'pages/9?_nocache=1';
-    const [restData, setData] = useState(null);
+    const aboutPagePath = RestBase + 'pages/9?_embed&_nocache=1'; // Data for "About" page
+    const contactPagePath = RestBase + 'pages/5?_embed&_nocache=1'; // Data for "Homepage/Contact" (page ID 5)
+
+    const [aboutPageData, setAboutPageData] = useState(null); // State for About page data
+    const [contactPageData, setContactPageData] = useState(null); // State for Contact page data
+    
     const [skills, setSkills] = useState([]);
     const [profileImage, setProfileImage] = useState(null);
-    const [isLoaded, setLoadStatus] = useState(false);
+    
+    const [isLoaded, setIsLoaded] = useState(false); // Combined loading state for core page data
     const [skillsLoaded, setSkillsLoaded] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
+    const [fetchError, setFetchError] = useState(null);
+
     const [currentTimePST, setCurrentTimePST] = useState('');
 
-    // Fetch page data first
+    // Fetch core page data (About and Contact/Homepage)
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchCoreData = async () => {
+            setIsLoaded(false);
+            setFetchError(null);
             try {
-                const pageResponse = await fetch(restPath);
-                if (pageResponse.ok) {
-                    const data = await pageResponse.json();
-                    
-                    setData(data);
-                    setLoadStatus(true);
+                // Fetch both page data in parallel
+                const [aboutResponse, contactResponse] = await Promise.all([
+                    fetch(aboutPagePath),
+                    fetch(contactPagePath)
+                ]);
 
-                    // Fetch profile image
-                    if (data.acf && data.acf.profile_image) {
-                        // If there's an image ID, fetch the image details
-                        fetchProfileImage(data.acf.profile_image);
-                    } else {
-                        // If no image ID, consider the image "loaded" (as there's nothing to load)
-                        console.log("No profile image ID found in ACF data.");
-                        setImageLoaded(true);
-                    }
-
-                } else {
-                    console.error("Failed to fetch page data:", pageResponse.status);
-                    setImageLoaded(true);
-                    setLoadStatus(false);
+                if (!aboutResponse.ok) {
+                    throw new Error(`Failed to fetch About page data: ${aboutResponse.status}`);
                 }
+                if (!contactResponse.ok) {
+                    throw new Error(`Failed to fetch Contact page data: ${contactResponse.status}`);
+                }
+
+                const aboutData = await aboutResponse.json();
+                const contactData = await contactResponse.json();
+
+                setAboutPageData(aboutData);
+                setContactPageData(contactData);
+                
+                // Fetch profile image if ACF data for About page exists
+                if (aboutData.acf && aboutData.acf.profile_image) {
+                    fetchProfileImage(aboutData.acf.profile_image);
+                } else {
+                    setImageLoaded(true); // No image to load
+                }
+
             } catch (error) {
-                console.error("Error fetching page data:", error);
-                setLoadStatus(false);
-                setImageLoaded(true);
+                console.error("Error fetching core page data:", error);
+                setFetchError(error.message);
+                setImageLoaded(true); // Ensure image loading doesn't hang
+            } finally {
+                setIsLoaded(true); // Set loaded to true after attempts, error or success
             }
         };
         
-        fetchData();
-    }, [restPath]);
+        fetchCoreData();
+    }, [aboutPagePath, contactPagePath]); // Dependencies
 
     // Fetch profile image data
     const fetchProfileImage = async (imageId) => {
@@ -64,7 +78,6 @@ function AboutPage() {
             
             if (response.ok) {
                 const imageData = await response.json();
-                console.log("Image data loaded:", imageData);
                 setProfileImage(imageData);
             } else {
                 console.error("Failed to fetch image:", response.status);
@@ -76,28 +89,22 @@ function AboutPage() {
         }
     };
 
-    // Then fetch skills once page data is loaded
+    // Fetch skills once About page data is loaded (or could be independent)
     useEffect(() => {
-        // Only run this effect when restData is available
-        if (restData) {
+        if (aboutPageData) { // Or if isLoaded is true and aboutPageData exists
             fetchAllSkills();
         }
-    }, [restData]);
+    }, [aboutPageData]); // Depends on aboutPageData
 
     // Function to fetch all skills
     const fetchAllSkills = async () => {
         try {
             console.log("Fetching skills...");
-            setSkillsLoaded(false); // Reset loading state
-            
-            // Fetch all skills with a high per_page value
+            setSkillsLoaded(false);
             const response = await fetch(`${RestBase}skills?per_page=100`);
             if (response.ok) {
-                const allSkills = await response.json();
-                console.log("Skills loaded:", allSkills.length);
-
-                // store all skills in skills state
-                setSkills(allSkills);
+                const allSkillsData = await response.json();
+                setSkills(allSkillsData);
             } else {
                 console.error("Failed to fetch skills:", response.status);
             }
@@ -132,115 +139,81 @@ function AboutPage() {
 
     }, []); // Empty dependency array ensures this effect runs only once on mount
 
-
     // GSAP animation - H1
     useEffect(() => {
-        // Check if data AND the specific tagline field exist
-        if(restData?.acf?.tagline){
-            // Target the H1 directly
-            gsap.fromTo('.about-intro h1', // Use a CSS selector
-                {
-                    x: 100,
-                    opacity: 0,
-                },
-                {
-                    x: 0,
-                    opacity: 1,
-                    duration: 1,
-                    ease: 'power2.inOut',
-                    delay: 0.3, // Slight delay after component likely renders
-                    // Optional: clearProps might not be strictly necessary if no other
-                    // styles conflict, but it's good practice
-                    clearProps: 'x,opacity' 
-                }
-            )
+        if(aboutPageData?.acf?.tagline){
+            gsap.fromTo('.about-intro h1', 
+                { x: 100, opacity: 0 },
+                { x: 0, opacity: 1, duration: 1, ease: 'power2.inOut', delay: 0.3, clearProps: 'x,opacity' }
+            );
         }
-        // Depend only on the specific data needed for the animation
-    }, [restData?.acf?.tagline]);
+    }, [aboutPageData?.acf?.tagline]);
 
     // GSAP animation - bio
     useEffect(() => {
-        if(restData?.acf?.profile_bio_1){
-            gsap.fromTo('.about-page-content > *', {
-                opacity: 0,
-                x: -100,
-            }, {
-                opacity: 1,
-                x: 0,
-                duration: 1,
-                ease: 'power2.inOut',
-                delay: 0.5,
-                clearProps: 'x,opacity',
-                stagger: 0.3,
-            })
+        if(aboutPageData?.acf?.profile_bio_1){
+            gsap.fromTo('.about-page-content > *', 
+                { opacity: 0, x: -100 },
+                { opacity: 1, x: 0, duration: 1, ease: 'power2.inOut', delay: 0.5, clearProps: 'x,opacity', stagger: 0.3 }
+            );
         }
-    }, [restData?.acf?.profile_bio_1]);
+    }, [aboutPageData?.acf?.profile_bio_1]);
 
     useEffect(() => {
-        if(restData?.acf?.profile_bio_2){
-            gsap.fromTo('.right-column > *', {
-                opacity: 0,
-                x: 100,
-            }, {
-                opacity: 1,
-                x: 0,
-                duration: 1,
-                ease: 'power2.inOut',
-                delay: 0.5,
-                clearProps: 'x,opacity',
-                stagger: 0.3,
-            })
+        if(aboutPageData?.acf?.profile_bio_2){
+            gsap.fromTo('.right-column > *', 
+                { opacity: 0, x: 100 },
+                { opacity: 1, x: 0, duration: 1, ease: 'power2.inOut', delay: 0.5, clearProps: 'x,opacity', stagger: 0.3 }
+            );
         }
-    }, [restData?.acf?.profile_bio_2]);
+    }, [aboutPageData?.acf?.profile_bio_2]);
 
     useEffect(() => {
-        if(restData?.acf?.profile_bio_1){
-            gsap.fromTo('.about-content-2', {
-                opacity: 0,
-                x: -100,
-            }, {
-                opacity: 1,
-                x: 0,
-                duration: 1,
-                ease: 'power2.inOut',
-                delay: 0.7,
-                clearProps: 'x,opacity',
-                stagger: 0.3,
-            })
+        if(aboutPageData?.acf?.profile_bio_1){
+            gsap.fromTo('.about-content-2', 
+                { opacity: 0, x: -100 },
+                { opacity: 1, x: 0, duration: 1, ease: 'power2.inOut', delay: 0.7, clearProps: 'x,opacity', stagger: 0.3 }
+            );
         }
-    }, [restData?.acf?.profile_bio_1]);
+    }, [aboutPageData?.acf?.profile_bio_1]);
+
+    // Conditional rendering based on loading and error states
+    if (!isLoaded && !fetchError) { // Show loading only if no error yet and not loaded
+        return <p className="loading">Loading page content...</p>;
+    }
+    if (fetchError) {
+        return <p className="error">Error: {fetchError}. Please try refreshing the page.</p>;
+    }
+    if (!aboutPageData || !contactPageData) { // If loaded but data is missing (e.g., one fetch failed but not caught by fetchError)
+        return <p className="loading">Page content could not be fully loaded. Please try refreshing.</p>;
+    }
 
     return (
         <>
             <Header/>
             <main className="about-page">
-                {!isLoaded ? (
-                    <p className="loading">Loading page content...</p> 
-                ) : (
-                    <section className="about-page-section">
+                <section className="about-page-section">
+                    <div className="about-intro">
+                        {aboutPageData.acf?.tagline ? <h1>{aboutPageData.acf.tagline}</h1> : null}
+                    </div>
+                    <div className="about-page-content-container">
                         <div className="left-column">
-                            <div className="about-intro">
-                                {restData.acf.tagline ? <h1>{restData.acf.tagline}</h1> : null}
-                            </div>
-                            
                             <div className="about-page-content">
-                                <p>{restData.acf.profile_bio_1}</p>
-                                    <div className="skills-container">
-                                        {!skillsLoaded ? (
-                                            <p className="loading">Loading skills... <span className="loading-dots"></span></p>
-                                        ) : skills.length > 0 ? (
-                                            <>
-                                                <ProfileSkills skillsData={skills} className="skill-tag--about" />
-                                            </>
-                                        ) : (
-                                            <p className="no-skills">No skills found. Please check your API endpoint.</p>
-                                        )}
-                                    </div>
+                                {aboutPageData.acf?.profile_bio_1 && <p>{aboutPageData.acf.profile_bio_1}</p>}
+                                <div className="skills-container">
+                                    {!skillsLoaded ? (
+                                        <p className="loading">Loading skills... <span className="loading-dots"></span></p>
+                                    ) : skills.length > 0 ? (
+                                        <ProfileSkills skillsData={skills} className="skill-tag--about" />
+                                    ) : (
+                                        <p className="no-skills">No skills found.</p>
+                                    )}
+                                </div>
                             </div>
     
                             <div className='about-content-2'>
                                 <div className='profile-bio-2'>
-                                    <p>{restData.acf.profile_bio_2}</p>
+                                    {aboutPageData.acf?.profile_bio_2 && <p>{aboutPageData.acf.profile_bio_2}</p>}
                                 </div>
                             </div>
                         </div>
@@ -273,37 +246,38 @@ function AboutPage() {
                             <div className="about-contact-section">
                                 <div className="contact-info">Vancouver, BC</div>
                                 <div className="contact-item">
-                                    {/* <div className="contact-label">Local Time</div> */}
                                     <div className="contact-info">{currentTimePST}</div>
                                 </div>
                                 <div className="contact-info">
-                                    <a href="mailto:angusmacminn@outlook.com">angusmacminn@outlook.com</a>
+                                    {aboutPageData.acf?.contact_email && 
+                                        <a href={`mailto:${aboutPageData.acf.contact_email}`}>{aboutPageData.acf.contact_email}</a>
+                                    }
                                 </div>
                                 <div className="social-links">
-                                    {restData.acf.instagram_url && (
-                                        <a href={restData.acf.instagram_url} target="_blank" rel="noopener noreferrer">
+                                    {aboutPageData.acf?.instagram_url && (
+                                        <a href={aboutPageData.acf.instagram_url} target="_blank" rel="noopener noreferrer">
                                             <img src={instagramIcon} alt="Instagram" />
                                         </a>
                                     )}
-                                    {restData.acf.github_url && (
-                                        <a href={restData.acf.github_url} target="_blank" rel="noopener noreferrer">
+                                    {aboutPageData.acf?.github_url && (
+                                        <a href={aboutPageData.acf.github_url} target="_blank" rel="noopener noreferrer">
                                             <img src={githubIcon} alt="GitHub" />
                                         </a>
                                     )}
-                                    {restData.acf.linkedin_url && (
-                                        <a href={restData.acf.linkedin_url} target="_blank" rel="noopener noreferrer">
+                                    {aboutPageData.acf?.linkedin_url && (
+                                        <a href={aboutPageData.acf.linkedin_url} target="_blank" rel="noopener noreferrer">
                                             <img src={linkedinIcon} alt="LinkedIn" />
                                         </a>
                                     )}
                                 </div>
                             </div>
                         </div>
-                        
-                    </section>
-                )}
+                    </div>
+                </section>
             </main>
+            <Contact pageData={contactPageData}/>
         </>
-    )
+    );
 }
 
 export default AboutPage;

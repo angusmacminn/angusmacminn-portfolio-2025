@@ -8,7 +8,7 @@ import HighlightsAccordion from './HighlightsAccordion';
 import './SingleWork.css';
 import Header from '../components/Header';
 import arrow from "../assets/icons/project-arrow.svg"
-
+import Contact from '../components/Contact';
 import { gsap } from 'gsap';
 
 // Simple hook to check for mobile screen size
@@ -34,6 +34,8 @@ const useIsMobile = (breakpoint = 768) => {
 
 function SingleWork() {
     const { slug } = useParams();
+    const restPath = RestBase + 'pages/5?_nocache=1';
+    const [restData, setData] = useState([]);
     const [workData, setWorkData] = useState(null);
     const [projectSkills, setProjectSkills] = useState([]);
     const [relatedWorks, setRelatedWorks] = useState([]);
@@ -42,6 +44,20 @@ function SingleWork() {
     const isMobile = useIsMobile();
     const containerRef = useRef(null);
     const contentRef = useRef(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch(restPath)
+            if ( response.ok ) {
+                const data = await response.json()
+                setData(data)
+                setLoadStatus(true)
+            } else {
+                setLoadStatus(false)
+            }
+        }
+        fetchData()
+    }, [restPath])
 
     // GSAP animation - card
     useEffect(() => {
@@ -277,6 +293,8 @@ function SingleWork() {
                     </div>
                 </div>
             </section>
+            <Contact pageData={restData}/>
+
         </>
     );
 }
