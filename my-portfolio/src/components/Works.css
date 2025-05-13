@@ -6,10 +6,12 @@
 }
 
 .works-cards {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr; /* Single column by default */
     gap: 2rem;
+    width: 100%;
+    border: 1px solid red; /* Temporary to see the container */
+    min-height: 200px; /* Temporary to ensure container is visible */
 }
 
 .work-card {
@@ -21,13 +23,18 @@
     align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
-     /* Define transitions on the base state */
     transition: background-color 0.5s ease, border-color 0.5s ease, transform 0.5s ease;
-    border: 1px solid transparent; /* Add transparent border initially to transition border */
+    border: 1px solid blue;
+    box-sizing: border-box;
     opacity: 0;
-   max-width: 28.125rem;
-   margin: 0 auto;
+    min-height: 100px;
+    width: 100%;
+    grid-column: 1 / -1;
+    position: relative;
+
 }
+
+
 
 .work-card:hover {
     background-color: var(--light-black);
@@ -64,12 +71,14 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: flex-start;
     gap: 0.5rem;
     color: var(--black);
     flex: 1;
     min-width: 0;
     /* Define color transition on the base skills container state */
     transition: color 0.5s ease, border-color 0.5s ease;
+    width: 100%;
 }
 
 .skill-tag {
@@ -85,18 +94,6 @@
     border-color: var(--white); /* Change border color */
 }
 
-
-@media (min-width: 480px) {
-    .work-card {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .skills {
-        justify-content: flex-start;
-        width: 100%;
-    }
-}
 
 
 .work-card:hover h3 {
@@ -130,8 +127,10 @@
 
 @media (min-width: 1024px) {
     .works-cards {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
+        grid-template-columns: repeat(2, 1fr); /* Two columns at larger screens */
+    }
+    
+    .work-card {
+        grid-column: auto; /* Reset the grid column span */
     }
 }
