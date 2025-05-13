@@ -6,6 +6,8 @@ import PixelPush from '../scripts/PixelPush';
 import { gsap } from 'gsap';
 
 
+
+
 function About({ pageData }) {
   // Safety check for pageData
   if (!pageData) {
@@ -19,6 +21,8 @@ function About({ pageData }) {
 
   const [isVisible, setIsVisible] = useState(false);
   const aboutSectionRef = useRef(null);
+  const h3Ref = useRef(null); // Create a new ref for the h3 element
+
 
 
   useEffect(() => {
@@ -28,7 +32,6 @@ function About({ pageData }) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          console.log("About section intersecting!");
           setIsVisible(true);
           observer.unobserve(section);
         }
@@ -50,19 +53,32 @@ function About({ pageData }) {
   }, []);
 
   useEffect(() => {
-    if (isVisible) {
-      console.log("Animating .about-content");
-      gsap.fromTo('.about-content', {
-        opacity: 0,
-        y: 100,
-      }, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        clearProps: 'transform,opacity',
-        delay: 0.2,
+    if (isVisible && h3Ref.current && window.SplitText) {
+      const split = new SplitText(h3Ref.current, {
+        type: "chars",
+        charsClass: "split-char",
+        wordsClass: "split-word",
+        linesClass: "split-line",
       });
+
+      gsap.from(split.chars, {
+        duration: 0.9,
+        opacity: 0,
+        y: 20,
+        delay: 0.2,
+        rotation: 10,
+        ease: "power3.out",
+        stagger: {
+          each: 0.05,
+          from: "start",
+        },
+      });
+
+      return () => {
+        if (split) {
+          split.revert();
+        }
+      };
     }
   }, [isVisible]);
   
@@ -73,16 +89,16 @@ function About({ pageData }) {
       {/* Only render if about_title exists */}
       {acf.about_title && (
         <div className="about-title">
-           <h2>{acf.about_title}</h2>
+           {/* <h2>{acf.about_title}</h2> */}
         </div>
       )}
       
       {/* Only render if intro_paragraph exists */}
       {acf.intro_paragraph && (
-        <div ref={aboutSectionRef} className="about-content">
+        <div className="about-content">
           <PixelPush />
           <div className="about-text">
-            <h2>{acf.intro_paragraph}</h2>
+            <h3 ref={h3Ref}>{acf.intro_paragraph}</h3>
             <Link to="/about" className="about-button">
               More about Angus
             </Link>

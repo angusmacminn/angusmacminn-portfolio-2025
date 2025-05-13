@@ -6,10 +6,6 @@
     font-weight: 400;
 }
 
-.about-title h2 {
-    
-    font-weight: 400;
-}
 
 .about-content {
     display: flex;
@@ -20,8 +16,8 @@
     padding-right: 2rem;
     padding-top: 2rem;
     padding-bottom: 10rem;
-    background-color: var(--white);
-    color: var(--black);
+    /* background-color: var(--white); */
+    color: var(--white);
     border-radius: 0.5rem 0.5rem 0rem 0rem;
     position: relative;
     overflow: hidden;
@@ -33,16 +29,17 @@
 }
 
 /* Update the text styles to create inversion effect */
-.about-content h2,
+.about-content h3,
 .about-content .about-button {
     position: relative;
     z-index: 1;
     mix-blend-mode: difference; /* This will invert the text color */
     color: var(--white); /* Set to white so it inverts properly */
+    font-weight: 400;
 }
 
 /* Ensure content stays above the shader */
-.about-content h2,
+.about-content h3,
 .about-content .about-button {
     position: relative;
     z-index: 1;
@@ -83,6 +80,11 @@
     .about-content {
         width: 100%;
         max-width: 100%;
+    }
+
+    .about-text h3 {
+        font-size: 1.5rem;
+        font-weight: 500;
     }
 }
 

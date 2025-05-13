@@ -74,13 +74,19 @@ void main() {
     // Add some variation based on pixel position
     gray = mix(gray, step(0.5, noise), trailMask * 0.8);
     
-    // White background with black/gray trail
-    vec3 color = vec3(1.0) - vec3(gray) * trailMask;
+    // Calculate the trail's color. This will be the RGB for the fragment.
+    // The 'gray' variable incorporates the trail's intensity.
+    vec3 trailDisplayColor = vec3(1.0) * gray; // Base for white/gray trail
     
-    // Subtle animation
-    color += 0.05 * sin(pixelUV.x * 0.01 + u_time * 0.0005) * sin(pixelUV.y * 1.0 + u_time * 0.005) * trailMask;
+    // Add subtle animation to the trail pixels
+    trailDisplayColor += 0.05 * sin(pixelUV.x * 0.01 + u_time * 0.0005) * sin(pixelUV.y * 1.0 + u_time * 0.005);
     
-    gl_FragColor = vec4(color, 1.0);
+    // Set the final fragment color:
+    // - RGB is the trail's calculated color (trailDisplayColor).
+    // - Alpha is the trailMask itself.
+    // This makes areas with no trail (trailMask = 0) fully transparent,
+    // allowing the HTML background (#0D0D0D) and text to show through.
+    gl_FragColor = vec4(trailDisplayColor, trailMask);
     
     #include <colorspace_fragment>
 }

@@ -45,6 +45,7 @@ function HomePage() {
                     
                     <main id="main-content">
                         <HeroContent pageData={restData} />
+                        {restData?.acf && (<About pageData={restData} />)}
                         <section className="work-section" id="work">
                             {restData.acf && <h2>{restData.acf.work_title}</h2>}
                             <Works />
@@ -54,7 +55,7 @@ function HomePage() {
                                 </Link>
                             </div>
                         </section>
-                        {restData?.acf && (<About pageData={restData} />)}
+                        
                         {restData?.acf && (<Contact pageData={restData} />)}
                     </main>
                 </div>

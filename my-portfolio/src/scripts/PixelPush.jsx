@@ -73,7 +73,7 @@ function PixelPush() {
         const geometry = new THREE.PlaneGeometry(bounds.width, bounds.height, 1, 1);
         const material = new THREE.ShaderMaterial({
             uniforms: {
-                u_backgroundColor: { value: new THREE.Vector3(0.95, 0.95, 0.95) },
+                u_backgroundColor: { value: new THREE.Vector3(0.0, 0.0, 0.0) },
                 u_mouse: { value: new THREE.Vector2(0.5, 0.5) },
                 u_resolution: { value: new THREE.Vector2(bounds.width, bounds.height) },
                 u_time: { value: 0.0 }

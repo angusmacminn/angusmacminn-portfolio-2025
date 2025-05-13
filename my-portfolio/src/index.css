@@ -14,21 +14,9 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: url('./assets/fonts/HelveticaNeueItalic.ttf') format('truetype');
-  font-weight: normal;
-  font-style: italic;
-  font-display: swap;
-}
 
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: url('./assets/fonts/HelveticaNeueBoldItalic.otf') format('opentype');
-  font-weight: bold;
-  font-style: italic;
-  font-display: swap;
-}
+
+
 
 @font-face {
   font-family: 'Helvetica Neue';
@@ -38,13 +26,7 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: url('./assets/fonts/HelveticaNeueLightItalic.otf') format('opentype');
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
+
 
 @font-face {
   font-family: 'Helvetica Neue';
@@ -83,7 +65,7 @@
 
   --white: #FFFFFF;
   --black: #0D0D0D;
-  --light-black: #1D1C1C;
+  --light-black: #1d1c1c;
   --dark-gray: #404040;
   --light-gray: #A6A6A6;
   background-color: #0D0D0D;
