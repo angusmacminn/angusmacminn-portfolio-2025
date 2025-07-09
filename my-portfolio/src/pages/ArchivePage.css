@@ -1,0 +1,29 @@
+.archive-section {
+    padding: 4rem 1rem;
+    box-sizing: border-box;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.archive-intro {
+    max-width: 720px;
+}
+
+.archive-intro p {
+    font-size: var(--font-size-small);
+    font-weight: 300;
+}
+
+.archive-title {
+    text-align: center;
+    font-size: 0.6rem;
+}
+
+
+@media (min-width: 768px) {
+    .archive-intro {
+        max-width: 720px;
+        text-align: center;
+        margin: 0 auto;
+    }
+}

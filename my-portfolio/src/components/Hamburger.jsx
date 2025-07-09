@@ -49,8 +49,8 @@ function HamburgerMenu() {
                     <li><NavLink onClick={handleLinkClick} to="/">Home</NavLink></li>
                     <li><HashLink onClick={handleLinkClick} smooth to="/#work">Work</HashLink></li>
                     <li><NavLink onClick={handleLinkClick} to="/about">About</NavLink></li>
-                    <li><NavLink onClick={handleLinkClick} to="/experiments">Experiments</NavLink></li>
-                    
+                    <li><NavLink onClick={handleLinkClick} to="/playground">Playground</NavLink></li>
+                    <li><NavLink onClick={handleLinkClick} to="/archive">Archive</NavLink></li>
                 </ul>
             </nav>
         }

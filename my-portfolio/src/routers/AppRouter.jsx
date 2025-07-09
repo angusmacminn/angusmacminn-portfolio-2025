@@ -2,7 +2,8 @@ import { BrowserRouter, Router, Route, Routes, useLocation } from 'react-router-
 import HomePage from '../pages/HomePage';
 import AboutPage from '../pages/AboutPage';
 import SingleWork from '../components/SingleWork';
-import ExperimentsPage from '../pages/ExperimentsPage';
+import ArchivePage from '../pages/ArchivePage'; // Renamed from ExperimentsPage
+import PlaygroundPage from '../pages/PlaygroundPage'; // New page
 import ScrollToTop from '../utils/ScrollToTop';
 
 import {AnimatePresence, motion} from 'framer-motion';
@@ -78,7 +79,9 @@ function AnimatedRoutes() {
                         </motion.div>
                     } />
 
-                    <Route path="/experiments" element={
+                
+
+                    <Route path="/archive" element={
                         <motion.div
                             initial="initial"
                             animate="in"
@@ -86,7 +89,19 @@ function AnimatedRoutes() {
                             variants={pageVariants}
                             transition={pageTransition}
                         >
-                            <ExperimentsPage />
+                            <ArchivePage />
+                        </motion.div>
+                    } />
+
+                    <Route path="/playground" element={
+                        <motion.div
+                            initial="initial"
+                            animate="in"
+                            exit="out"
+                            variants={pageVariants}
+                            transition={pageTransition}
+                        >
+                            <PlaygroundPage />
                         </motion.div>
                     } />
             </Routes>

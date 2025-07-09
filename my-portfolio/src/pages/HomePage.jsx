@@ -50,8 +50,8 @@ function HomePage() {
                             {restData.acf && <h2>{restData.acf.work_title}</h2>}
                             <Works />
                             <div className="experiments-button-container">
-                                <Link to="/experiments" className="experiments-button">
-                                    Experiments
+                                <Link to="/playground" className="experiments-button">
+                                    Playground
                                 </Link>
                             </div>
                         </section>
