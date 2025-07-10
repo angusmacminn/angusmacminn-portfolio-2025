@@ -185,6 +185,7 @@
     .about-page-section {
         flex-direction: column;
         gap: 1rem;
+        margin-top: 4rem;
     }
 
     .about-page-content-container {

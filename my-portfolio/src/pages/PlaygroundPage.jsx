@@ -1,30 +1,37 @@
 import { useState, useEffect } from 'react';
 import Header from '../components/Header';
-import DotDisplace from '../scripts/DotDisplace';
-import PixelPush from '../scripts/PixelPush';
 import "./PlaygroundPage.css";
 import { gsap } from 'gsap';
+import FlipCard from '../components/playground/playground-components/FlipCard';
+import LoadingSpinner from '../components/playground/playground-components/LoadingSpinner';
+import PlaygroundItemWrapper from '../components/playground/PlaygroundWrapper';
+import PixelNoise from '../components/playground/playground-components/PixelNoise';
 
-// Playground items - hardcoded for now, could be moved to a config file later
+
 const playgroundItems = [
     {
-        id: 'dot-displace',
-        title: 'Dot Displacement',
-        description: 'Interactive particle system with mouse-following displacement effect',
-        component: DotDisplace,
-        category: 'Interactive',
-        technologies: ['Three.js', 'GLSL']
+        id: 'flip-card',
+        title: 'Flip Card',
+        component: FlipCard,
+        technologies: ['React', 'Motion'],
+        description: 'Smooth 3D card flip animation on hover'
     },
     {
-        id: 'pixel-push',
-        title: 'Pixel Push',
-        description: 'Custom shader experiment with vertex and fragment manipulation',
-        component: PixelPush,
-        category: 'Shaders',
-        technologies: ['WebGL', 'GLSL', 'Three.js']
+        id: 'loading-spinner',
+        title: 'Loading Spinners',
+        component: LoadingSpinner,
+        technologies: ['React', 'Motion', 'CSS'],
+        description: 'Animated loading indicators with pixel patterns'
+    },
+    {
+        id: 'pixel-noise',
+        title: 'Pixel Noise',
+        component: PixelNoise,
+        technologies: ['Threejs', 'WebGL', 'GLSL'],
+        description: 'Interactive noise shader with mouse controls'
     }
-    // Add more items as you create them
 ];
+
 
 function PlaygroundPage() {
     const [selectedItem, setSelectedItem] = useState(null);
@@ -48,18 +55,34 @@ function PlaygroundPage() {
         <>
             <Header />
             <section className="playground-section">
-                <div className="playground-title">
-                    <h1>Playground</h1>
+                <div className='playground-header-container'>
+                    <div className="playground-title">
+                        <h1>Playground</h1>
+                    </div>
+    
+                    <div className='playground-intro'>
+                        <p>
+                            Interactive web experiments, motion graphics, and live demos. 
+                            Hover on any item to see it in action, or explore the code behind each experiment.
+                        </p>
+                    </div>
                 </div>
 
-                <div className='playground-intro'>
-                    <p>
-                        Interactive web experiments, motion graphics, and live demos. 
-                        Hover on any item to see it in action, or explore the code behind each experiment.
-                    </p>
+                <div className="playground-container">
+                {playgroundItems.map((item) => {
+                        const Component = item.component;
+                        return (
+                            <PlaygroundItemWrapper
+                                key={item.id}
+                                title={item.title}
+                                technologies={item.technologies}
+                                description={item.description}
+                            >
+                                <Component />
+                            </PlaygroundItemWrapper>
+                        );
+                    })}
                 </div>
-
-               
             </section>
         </>
     );

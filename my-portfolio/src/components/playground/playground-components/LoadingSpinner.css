@@ -1,0 +1,51 @@
+.spinner-demo {
+    width: 100%;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.spinner-demo h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    color: var(--white);
+}
+
+.spinners {
+    display: flex;
+    justify-content: space-around;
+}
+
+.pixel-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    width: 60px;  /* Define explicit size */
+    height: 60px; /* Define explicit size */
+    place-items: center; /* Center items in grid cells */
+}
+
+.pixel {
+    width: 10px;
+    height: 10px;
+    background-color: #1d6df6;
+    border-radius: 1px; /* Optional: slight rounding */
+    display: block; /* Ensure proper display */
+}
+
+.radial-pixel-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    width: 60px;  /* Define explicit size */
+    height: 60px;
+  }
+  
+  .radial-pixel {
+    width: 10px;
+    height: 10px;
+    background-color: #f61d70;
+  }

@@ -1,0 +1,21 @@
+.pixel-noise-container {
+    width: 100%;
+    height: 300px; /* Fixed height for playground */
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #000; /* Fallback background */
+}
+
+.pixel-noise-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
+/* Alternative: Aspect ratio approach */
+.pixel-noise-container.aspect-ratio {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    height: auto;
+}

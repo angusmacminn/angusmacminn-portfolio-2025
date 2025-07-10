@@ -1,0 +1,102 @@
+.playground-item {
+    background-color: var(--light-black);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid var(--dark-gray);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.playground-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.playground-header h3 {
+    margin: 0;
+    flex: 1;
+}
+
+.tech-badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.tech-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Technology-specific colors */
+.tech-react {
+    background-color: rgba(97, 219, 251, 0.2);
+    color: #61dbfb;
+    border: 1px solid rgba(97, 219, 251, 0.3);
+}
+
+.tech-motion {
+    background-color: rgba(255, 105, 180, 0.2);
+    color: #ff69b4;
+    border: 1px solid rgba(255, 105, 180, 0.3);
+}
+
+.tech-css {
+    background-color: rgba(21, 114, 182, 0.2);
+    color: #1572b6;
+    border: 1px solid rgba(21, 114, 182, 0.3);
+}
+
+.tech-javascript {
+    background-color: rgba(247, 223, 30, 0.2);
+    color: #f7df1e;
+    border: 1px solid rgba(247, 223, 30, 0.3);
+}
+
+.tech-gsap {
+    background-color: rgba(136, 204, 34, 0.2);
+    color: #88cc22;
+    border: 1px solid rgba(136, 204, 34, 0.3);
+}
+
+.tech-webgl {
+    background-color: rgba(138, 43, 226, 0.2);
+    color: #8a2be2;
+    border: 1px solid rgba(138, 43, 226, 0.3);
+}
+
+.tech-threejs {
+    background-color: rgba(0, 180, 216, 0.2);
+    color: #00b4d8;
+    border: 1px solid rgba(0, 180, 216, 0.3);
+}
+
+.tech-glsl {
+    background-color: rgba(255, 159, 67, 0.2);
+    color: #ff9f43;
+    border: 1px solid rgba(255, 159, 67, 0.3);
+}
+
+.playground-description {
+    font-size: 0.9rem;
+    color: var(--medium-gray);
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.playground-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
