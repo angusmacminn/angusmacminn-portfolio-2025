@@ -6,6 +6,7 @@ import FlipCard from '../components/playground/playground-components/FlipCard';
 import LoadingSpinner from '../components/playground/playground-components/LoadingSpinner';
 import PlaygroundItemWrapper from '../components/playground/PlaygroundWrapper';
 import PixelNoise from '../components/playground/playground-components/PixelNoise';
+import DomainWarping from '../components/playground/playground-components/DomainWarping';
 
 
 const playgroundItems = [
@@ -29,7 +30,15 @@ const playgroundItems = [
         component: PixelNoise,
         technologies: ['Threejs', 'WebGL', 'GLSL'],
         description: 'Interactive noise shader with mouse controls'
-    }
+    },
+    {
+        id: 'domain-warping',
+        title: 'Domain Warping',
+        component: DomainWarping,
+        technologies: ['Threejs', 'WebGL', 'GLSL'],
+        description: 'Advanced noise-based domain warping shader'
+    },
+    
 ];
 
 
@@ -63,7 +72,6 @@ function PlaygroundPage() {
                     <div className='playground-intro'>
                         <p>
                             Interactive web experiments, motion graphics, and live demos. 
-                            Hover on any item to see it in action, or explore the code behind each experiment.
                         </p>
                     </div>
                 </div>
