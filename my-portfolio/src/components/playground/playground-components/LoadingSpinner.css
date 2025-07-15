@@ -16,36 +16,141 @@
 
 .spinners {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
+    gap: 2rem;
+    padding: 2rem;
+    justify-items: center;
 }
 
+.spinner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.spinner-container h4 {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--white);
+    opacity: 0.8;
+}
+
+/* Original Grid Spinner */
 .pixel-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 5px;
-    width: 60px;  /* Define explicit size */
-    height: 60px; /* Define explicit size */
-    place-items: center; /* Center items in grid cells */
+    width: 60px;
+    height: 60px;
+    place-items: center;
 }
 
 .pixel {
     width: 10px;
     height: 10px;
     background-color: #1d6df6;
-    border-radius: 1px; /* Optional: slight rounding */
-    display: block; /* Ensure proper display */
+    border-radius: 1px;
+    display: block;
 }
 
+/* Original Radial Spinner */
 .radial-pixel-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 5px;
-    width: 60px;  /* Define explicit size */
+    width: 60px;
     height: 60px;
-  }
-  
-  .radial-pixel {
-    width: 10px;
-    height: 10px;
+}
+
+.radial-pixel {
+    width: 8px;
+    height: 8px;
     background-color: #f61d70;
-  }
+    border-radius: 1px;
+}
+
+/* Circular/Orbital Spinner */
+.circular-spinner {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.orbital-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #00ff88;
+    border-radius: 50%;
+    transform-origin: center 25px;
+}
+
+/* Wave Bar Spinner */
+.wave-bar {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    height: 60px;
+    gap: 3px;
+}
+
+.wave-segment {
+    width: 4px;
+    height: 15px;
+    background-color: #ff6b35;
+    border-radius: 2px;
+    transform-origin: bottom;
+}
+
+/* Spiral Spinner */
+.spiral-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    width: 60px;
+    height: 60px;
+    place-items: center;
+}
+
+.spiral-pixel {
+    width: 8px;
+    height: 8px;
+    background-color: #9b59b6;
+    border-radius: 2px;
+}
+
+
+
+/* Matrix Rain Spinner */
+.matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    width: 60px;
+    height: 60px;
+    place-items: center;
+}
+
+.matrix-pixel {
+    width: 6px;
+    height: 6px;
+    background-color: #00ff41;
+    border-radius: 1px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .spinners {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        padding: 1rem;
+    }
+    
+    .spinner-container h4 {
+        font-size: 0.7rem;
+    }
+}
