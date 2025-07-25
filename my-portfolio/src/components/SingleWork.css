@@ -92,7 +92,7 @@
 
 .project-link-container {
     text-align: center;
-    margin: 1rem 0 2rem; /* Same margin as development message */
+    margin: 1rem 0 1rem; 
 }
 
 .project-link-button {
@@ -281,6 +281,10 @@
         grid-row: 1 / 2;
         /* Ensure it takes necessary vertical space */
         align-self: start;
+    }
+
+    .project-link-container {
+        display: flex;
     }
 
     

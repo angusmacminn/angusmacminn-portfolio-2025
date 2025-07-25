@@ -10,6 +10,7 @@ import Header from '../components/Header';
 import arrow from "../assets/icons/project-arrow.svg"
 import Contact from '../components/Contact';
 import { gsap } from 'gsap';
+import StackedMediaGallery from './StackedMediaGallery';
 
 // Simple hook to check for mobile screen size
 const useIsMobile = (breakpoint = 768) => {
@@ -116,9 +117,6 @@ function SingleWork() {
                     
                     if (matchingWork) {
                         setWorkData(matchingWork);
-                        
-                       
-                        
                         // Get other works (excluding current)
                         const otherWorks = allWorks
                             .filter(work => work.slug !== slug)
@@ -199,6 +197,25 @@ function SingleWork() {
                                 null
                             )}
                         </div>
+                        <div className='project-link-container'>
+                            {/* === Conditional Message/Button === */}
+                            {workData.acf?.link_to_project && (
+                                workData.acf.link_to_project && (
+                                    <div className="project-link-container">
+                                        <a 
+                                            href={workData.acf.link_to_project} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer" 
+                                            className="project-link-button"
+                                        >
+                                            Visit
+                                            <img src={arrow} alt="arrow" />
+                                        </a>
+                                    </div>
+                                )
+                            )}
+                       </div>
+                        
                         {(workData.acf.role || workData.acf.responsibilities_list) && (
                             <div className="work-role-section">
                                 {workData.acf.role && (
@@ -220,34 +237,7 @@ function SingleWork() {
                                 )}
                             </div>
                         )}
-                    </div>
 
-                    <div className='media-container'>
-                        {/* Media Gallery */}
-                        {workData.acf?.media_gallery && workData.acf.media_gallery.length > 0 && (
-                            <div className="work-media">
-                                <MediaGallery mediaItems={workData.acf.media_gallery} restBase={RestBase} />
-                            </div>
-                        )}
-                        
-                        {/* === Conditional Message/Button === */}
-                        {workData.acf?.media_gallery && workData.acf.media_gallery.length > 0 && (
-                            workData.acf.link_to_project && (
-                                <div className="project-link-container">
-                                    <a 
-                                        href={workData.acf.link_to_project} 
-                                        target="_blank" 
-                                        rel="noopener noreferrer" 
-                                        className="project-link-button"
-                                    >
-                                        Visit
-                                        <img src={arrow} alt="arrow" />
-                                    </a>
-                                </div>
-                            )
-                        )}
-                    </div>
-                            
                     <div className="work-overview">
                         {workData.acf.overview_title && (
                             <h2>{workData.acf.overview_title}</h2>
@@ -267,6 +257,18 @@ function SingleWork() {
                             restBase={RestBase}
                         />
                     </div>
+                    </div>
+
+                    <div className='media-container'>
+                        {/* Stacked Media Gallery */}
+                        {workData.acf?.media_gallery && workData.acf.media_gallery.length > 0 && (
+                            <div className="work-media-stacked">
+                                <StackedMediaGallery mediaItems={workData.acf.media_gallery} restBase={RestBase} />
+                            </div>
+                        )}
+                    </div>
+                            
+                    
                 </div>
                 
                 {/* More Works Section */}

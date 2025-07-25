@@ -1,0 +1,52 @@
+/* Stacked Media Gallery Styles */
+.stacked-media-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+}
+
+.stacked-media-item {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--light-black);
+    border: 1px solid var(--dark-gray);
+}
+
+.stacked-media-video,
+.stacked-media-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.stacked-media-embed {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Standard video aspect ratio */
+    position: relative;
+}
+
+.stacked-media-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+}
+
+/* Loading/Error states for stacked gallery */
+.stacked-gallery-loading,
+.stacked-gallery-error {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1rem;
+    color: var(--medium-gray);
+}
+
+/* Desktop adjustments for stacked media */
+@media (min-width: 1000px) {
+    .stacked-media-gallery {
+        gap: 3rem;
+    }
+}
