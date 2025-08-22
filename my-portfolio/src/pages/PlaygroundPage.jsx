@@ -7,16 +7,25 @@ import LoadingSpinner from '../components/playground/playground-components/Loadi
 import PlaygroundItemWrapper from '../components/playground/PlaygroundWrapper';
 import PixelNoise from '../components/playground/playground-components/PixelNoise';
 import DomainWarping from '../components/playground/playground-components/DomainWarping';
-
+import AnimatedBorder from '../components/playground/playground-components/AnimatedBorder';
+import BayerDither from '../components/playground/playground-components/BayerDither';
 
 const playgroundItems = [
+    // {
+    //     id: 'flip-card',
+    //     title: 'Flip Card',
+    //     component: FlipCard,
+    //     technologies: ['React', 'Motion'],
+    //     description: 'Smooth 3D card flip animation on hover'
+    // },
     {
-        id: 'flip-card',
-        title: 'Flip Card',
-        component: FlipCard,
-        technologies: ['React', 'Motion'],
-        description: 'Smooth 3D card flip animation on hover'
+        id: 'bayer-dither',
+        title: 'Bayer Dither',
+        component: BayerDither,
+        technologies: ['WebGL', 'GLSL', ],
+        description: 'Bayer Dither algorithm used in combination with a noise function'
     },
+
     {
         id: 'loading-spinner',
         title: 'Loading Spinners',
@@ -38,6 +47,13 @@ const playgroundItems = [
         technologies: ['Threejs', 'WebGL', 'GLSL'],
         description: 'Advanced noise-based domain warping shader'
     },
+    // {
+    //     id: 'animated-border',
+    //     title: 'Animated Border',
+    //     component: AnimatedBorder,
+    //     technologies: ['CSS', 'Javascript'],
+    //     description: 'Animated border built with custom css and javascript'
+    // },
     
 ];
 

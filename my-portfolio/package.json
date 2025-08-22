@@ -13,6 +13,7 @@
     "@splidejs/react-splide": "^0.7.12",
     "gsap": "^3.12.7",
     "hamburger-react": "^2.5.2",
+    "lil-gui": "^0.20.0",
     "motion": "^12.9.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",

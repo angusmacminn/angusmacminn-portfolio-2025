@@ -1,0 +1,42 @@
+
+@property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes rotation {
+    0% { --gradient-angle: 0deg }
+    100% { --gradient-angle: 360deg }
+}
+
+
+.parent-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.box {
+    background-color: var(--dark-gray);
+    height: 200px;
+    width: 100%;  /* Add explicit width */
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    position: relative;
+}
+
+
+.box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: conic-gradient( from var(--gradient-angle), #3f87a6, #ebf8e1, #f69d3c);
+    border-radius: inherit;
+    animation: rotation 10s linear infinite;
+}
+
