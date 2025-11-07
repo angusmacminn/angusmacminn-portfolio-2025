@@ -34,6 +34,15 @@ const pageTransition = {
 function AnimatedRoutes() {
     const location = useLocation();
 
+    // Track page views on route change
+    useEffect(() => {
+        if (window.gtag) {
+            window.gtag('config', 'G-5GXJNMK19X', {
+                page_path: location.pathname + location.search,
+            });
+        }
+    }, [location]);
+
     const handleScrollToTop = () => {
         window.scrollTo(0, 0);
     };
