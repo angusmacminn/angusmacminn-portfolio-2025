@@ -5,6 +5,7 @@ import SingleWork from '../components/SingleWork';
 import ArchivePage from '../pages/ArchivePage'; // Renamed from ExperimentsPage
 import PlaygroundPage from '../pages/PlaygroundPage'; // New page
 import ScrollToTop from '../utils/ScrollToTop';
+import { useEffect } from 'react';
 
 import {AnimatePresence, motion} from 'framer-motion';
 
