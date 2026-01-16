@@ -18,6 +18,7 @@ function Header() {
                         <ul>
                             <li><HashLink smooth to="/#work">Work</HashLink></li>
                             <li><NavLink to="/about">About</NavLink></li>
+                            <li><NavLink to="/services">Services</NavLink></li>
                             <li><NavLink to="/playground">Playground</NavLink></li>
                             <li><NavLink to="/archive">Archive</NavLink></li>
                         </ul>

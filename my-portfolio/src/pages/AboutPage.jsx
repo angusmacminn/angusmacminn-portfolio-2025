@@ -99,7 +99,7 @@ function AboutPage() {
     // Function to fetch all skills
     const fetchAllSkills = async () => {
         try {
-            console.log("Fetching skills...");
+            // console.log("Fetching skills...");
             setSkillsLoaded(false);
             const response = await fetch(`${RestBase}skills?per_page=100`);
             if (response.ok) {
@@ -179,7 +179,8 @@ function AboutPage() {
 
     // Conditional rendering based on loading and error states
     if (!isLoaded && !fetchError) { // Show loading only if no error yet and not loaded
-        return <p className="loading">Loading page content...</p>;
+        // return <p className="loading">Loading page content...</p>;
+        return null;
     }
     if (fetchError) {
         return <p className="error">Error: {fetchError}. Please try refreshing the page.</p>;

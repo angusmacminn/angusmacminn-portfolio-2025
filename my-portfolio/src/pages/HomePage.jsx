@@ -37,7 +37,7 @@ function HomePage() {
             </div>
             
             {!isLoaded ? (
-                <p>Loading...</p>
+                null
             ) : (
                 <>
                 <div className="content-wrapper">

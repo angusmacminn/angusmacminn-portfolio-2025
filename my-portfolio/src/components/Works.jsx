@@ -90,7 +90,7 @@ function Works() {
     
     return (
       <div ref={workSectionRef} className="works">
-      {!isLoaded ? (<p>Loading works...</p>) : (
+      {!isLoaded ? (null) : (
         <div className="works-cards">
           {works.length === 0 ? (
             <p>No works found</p>

@@ -228,7 +228,7 @@ function DotDisplace() {
         if (!sceneRef.current) return;
 
         if (isVisible) {
-            console.log('DotDisplace is visible, starting animation');
+            // console.log('DotDisplace is visible, starting animation');
 
             const animate = () => {
                 if (!sceneRef.current) return;
@@ -278,7 +278,7 @@ function DotDisplace() {
 
             requestRef.current = requestAnimationFrame(animate);
         } else {
-            console.log('DotDisplace is not visible, stopping animation');
+            // console.log('DotDisplace is not visible, stopping animation');
             cancelAnimationFrame(requestRef.current);
         }
 

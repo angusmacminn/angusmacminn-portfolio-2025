@@ -4,6 +4,7 @@ import AboutPage from '../pages/AboutPage';
 import SingleWork from '../components/SingleWork';
 import ArchivePage from '../pages/ArchivePage'; // Renamed from ExperimentsPage
 import PlaygroundPage from '../pages/PlaygroundPage'; // New page
+import Services from '../pages/Services'; // Services page
 import ScrollToTop from '../utils/ScrollToTop';
 import { useEffect } from 'react';
 
@@ -112,6 +113,18 @@ function AnimatedRoutes() {
                             transition={pageTransition}
                         >
                             <PlaygroundPage />
+                        </motion.div>
+                    } />
+
+                    <Route path="/services" element={
+                        <motion.div
+                            initial="initial"
+                            animate="in"
+                            exit="out"
+                            variants={pageVariants}
+                            transition={pageTransition}
+                        >
+                            <Services />
                         </motion.div>
                     } />
             </Routes>

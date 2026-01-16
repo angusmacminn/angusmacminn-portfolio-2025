@@ -52,9 +52,9 @@ function SingleWork() {
             if ( response.ok ) {
                 const data = await response.json()
                 setData(data)
-                setLoadStatus(true)
+                // setLoadStatus(true)
             } else {
-                setLoadStatus(false)
+                // setLoadStatus(false)
             }
         }
         fetchData()
@@ -156,7 +156,7 @@ function SingleWork() {
 
     if (!isLoaded) {
         return <div className="loading-container">
-            <p>Loading work item...</p>
+           
         </div>
     }
 

@@ -1,0 +1,557 @@
+.services-section {
+    min-height: 100vh;
+    padding: 5rem 2rem;
+}
+
+.services-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.services-header {
+    margin-bottom: 2rem;
+}
+
+.services-subtitle {
+    font-size: 0.9rem;
+    /* text-transform: uppercase; */
+    letter-spacing: 0.1em;
+    color: var(--light-gray);
+    font-weight: 300;
+}
+
+.services-hero {
+    margin-bottom: 2rem;
+}
+
+.services-hero h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    font-weight: 400;
+    margin: 0;
+}
+
+.services-description {
+    margin-bottom: 3rem;
+    max-width: 800px;
+}
+
+.services-description p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+
+.services-cta-section {
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.services-cta-button {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--white);
+    padding: 1rem 2.5rem;
+    border: 1px solid var(--white);
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    position: relative;
+}
+
+.services-cta-button:hover {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.why-work-with-me {
+    margin-bottom: 4rem;
+    max-width: 800px;
+}
+
+.why-work-with-me h2 {
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+}
+
+.why-work-with-me p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--white);
+}
+
+.is-this-you {
+    background-color: var(--light-black);
+    border: 1px solid var(--dark-gray);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.is-this-you h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 400;
+}
+
+.is-this-you ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+}
+
+.is-this-you ul li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.is-this-you ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--white);
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+.closing-text {
+    margin: 0;
+    font-style: italic;
+    color: var(--white);
+}
+
+.what-i-offer {
+    margin-bottom: 4rem;
+}
+
+.what-i-offer h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    font-weight: 400;
+}
+
+.services-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+}
+
+.service-card {
+    background-color: var(--light-black);
+    border: 1px solid var(--dark-gray);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--light-gray);
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+}
+
+.service-card p {
+    color: var(--light-gray);
+}
+
+.service-card .card-intro {
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.service-card .card-description {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.service-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+}
+
+.service-badge {
+    background-color: transparent;
+    border: 1px solid var(--dark-gray);
+    color: var(--light-gray);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.service-card:hover .service-badge {
+    border-color: var(--light-gray);
+    color: var(--white);
+}
+
+.service-card .card-footer {
+    margin: 0;
+    color: var(--white);
+    line-height: 1.6;
+}
+
+.selected-work {
+    margin-bottom: 4rem;
+}
+
+.selected-work h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    font-weight: 400;
+}
+
+.selected-work-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+}
+
+.selected-work-card {
+    background-color: transparent;
+    border: 1px solid var(--dark-gray);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.selected-work-card:hover {
+    background-color: var(--light-black);
+    border-color: var(--light-gray);
+}
+
+.selected-work-content {
+    flex: 1;
+}
+
+.view-case-study {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    align-self: flex-end;
+    margin-top: 1.5rem;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.selected-work-card:hover .view-case-study {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.view-case-study span {
+    font-size: 0.9rem;
+    color: var(--white);
+    font-weight: 400;
+}
+
+.view-case-study img {
+    width: 20px;
+    height: 20px;
+    filter: invert(1);
+    transition: transform 0.3s ease;
+}
+
+.selected-work-card:hover .view-case-study img {
+    transform: rotate(50deg);
+}
+
+.selected-work-card h3 {
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+    color: var(--white);
+    transition: color 0.3s ease;
+}
+
+.selected-work-card:hover h3 {
+    color: var(--white);
+}
+
+.selected-work-card .project-role {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--dark-gray);
+    margin: 0 0 1rem 0;
+    font-weight: 300;
+}
+
+.selected-work-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--light-gray);
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.selected-work-card:hover p {
+    color: var(--white);
+}
+
+.selected-work-card:hover .project-role {
+    color: var(--light-gray);
+}
+
+.services-contact-section {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    padding: 2rem 1.5rem;
+    background-color: rgba(29, 28, 28, 0.4);
+    border: 1px solid rgba(64, 64, 64, 0.3);
+    border-radius: 12px;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.services-contact-section h2 {
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+}
+
+.services-contact-intro {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--light-gray);
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.services-contact-process {
+    margin-bottom: 2.5rem;
+}
+
+.services-contact-process h3 {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.services-process-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.services-process-steps p {
+    font-size: 0.95rem;
+    color: var(--light-gray);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.services-contact-ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    align-items: center;
+}
+
+.services-contact-cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 400;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 280px;
+}
+
+.services-contact-cta.primary {
+    background-color: var(--white);
+    color: var(--black);
+    border: 1px solid var(--white);
+}
+
+.services-contact-cta.primary:hover {
+    background-color: transparent;
+    color: var(--white);
+}
+
+.services-contact-cta.secondary {
+    background-color: transparent;
+    color: var(--white);
+    border: 1px solid var(--dark-gray);
+}
+
+.services-contact-cta.secondary:hover {
+    border-color: var(--white);
+}
+
+.services-contact-info {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(64, 64, 64, 0.3);
+}
+
+.services-contact-info p {
+    font-size: 0.9rem;
+    color: var(--light-gray);
+    margin: 0.5rem 0;
+}
+
+.services-email-line {
+    margin-bottom: 0.75rem;
+}
+
+.services-email-line span {
+    color: var(--dark-gray);
+    margin-right: 0.5rem;
+}
+
+.services-location-line {
+    color: var(--dark-gray);
+    font-size: 0.85rem;
+}
+
+/* Tablet and up */
+@media (min-width: 768px) {
+    .services-container {
+        padding: 4rem 2rem;
+    }
+
+    .services-hero {
+        margin-bottom: 3rem;
+    }
+
+    .services-hero h1 {
+        font-size: 3.5rem;
+    }
+
+    .services-description {
+        margin-bottom: 5rem;
+    }
+
+    .services-cta-section {
+        margin-bottom: 6rem;
+    }
+
+    .services-cta-button {
+        font-size: 1.1rem;
+        padding: 1rem 2.5rem;
+    }
+
+    .why-work-with-me {
+        margin-bottom: 6rem;
+    }
+
+    .why-work-with-me h2 {
+        font-size: 2.5rem;
+    }
+
+    .what-i-offer {
+        margin-bottom: 6rem;
+    }
+
+    .selected-work {
+        margin-bottom: 6rem;
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+
+    .is-this-you {
+        padding: 2.5rem;
+        margin-bottom: 6rem;
+    }
+
+    .service-card {
+        padding: 2.5rem;
+    }
+
+    .selected-work-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+    }
+
+    .selected-work-card {
+        padding: 2rem;
+    }
+
+    .services-contact-section {
+        padding: 4rem 3rem;
+        margin-top: 6rem;
+        margin-bottom: 6rem;
+    }
+
+    .services-contact-section h2 {
+        font-size: 2.5rem;
+    }
+
+    .services-contact-ctas {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .services-contact-cta {
+        width: auto;
+        padding: 1rem 2.5rem;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1200px) {
+    .services-hero h1 {
+        font-size: 4rem;
+    }
+
+    .what-i-offer h2 {
+        font-size: 3rem;
+    }
+
+    .selected-work h2 {
+        font-size: 3rem;
+    }
+
+    .service-card {
+        padding: 3rem;
+    }
+
+    .selected-work-card {
+        padding: 2.5rem;
+    }
+
+    .services-contact-section {
+        padding: 5rem 4rem;
+    }
+}

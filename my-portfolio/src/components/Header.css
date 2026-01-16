@@ -99,27 +99,44 @@
 }
 
 .desktop-nav li {
-    /* Add initial states */
-    background-color: transparent;
-    border: 1px solid transparent;
+    position: relative;
+    transition: scale 0.3s ease;
+}
+
+.desktop-nav li::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--black);
+    border: 1px solid var(--white);
     border-radius: 0.5rem;
-    /* Add transition for all properties */
-    transition: background-color 0.2s ease, border 0.2s ease;
+    transform: scale(0.95);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: -1;
 }
 
 .desktop-nav a {
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--light-gray);
     font-weight: 500;
     position: relative;
     padding: 0.2rem 0.5rem;
-    display: block; /* Ensure the anchor fills the li */
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.desktop-nav li:hover::before {
+    transform: scale(1);
+    opacity: 1;
 }
 
 .desktop-nav li:hover {
-    background-color: var(--black);
-    border: 1px solid var(--white);
-    border-radius: 0.5rem;
+    scale: 1;
+}
+
+.desktop-nav li:hover a {
+    color: var(--white);
 }
 
 
