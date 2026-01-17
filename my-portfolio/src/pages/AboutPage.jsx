@@ -5,9 +5,11 @@ import ProfileSkills from '../components/ProfileSkills';
 import linkedinIcon from '../assets/icons/iconmonstr-linkedin-3.svg';
 import githubIcon from '../assets/icons/iconmonstr-github-1.svg';
 import instagramIcon from '../assets/icons/iconmonstr-instagram-11.svg';
+import globeIcon from '../assets/icons/globe.svg';
 import "./AboutPage.css";
 import Contact from '../components/Contact';
 import { gsap } from 'gsap';
+import { motion } from 'framer-motion';
 
 function AboutPage() {
     const aboutPagePath = RestBase + 'pages/9?_embed&_nocache=1'; // Data for "About" page
@@ -245,9 +247,26 @@ function AboutPage() {
                             </div>
 
                             <div className="about-contact-section">
-                                <div className="contact-info">Vancouver, BC</div>
+                                <div className="contact-info location-info">
+                                    <img src={globeIcon} alt="location" className="globe-icon" />
+                                    Vancouver, BC
+                                </div>
                                 <div className="contact-item">
-                                    <div className="contact-info">{currentTimePST}</div>
+                                    <div className="contact-info time-info">
+                                        <motion.span 
+                                            className="time-indicator"
+                                            animate={{ 
+                                                opacity: [1, 0.3, 1],
+                                                scale: [1, 0.8, 1]
+                                            }}
+                                            transition={{ 
+                                                duration: 2,
+                                                repeat: Infinity,
+                                                ease: "easeInOut"
+                                            }}
+                                        />
+                                        {currentTimePST}
+                                    </div>
                                 </div>
                                 <div className="contact-info">
                                     {aboutPageData.acf?.contact_email && 
