@@ -6,6 +6,11 @@
     margin: 0 auto;
 }
 
+.playground-title h1 {
+    font-weight: 400;
+    color: var(--white);
+}
+
 .playground-item {
     max-width: 300px;
     margin: 0 auto;

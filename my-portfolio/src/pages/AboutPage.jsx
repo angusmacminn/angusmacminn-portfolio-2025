@@ -197,7 +197,7 @@ function AboutPage() {
             <main className="about-page">
                 <section className="about-page-section">
                     <div className="about-intro">
-                        {aboutPageData.acf?.tagline ? <h1>{aboutPageData.acf.tagline}</h1> : null}
+                        <h1>About Angus</h1> 
                     </div>
                     <div className="about-page-content-container">
                         <div className="left-column">

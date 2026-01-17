@@ -10,6 +10,7 @@
 
 .hero-content h1,
 .hero-content h2 {
+    
     visibility: hidden; /* Initially hide the text elements completely */
 }
 
