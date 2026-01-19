@@ -136,8 +136,26 @@ button {
   transition: border-color 0.25s;
 }
 
-button:focus,
+/* Accessible focus styles */
+*:focus-visible {
+  outline: 3px solid #3b82f6;
+  outline-offset: 2px;
+}
+
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 3px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+a:focus-visible {
+  outline: 3px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid #3b82f6;
+  outline-offset: 2px;
 }
 

@@ -21,6 +21,16 @@ function Services() {
         });
     }, []);
 
+    const scrollToContactSection = () => {
+        const contactSection = document.getElementById('services-contact-section');
+        if (contactSection) {
+          contactSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      };
+
     return (
         <>
             <Header />
@@ -40,7 +50,7 @@ function Services() {
                     </div>
 
                     <div className="services-cta-section">
-                        <a href="#contact" className="services-cta-button">Say Hi!</a>
+                        <button onClick={scrollToContactSection} className="services-cta-button">Say Hi!</button>
                     </div>
 
                     <div className="why-work-with-me">
@@ -160,7 +170,7 @@ function Services() {
                         </div>
                     </div>
 
-                    <div className="services-contact-section">
+                    <div className="services-contact-section" id="services-contact-section">
                         <h2>Let's talk about your project</h2>
                         <p className="services-contact-intro">If you're planning a new website or want to improve an existing one, let's chat through your ideas and see if we're a good fit.</p>
                         
