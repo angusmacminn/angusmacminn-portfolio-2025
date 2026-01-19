@@ -41,7 +41,7 @@ function Services() {
                     </div>
 
                     <div className="services-hero">
-                        <h1>Design-led websites that feel modern, perform well, and are easy to update.</h1>
+                        <h1>Thoughtful, custom websites built to grow with your content.</h1>
                     </div>
 
                     <div className="services-description">
