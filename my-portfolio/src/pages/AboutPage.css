@@ -27,6 +27,7 @@
     border-radius: 0.5rem;
     box-shadow: 5px 4px 17.6px 1px rgba(231, 231, 231, 0.06) inset;
     border: 1px solid var(--dark-gray);
+    line-height: 1.9;
 }
 
 .skills-container {
