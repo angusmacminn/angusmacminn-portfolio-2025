@@ -5,7 +5,6 @@ import Works from '../components/Works';
 import HeroContent from '../components/Hero';
 import Contact from '../components/Contact';
 import About from '../components/About';
-import Header from '../components/Header';
 import DotDisplace from '../scripts/DotDisplace';
 import './HomePage.css';
 
@@ -41,8 +40,6 @@ function HomePage() {
             ) : (
                 <>
                 <div className="content-wrapper">
-                    <Header />
-                    
                     <main id="main-content">
                         <HeroContent pageData={restData} />
                         {restData?.acf && (<About pageData={restData} />)}

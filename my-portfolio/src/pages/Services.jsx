@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../components/Header';
 import { gsap } from 'gsap';
 import arrow from '../assets/icons/project-arrow.svg';
 import './Services.css';
@@ -33,7 +32,6 @@ function Services() {
 
     return (
         <>
-            <Header />
             <section className="services-section">
                 <div className="services-container">
                     <div className="services-header">

@@ -7,6 +7,7 @@ import PlaygroundPage from '../pages/PlaygroundPage'; // New page
 import Services from '../pages/Services'; // Services page
 import ScrollToTop from '../utils/ScrollToTop';
 import { useEffect } from 'react';
+import Header from '../components/Header';
 
 import {AnimatePresence, motion} from 'framer-motion';
 
@@ -14,22 +15,22 @@ import {AnimatePresence, motion} from 'framer-motion';
 const pageVariants = {
     initial: {
         opacity: 0,
-        // x: "-100vw" // slide in from left
+        x: -550 // slide in from left
     },
     in: {
         opacity: 1,
-        // x: 0 // arrive at center
+        x: 0 // arrive at center
     },
     out: {
         opacity: 0,
-        // x: "100vw" // slide out to right
+        x: 550 // slide out to right
     }
 };
 
 const pageTransition = {
-    type: "spring",
-    ease: "anticipate",
-    duration: 0.5
+    type: "tween",
+    ease: [0.4, 0, 0.2, 1], // smoother cubic-bezier
+    duration: 0.6
 };
 
 // wrapper component to apply motion to routes
@@ -137,7 +138,7 @@ function AnimatedRoutes() {
 function AppRouter() {
     return (
         <BrowserRouter>
-            
+            <Header />
             <main>
                 <AnimatedRoutes />
             </main>

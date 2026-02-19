@@ -122,6 +122,13 @@ body {
   min-height: 100vh;
 }
 
+html,
+body,
+#root {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 
 
 button {

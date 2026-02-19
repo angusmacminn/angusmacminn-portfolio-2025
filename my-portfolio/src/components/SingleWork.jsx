@@ -6,7 +6,6 @@ import { HashLink } from 'react-router-hash-link';
 import MediaGallery from './MediaGallery';
 import HighlightsAccordion from './HighlightsAccordion';
 import './SingleWork.css';
-import Header from '../components/Header';
 import arrow from "../assets/icons/project-arrow.svg"
 import Contact from '../components/Contact';
 import { gsap } from 'gsap';
@@ -174,7 +173,6 @@ function SingleWork() {
 
     return (
         <>
-            <Header />
             <section className="single-work">
                 <div ref={containerRef} className="single-work-container">
                     <div ref={contentRef} className='top-half-left'>

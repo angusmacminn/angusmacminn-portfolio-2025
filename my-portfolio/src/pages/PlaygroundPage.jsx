@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import Header from '../components/Header';
 import "./PlaygroundPage.css";
 import { gsap } from 'gsap';
 import FlipCard from '../components/playground/playground-components/FlipCard';
@@ -78,7 +77,6 @@ function PlaygroundPage() {
 
     return (
         <>
-            <Header />
             <section className="playground-section">
                 <div className='playground-header-container'>
                     <div className="playground-title">

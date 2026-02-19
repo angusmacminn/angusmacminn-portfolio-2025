@@ -1,4 +1,3 @@
-import Header from '../components/Header';
 import { useState, useEffect, useRef } from 'react';
 import { RestBase } from '../utils/RestBase';
 import ProfileSkills from '../components/ProfileSkills';
@@ -193,7 +192,6 @@ function AboutPage() {
 
     return (
         <>
-            <Header/>
             <main className="about-page">
                 <section className="about-page-section">
                     <div className="about-intro">

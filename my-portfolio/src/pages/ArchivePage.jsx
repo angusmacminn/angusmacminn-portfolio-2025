@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { RestBase } from '../utils/RestBase';
-import Header from '../components/Header';
 import Experiments from '../components/Experiments'; // Keep the same component
 import "./ArchivePage.css";
 import { gsap } from 'gsap';
@@ -45,14 +44,13 @@ function ArchivePage() {
             duration: 1,
             ease: 'power2.inOut',
             clearProps: 'transform,opacity',
-            delay: 0.3,
-            stagger: 0.3,
+            delay: 0.0,
+            stagger: 0.0
         });
     }, []);
 
     return (
         <>
-            <Header />
             <section className="archive-section">
                 <div className="archive-title">
                     <h1>Archive</h1>
