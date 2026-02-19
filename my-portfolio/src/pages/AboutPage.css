@@ -40,7 +40,7 @@
     border-radius: 0.5rem;
     box-shadow: 5px 4px 17.6px 1px rgba(231, 231, 231, 0.06) inset;
     border: 1px solid var(--dark-gray);
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .hierarchical-skills {
@@ -109,7 +109,7 @@
     border: 1px solid var(--dark-gray);
     
     width: 100%;
-    max-width: 260px;
+    max-width: 100%;
 }
 
 .education-section h3,
@@ -206,6 +206,8 @@
         max-width: 500px;
         margin: 0 auto;
     }
+
+    
 }
 
 @media (min-width: 1000px) {
@@ -238,6 +240,11 @@
     .right-column {
         align-self: flex-start;
         margin-top: 1rem;
+    }
+
+    .education-section,
+    .about-contact-section {
+        max-width: 260px;
     }
 
     /* .profile-image {
