@@ -7,11 +7,28 @@ function PixelPush() {
     const canvasRef = useRef(null);
     const containerRef = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
+    const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
     const sceneRef = useRef(null);
     const requestRef = useRef(null);
 
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(max-width: 767px)');
+        const handleChange = (event) => {
+            setIsMobile(event.matches);
+        };
+
+        setIsMobile(mediaQuery.matches);
+        mediaQuery.addEventListener('change', handleChange);
+
+        return () => {
+            mediaQuery.removeEventListener('change', handleChange);
+        };
+    }, []);
+
     // Setup Intersection Observer
     useEffect(() => {
+        if (isMobile) return;
+
         const options = {
             root: null, // use viewport as root
             rootMargin: '0px',
@@ -35,10 +52,11 @@ function PixelPush() {
                 observer.unobserve(containerRef.current);
             }
         };
-    }, []);
+    }, [isMobile]);
 
     // Setup and handle Three.js scene
     useEffect(() => {
+        if (isMobile) return;
         if (!canvasRef.current || !containerRef.current) return;
 
         // Get initial bounds from container
@@ -164,10 +182,11 @@ function PixelPush() {
                 sceneRef.current.renderer.dispose();
             }
         };
-    }, []);
+    }, [isMobile]);
 
     // Handle animation based on visibility
     useEffect(() => {
+        if (isMobile) return;
         if (!isVisible || !sceneRef.current) return;
         
         let lastTime = 0;
@@ -203,7 +222,11 @@ function PixelPush() {
         return () => {
             cancelAnimationFrame(requestRef.current);
         };
-    }, [isVisible]);
+    }, [isVisible, isMobile]);
+
+    if (isMobile) {
+        return null;
+    }
 
     return (
         <canvas 
