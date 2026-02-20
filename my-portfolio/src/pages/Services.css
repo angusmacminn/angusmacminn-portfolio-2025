@@ -1,6 +1,8 @@
 .services-section {
     min-height: 100vh;
     padding: 5rem 2rem;
+    
+
 }
 
 .services-container {
@@ -41,6 +43,7 @@
     line-height: 1.6;
     color: var(--white);
     margin-bottom: 1rem;
+    font-weight: 300;
 }
 
 .services-cta-section {
@@ -83,6 +86,7 @@
     font-size: 1.1rem;
     line-height: 1.6;
     color: var(--white);
+    font-weight: 300;
 }
 
 .is-this-you {
@@ -91,6 +95,7 @@
     border-radius: 12px;
     padding: 1.5rem;
     margin-bottom: 4rem;
+    
 }
 
 .is-this-you h2 {
@@ -347,6 +352,7 @@
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    font-weight: 300;
 }
 
 .services-contact-process {
@@ -373,6 +379,7 @@
     color: var(--light-gray);
     margin: 0;
     line-height: 1.5;
+    font-weight: 300;
 }
 
 .services-contact-ctas {
