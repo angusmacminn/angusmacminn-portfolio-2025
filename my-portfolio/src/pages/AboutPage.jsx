@@ -266,11 +266,7 @@ function AboutPage() {
                                         {currentTimePST}
                                     </div>
                                 </div>
-                                <div className="contact-info">
-                                    {aboutPageData.acf?.contact_email && 
-                                        <a href={`mailto:${aboutPageData.acf.contact_email}`}>{aboutPageData.acf.contact_email}</a>
-                                    }
-                                </div>
+                                
                                 <div className="social-links">
                                     {aboutPageData.acf?.instagram_url && (
                                         <a href={aboutPageData.acf.instagram_url} target="_blank" rel="noopener noreferrer">
